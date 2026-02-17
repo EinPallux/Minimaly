@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Minimaly — Icon Database</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Parkinsans', sans-serif;
+            background: #efefef;
+            color: #111;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ── Navbar ── */
+        .nav-pill {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(0, 0, 0, 0.09);
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 999px;
+        }
+
+        .search-wrap {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(0, 0, 0, 0.09);
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 18px;
+            width: 440px;
+            max-width: 55vw;
+            cursor: text;
+            transition: box-shadow 0.25s, border-color 0.25s, background 0.25s;
+        }
+
+        .search-wrap:focus-within {
+            background: #fff;
+            border-color: rgba(0, 0, 0, 0.18);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.09);
+        }
+
+        .search-wrap input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-family: 'Parkinsans', sans-serif;
+            font-size: 13.5px;
+            color: #444;
+        }
+
+        .search-wrap input::placeholder {
+            color: #b5b5b5;
+        }
+
+        kbd {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.07);
+            border: 1px solid rgba(0, 0, 0, 0.11);
+            border-radius: 5px;
+            padding: 2px 6px;
+            font-family: 'Parkinsans', sans-serif;
+            font-size: 11px;
+            color: #aaa;
+            line-height: 1.5;
+            transition: opacity 0.2s;
+        }
+
+        /* ── Page layout ── */
+        .page-content {
+            padding-top: 88px;
+        }
+
+        /* ── Section titles ── */
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+
+        /* ── Collection cards ── */
+        .collection-card {
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            border-radius: 20px;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collection-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.10);
+            border-color: rgba(0, 0, 0, 0.13);
+        }
+
+        .collection-card .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .collection-card .preview-cell {
+            aspect-ratio: 1;
+            background: #f7f7f7;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .collection-card .preview-cell svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .collection-card .coll-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 3px;
+        }
+
+        .collection-card .coll-count {
+            font-size: 12px;
+            color: #aaa;
+            font-weight: 500;
+        }
+
+        .collection-card .coll-arrow {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .collection-card:hover .coll-arrow {
+            background: #111;
+            transform: translateX(2px);
+        }
+
+        .collection-card:hover .coll-arrow svg {
+            stroke: white;
+        }
+
+        /* ── Icon grid ── */
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+            gap: 10px;
+        }
+
+        .icon-tile {
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            border-radius: 14px;
+            padding: 14px 8px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .icon-tile:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.10);
+            border-color: rgba(0, 0, 0, 0.13);
+        }
+
+        .icon-tile svg {
+            width: 28px;
+            height: 28px;
+            transition: transform 0.2s;
+        }
+
+        .icon-tile:hover svg {
+            transform: scale(1.12);
+        }
+
+        .icon-tile .tile-name {
+            font-size: 10px;
+            color: #aaa;
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.3;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* ── Filter pills ── */
+        .filter-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 500;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.09);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .filter-pill:hover {
+            border-color: #111;
+        }
+
+        .filter-pill.active {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        /* ── Search results banner ── */
+        .search-results-bar {
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            border-radius: 14px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        /* ── Empty state ── */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #ccc;
+        }
+
+        .empty-state svg {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 16px;
+            display: block;
+        }
+
+        .empty-state p {
+            font-size: 15px;
+            color: #aaa;
+        }
+
+        /* ══════════════════════════════
+       POPUP / MODAL
+    ══════════════════════════════ */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .popup-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .popup {
+            background: #fff;
+            border-radius: 28px;
+            width: 100%;
+            max-width: 760px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 32px 80px rgba(0, 0, 0, 0.18);
+            transform: scale(0.94) translateY(16px);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .popup-overlay.open .popup {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Popup header */
+        .popup-header {
+            padding: 24px 28px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .popup-close {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .popup-close:hover {
+            background: #e0e0e0;
+            transform: scale(1.08);
+        }
+
+        /* Popup body */
+        .popup-body {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Left: preview pane */
+        .popup-preview {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+            background: #f8f8f8;
+            border-right: 1px solid rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+
+        .preview-canvas {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            transition: background 0.2s;
+        }
+
+        .preview-canvas svg {
+            display: block;
+            transition: all 0.2s ease;
+        }
+
+        .preview-name {
+            margin-top: 16px;
+            font-size: 13px;
+            color: #aaa;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+
+        /* Right: controls pane */
+        .popup-controls {
+            width: 260px;
+            padding: 24px 24px;
+            overflow-y: auto;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .control-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        /* Sliders */
+        .ctrl-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 4px;
+            background: #e8e8e8;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .ctrl-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #111;
+            cursor: pointer;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.15);
+            transition: transform 0.15s;
+        }
+
+        .ctrl-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .slider-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .slider-val {
+            font-size: 13px;
+            font-weight: 700;
+            color: #111;
+            min-width: 36px;
+            text-align: right;
+        }
+
+        /* Color swatches */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .color-swatch {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.15s, border-color 0.15s;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.12);
+        }
+
+        .color-swatch.selected {
+            border-color: #111;
+            box-shadow: 0 0 0 2px #fff inset;
+        }
+
+        .color-input-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .color-input-row input[type="color"] {
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 8px;
+            padding: 2px;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .color-input-row input[type="text"] {
+            flex: 1;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-family: 'Parkinsans', sans-serif;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .color-input-row input[type="text"]:focus {
+            border-color: #111;
+        }
+
+        /* BG Color row */
+        .bg-swatches {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .bg-swatch {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.15s, border-color 0.15s;
+        }
+
+        .bg-swatch:hover {
+            transform: scale(1.12);
+        }
+
+        .bg-swatch.selected {
+            border-color: #111;
+        }
+
+        .bg-swatch.transparent-swatch {
+            background: repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%) 0 0 / 10px 10px;
+        }
+
+        /* Popup footer / actions */
+        .popup-footer {
+            padding: 16px 28px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .btn-primary {
+            flex: 1;
+            background: #111;
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 13px 20px;
+            font-family: 'Parkinsans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #111;
+            border: none;
+            border-radius: 12px;
+            padding: 13px 18px;
+            font-family: 'Parkinsans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #e4e4e4;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #111;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 999px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            z-index: 2000;
+            pointer-events: none;
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Scroll reveal */
+        .sr {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .sr.in {
+            opacity: 1;
+            transform: none;
+        }
+
+        .sr-d1 {
+            transition-delay: 0.05s;
+        }
+
+        .sr-d2 {
+            transition-delay: 0.12s;
+        }
+
+        .sr-d3 {
+            transition-delay: 0.19s;
+        }
+
+        .sr-d4 {
+            transition-delay: 0.26s;
+        }
+
+        .sr-d5 {
+            transition-delay: 0.33s;
+        }
+
+        .sr-d6 {
+            transition-delay: 0.40s;
+        }
+
+        /* Loading skeleton */
+        @keyframes shimmer {
+            0% {
+                background-position: -400px 0;
+            }
+
+            100% {
+                background-position: 400px 0;
+            }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #ebebeb 25%, #f5f5f5 50%, #ebebeb 75%);
+            background-size: 800px 100%;
+            animation: shimmer 1.4s infinite;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 640px) {
+            .search-wrap {
+                max-width: 100%;
+                width: 100%;
+            }
+
+            .popup-body {
+                flex-direction: column;
+            }
+
+            .popup-controls {
+                width: 100%;
+                border-right: none;
+                border-top: 1px solid rgba(0, 0, 0, 0.06);
+            }
+
+            .icon-grid {
+                grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ══════════════════════════════════════
+     NAVBAR
+══════════════════════════════════════ -->
+    <nav
+        style="position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(239,239,239,0.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.05);">
+
+        <!-- Logo -->
+        <a href="index.html" class="nav-pill"
+            style="display:inline-flex;align-items:center;padding:9px 22px;text-decoration:none;flex-shrink:0;">
+            <span style="font-size:15px;letter-spacing:-0.01em;color:#111;">
+                <strong style="font-weight:900;">Mini</strong><span style="font-weight:400;">maly</span>
+            </span>
+        </a>
+
+        <!-- Search -->
+        <div class="search-wrap" id="db-search-wrap" onclick="document.getElementById('db-search').focus()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+            </svg>
+            <input id="db-search" type="text" placeholder="Search icons and collections..." />
+            <div id="db-kbd" style="display:flex;gap:3px;flex-shrink:0;transition:opacity 0.2s;">
+                <kbd>⌘</kbd><kbd>K</kbd>
+            </div>
+        </div>
+
+        <!-- Back link -->
+        <a href="index.html"
+            style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:999px;background:rgba(255,255,255,0.85);border:1px solid rgba(0,0,0,0.09);font-size:13px;font-weight:600;color:#555;text-decoration:none;flex-shrink:0;transition:color 0.2s,border-color 0.2s;white-space:nowrap;"
+            onmouseover="this.style.color='#111'" onmouseout="this.style.color='#555'">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 5l-7 7 7 7" />
+            </svg>
+            Home
+        </a>
+    </nav>
+
+    <!-- ══════════════════════════════════════
+     PAGE CONTENT
+══════════════════════════════════════ -->
+    <main class="page-content" style="max-width:1200px;margin:0 auto;padding:36px 24px 80px;">
+
+        <!-- ── SEARCH RESULTS (hidden by default) ── -->
+        <div id="search-results-section" style="display:none;">
+            <div class="search-results-bar">
+                <div>
+                    <span style="font-weight:700;font-size:15px;" id="search-result-count">0 results</span>
+                    <span style="color:#aaa;font-size:14px;" id="search-result-label"> for ""</span>
+                </div>
+                <button onclick="clearSearch()"
+                    style="display:flex;align-items:center;gap:6px;background:#f0f0f0;border:none;border-radius:8px;padding:6px 14px;font-family:'Parkinsans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.2s;"
+                    onmouseover="this.style.background='#e4e4e4'" onmouseout="this.style.background='#f0f0f0'">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                    Clear
+                </button>
+            </div>
+            <div class="icon-grid" id="search-results-grid"></div>
+        </div>
+
+        <!-- ── MAIN CONTENT (shown when not searching) ── -->
+        <div id="main-content">
+
+            <!-- Featured Collections -->
+            <section style="margin-bottom:52px;">
+                <p class="section-label sr">Featured Collections</p>
+                <div id="collections-grid"
+                    style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;">
+                    <!-- Injected by JS -->
+                </div>
+            </section>
+
+            <!-- All Icons -->
+            <section>
+                <div
+                    style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+                    <p class="section-label sr" style="margin-bottom:0;">All Icons</p>
+                    <!-- Filter pills -->
+                    <div id="filter-pills" style="display:flex;gap:8px;flex-wrap:wrap;" class="sr sr-d1">
+                        <button class="filter-pill active" data-filter="all"
+                            onclick="filterByCollection('all',this)">All</button>
+                        <!-- Collection filters injected by JS -->
+                    </div>
+                </div>
+                <div class="icon-grid" id="all-icons-grid">
+                    <!-- Injected by JS -->
+                </div>
+                <div id="empty-state" class="empty-state" style="display:none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                    <p>No icons found in this collection yet.</p>
+                    <p style="font-size:13px;margin-top:6px;color:#bbb;">Icons will appear here once added to the
+                        database.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ══════════════════════════════════════
+     ICON EDITOR POPUP
+══════════════════════════════════════ -->
+    <div class="popup-overlay" id="popup-overlay" onclick="closePopup(event)">
+        <div class="popup" id="popup">
+
+            <!-- Header -->
+            <div class="popup-header">
+                <div>
+                    <div style="font-size:18px;font-weight:800;color:#111;" id="popup-icon-name">Icon Name</div>
+                    <div style="font-size:12px;color:#aaa;margin-top:2px;font-weight:500;" id="popup-icon-collection">
+                        Collection</div>
+                </div>
+                <button class="popup-close" onclick="closePopupDirect()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Body -->
+            <div class="popup-body">
+
+                <!-- Preview -->
+                <div class="popup-preview">
+                    <div class="preview-canvas" id="preview-canvas" style="width:160px;height:160px;">
+                        <div id="popup-svg-wrap"></div>
+                    </div>
+                    <div class="preview-name" id="popup-preview-label">preview</div>
+                    <!-- Size indicator -->
+                    <div style="margin-top:12px;display:flex;gap:8px;">
+                        <span id="size-badge"
+                            style="background:#f0f0f0;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#888;">24
+                            × 24</span>
+                        <span id="stroke-badge"
+                            style="background:#f0f0f0;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#888;">Stroke
+                            2</span>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="popup-controls">
+
+                    <!-- Stroke weight -->
+                    <div class="control-group">
+                        <label>Stroke Weight</label>
+                        <div class="slider-row">
+                            <span style="font-size:12px;color:#aaa;">0.5</span>
+                            <span class="slider-val" id="stroke-val">2.0</span>
+                        </div>
+                        <input type="range" class="ctrl-slider" id="stroke-slider" min="0.5" max="4" step="0.25"
+                            value="2" oninput="updatePreview()" />
+                        <div class="slider-row" style="margin-top:4px;">
+                            <span style="font-size:12px;color:#aaa;">Thin</span>
+                            <span style="font-size:12px;color:#aaa;">Heavy</span>
+                        </div>
+                    </div>
+
+                    <!-- Icon size -->
+                    <div class="control-group">
+                        <label>Icon Size</label>
+                        <div class="slider-row">
+                            <span style="font-size:12px;color:#aaa;">16px</span>
+                            <span class="slider-val" id="size-val">24px</span>
+                        </div>
+                        <input type="range" class="ctrl-slider" id="size-slider" min="16" max="96" step="4" value="24"
+                            oninput="updatePreview()" />
+                        <div class="slider-row" style="margin-top:4px;">
+                            <span style="font-size:12px;color:#aaa;">Small</span>
+                            <span style="font-size:12px;color:#aaa;">Large</span>
+                        </div>
+                    </div>
+
+                    <!-- Padding -->
+                    <div class="control-group">
+                        <label>Padding</label>
+                        <div class="slider-row">
+                            <span style="font-size:12px;color:#aaa;">0</span>
+                            <span class="slider-val" id="padding-val">16px</span>
+                        </div>
+                        <input type="range" class="ctrl-slider" id="padding-slider" min="0" max="48" step="4" value="16"
+                            oninput="updatePreview()" />
+                    </div>
+
+                    <!-- Icon color -->
+                    <div class="control-group">
+                        <label>Icon Color</label>
+                        <div class="color-grid" id="icon-color-swatches">
+                            <!-- injected by JS -->
+                        </div>
+                        <div class="color-input-row">
+                            <input type="color" id="icon-color-picker" value="#111111"
+                                oninput="onPickerChange('icon')" />
+                            <input type="text" id="icon-color-hex" value="#111111" maxlength="7" placeholder="#111111"
+                                oninput="onHexChange('icon')" />
+                        </div>
+                    </div>
+
+                    <!-- Background color -->
+                    <div class="control-group">
+                        <label>Background</label>
+                        <div class="bg-swatches" id="bg-swatches">
+                            <!-- injected by JS -->
+                        </div>
+                        <div class="color-input-row" style="margin-top:10px;">
+                            <input type="color" id="bg-color-picker" value="#ffffff" oninput="onPickerChange('bg')" />
+                            <input type="text" id="bg-color-hex" value="#ffffff" maxlength="7" placeholder="#ffffff"
+                                oninput="onHexChange('bg')" />
+                        </div>
+                    </div>
+
+                    <!-- Round corners -->
+                    <div class="control-group">
+                        <label>Corner Radius</label>
+                        <div class="slider-row">
+                            <span style="font-size:12px;color:#aaa;">0px</span>
+                            <span class="slider-val" id="radius-val">12px</span>
+                        </div>
+                        <input type="range" class="ctrl-slider" id="radius-slider" min="0" max="40" step="2" value="12"
+                            oninput="updatePreview()" />
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="popup-footer">
+                <button class="btn-primary" onclick="downloadSVG()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Download SVG
+                </button>
+                <button class="btn-secondary" onclick="copySVGCode()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                    Copy
+                </button>
+                <button class="btn-secondary" onclick="copyPNG()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                    PNG
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+        </svg>
+        <span id="toast-msg">Copied!</span>
+    </div>
+
+    <!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+    <script>
+        'use strict';
+
+        /* ─────────────────────────────────────────
+           DATABASE STRUCTURE
+           Icons live at: images/icon_database/<collection>/<icon>.svg
+           We define the manifest here. Once you add icons to the repo,
+           update the COLLECTIONS object below.
+        
+           Format:
+           {
+             collectionName: {
+               label: 'Display Name',
+               icons: ['icon-name-1', 'icon-name-2', ...]
+             }
+           }
+        ───────────────────────────────────────── */
+        const COLLECTIONS = {
+            // ── Placeholder collections (replace with your real icons) ──
+            // When you add real icons, just add the collection key and icon filenames (without .svg)
+            // Example:
+            // 'ui-essentials': {
+            //   label: 'UI Essentials',
+            //   icons: ['home', 'search', 'settings', 'user', 'bell', 'lock']
+            // },
+        };
+
+        /* ─────────────────────────────────────────
+           FALLBACK BUILT-IN ICONS
+           These are shown when no real SVG files exist yet.
+           Each entry has an inline SVG path string.
+        ───────────────────────────────────────── */
+        const BUILTIN_ICONS = [
+            { name: 'Home', collection: 'UI Essentials', path: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>' },
+            { name: 'Search', collection: 'UI Essentials', path: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>' },
+            { name: 'Star', collection: 'UI Essentials', path: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>' },
+            { name: 'Heart', collection: 'UI Essentials', path: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>' },
+            { name: 'Bell', collection: 'UI Essentials', path: '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>' },
+            { name: 'Settings', collection: 'UI Essentials', path: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>' },
+            { name: 'User', collection: 'UI Essentials', path: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>' },
+            { name: 'Lock', collection: 'UI Essentials', path: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>' },
+            { name: 'Download', collection: 'UI Essentials', path: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>' },
+            { name: 'Mail', collection: 'Social', path: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>' },
+            { name: 'Share', collection: 'Social', path: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>' },
+            { name: 'Globe', collection: 'Social', path: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' },
+            { name: 'Link', collection: 'Social', path: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' },
+            { name: 'Play', collection: 'Media', path: '<polygon points="5 3 19 12 5 21 5 3"/>' },
+            { name: 'Pause', collection: 'Media', path: '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>' },
+            { name: 'Volume', collection: 'Media', path: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>' },
+            { name: 'Camera', collection: 'Media', path: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>' },
+            { name: 'Code', collection: 'Tech', path: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>' },
+            { name: 'Zap', collection: 'Tech', path: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>' },
+            { name: 'Cloud', collection: 'Tech', path: '<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>' },
+            { name: 'Database', collection: 'Tech', path: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>' },
+            { name: 'Layers', collection: 'Tech', path: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>' },
+            { name: 'Shield', collection: 'UI Essentials', path: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' },
+            { name: 'Smile', collection: 'UI Essentials', path: '<circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>' },
+            { name: 'Wifi', collection: 'Tech', path: '<path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>' },
+        ];
+
+        /* ─────────────────────────────────────────
+           STATE
+        ───────────────────────────────────────── */
+        let allIcons = [];        // flat list of all icon objects
+        let activeFilter = 'all'; // current collection filter
+        let currentIconData = {}; // icon open in popup
+
+        /* ─────────────────────────────────────────
+           BOOTSTRAP: load from real files OR fallback
+        ───────────────────────────────────────── */
+        async function bootstrap() {
+            // Try to load real icons from COLLECTIONS manifest first
+            const hasRealCollections = Object.keys(COLLECTIONS).length > 0;
+
+            if (hasRealCollections) {
+                allIcons = await loadRealIcons();
+            }
+
+            // Always merge built-ins (so the page is never empty)
+            // Built-ins are replaced as real icons with matching names are found
+            const builtinMapped = BUILTIN_ICONS.map(ic => ({
+                name: ic.name,
+                collection: ic.collection,
+                type: 'builtin',
+                path: ic.path,
+                svgUrl: null,
+            }));
+
+            // If we have real icons, only add builtins that aren't already loaded
+            if (allIcons.length > 0) {
+                const realNames = new Set(allIcons.map(i => i.name.toLowerCase()));
+                builtinMapped.filter(b => !realNames.has(b.name.toLowerCase()))
+                    .forEach(b => allIcons.push(b));
+            } else {
+                allIcons = builtinMapped;
+            }
+
+            renderCollections();
+            renderAllIcons(allIcons);
+            renderFilterPills();
+        }
+
+        async function loadRealIcons() {
+            const icons = [];
+            for (const [colKey, colData] of Object.entries(COLLECTIONS)) {
+                for (const iconName of colData.icons) {
+                    const url = `images/icon_database/${colKey}/${iconName}.svg`;
+                    icons.push({
+                        name: toDisplayName(iconName),
+                        collection: colData.label,
+                        collectionKey: colKey,
+                        type: 'file',
+                        svgUrl: url,
+                        path: null, // loaded lazily on open
+                    });
+                }
+            }
+            return icons;
+        }
+
+        function toDisplayName(slug) {
+            return slug.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        }
+
+        /* ─────────────────────────────────────────
+           COLLECTIONS GRID
+        ───────────────────────────────────────── */
+        function getCollections() {
+            const map = {};
+            for (const icon of allIcons) {
+                const col = icon.collection;
+                if (!map[col]) map[col] = [];
+                map[col].push(icon);
+            }
+            return map;
+        }
+
+        function renderCollections() {
+            const colMap = getCollections();
+            const grid = document.getElementById('collections-grid');
+            const colKeys = Object.keys(colMap);
+
+            // Pick up to 6 collections (shuffled)
+            const shuffled = colKeys.sort(() => Math.random() - 0.5).slice(0, 6);
+
+            grid.innerHTML = shuffled.map((col, i) => {
+                const icons = colMap[col].slice(0, 9);
+                const delayClass = `sr-d${Math.min(i + 1, 6)}`;
+                const previewCells = icons.slice(0, 9).map(ic => `
+      <div class="preview-cell">
+        ${ic.type === 'builtin' ? buildInlineSVG(ic.path, 20) : `<img src="${ic.svgUrl}" width="20" height="20" loading="lazy" style="opacity:0.8;" />`}
+      </div>
+    `).join('');
+
+                // Pad to 9
+                const empty = Array(Math.max(0, 9 - icons.length)).fill('<div class="preview-cell"></div>').join('');
+
+                return `
+      <div class="collection-card sr ${delayClass}" onclick="filterByCollection('${col}', null)">
+        <div class="coll-arrow">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="preview-grid">${previewCells}${empty}</div>
+        <div class="coll-name">${col}</div>
+        <div class="coll-count">${colMap[col].length} icon${colMap[col].length !== 1 ? 's' : ''}</div>
+      </div>
+    `;
+            }).join('');
+
+            // Trigger scroll reveal
+            requestAnimationFrame(() => initSR());
+        }
+
+        function buildInlineSVG(path, size = 24, stroke = '#333', strokeW = 1.6) {
+            return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="${stroke}" stroke-width="${strokeW}" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+        }
+
+        /* ─────────────────────────────────────────
+           ICON GRID
+        ───────────────────────────────────────── */
+        function renderAllIcons(icons) {
+            const grid = document.getElementById('all-icons-grid');
+            const empty = document.getElementById('empty-state');
+
+            if (!icons.length) {
+                grid.innerHTML = '';
+                empty.style.display = 'block';
+                return;
+            }
+            empty.style.display = 'none';
+
+            grid.innerHTML = icons.map((ic, i) => {
+                const inner = ic.type === 'builtin'
+                    ? buildInlineSVG(ic.path, 28)
+                    : `<img src="${ic.svgUrl}" width="28" height="28" loading="lazy" />`;
+                return `
+      <div class="icon-tile" onclick="openPopup(${i})" title="${ic.name}">
+        ${inner}
+        <span class="tile-name">${ic.name}</span>
+      </div>
+    `;
+            }).join('');
+        }
+
+        /* ─────────────────────────────────────────
+           FILTER PILLS
+        ───────────────────────────────────────── */
+        function renderFilterPills() {
+            const colMap = getCollections();
+            const container = document.getElementById('filter-pills');
+            const existingAll = container.querySelector('[data-filter="all"]');
+            // Clear except "All"
+            [...container.querySelectorAll('[data-filter]:not([data-filter="all"])')].forEach(el => el.remove());
+
+            Object.keys(colMap).forEach(col => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-pill';
+                btn.dataset.filter = col;
+                btn.textContent = col;
+                btn.onclick = function () { filterByCollection(col, this); };
+                container.appendChild(btn);
+            });
+        }
+
+        function filterByCollection(col, btn) {
+            activeFilter = col;
+
+            // Update pills
+            document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+            if (btn) {
+                btn.classList.add('active');
+            } else {
+                // called from collection card — find the matching pill
+                const match = document.querySelector(`[data-filter="${col}"]`);
+                if (match) match.classList.add('active');
+                else document.querySelector('[data-filter="all"]').classList.add('active');
+            }
+
+            // Scroll to icons section
+            document.getElementById('all-icons-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            const filtered = col === 'all' ? allIcons : allIcons.filter(i => i.collection === col);
+            renderAllIcons(filtered);
+        }
+
+        /* ─────────────────────────────────────────
+           SEARCH
+        ───────────────────────────────────────── */
+        const dbSearch = document.getElementById('db-search');
+        const kbdHint = document.getElementById('db-kbd');
+        const searchSection = document.getElementById('search-results-section');
+        const mainContent = document.getElementById('main-content');
+
+        dbSearch.addEventListener('focus', () => {
+            kbdHint.style.opacity = '0';
+        });
+        dbSearch.addEventListener('blur', () => {
+            kbdHint.style.opacity = '1';
+        });
+
+        dbSearch.addEventListener('input', () => {
+            const q = dbSearch.value.trim().toLowerCase();
+            if (!q) {
+                clearSearch(); return;
+            }
+
+            const results = allIcons.filter(ic =>
+                ic.name.toLowerCase().includes(q) ||
+                ic.collection.toLowerCase().includes(q)
+            );
+
+            searchSection.style.display = 'block';
+            mainContent.style.display = 'none';
+
+            document.getElementById('search-result-count').textContent = `${results.length} result${results.length !== 1 ? 's' : ''}`;
+            document.getElementById('search-result-label').textContent = ` for "${dbSearch.value.trim()}"`;
+
+            const grid = document.getElementById('search-results-grid');
+            if (!results.length) {
+                grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;margin:0 auto 14px;display:block;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <p>No icons match "<strong>${dbSearch.value.trim()}</strong>"</p>
+      <p style="font-size:13px;margin-top:6px;color:#bbb;">Try a different keyword or browse by collection.</p>
+    </div>`;
+                return;
+            }
+
+            grid.innerHTML = results.map((ic, i) => {
+                const idx = allIcons.indexOf(ic);
+                const inner = ic.type === 'builtin'
+                    ? buildInlineSVG(ic.path, 28)
+                    : `<img src="${ic.svgUrl}" width="28" height="28" loading="lazy" />`;
+                return `
+      <div class="icon-tile" onclick="openPopup(${idx})" title="${ic.name}">
+        ${inner}
+        <span class="tile-name">${ic.name}</span>
+      </div>
+    `;
+            }).join('');
+        });
+
+        function clearSearch() {
+            dbSearch.value = '';
+            searchSection.style.display = 'none';
+            mainContent.style.display = 'block';
+        }
+
+        // ⌘K / Ctrl+K
+        document.addEventListener('keydown', e => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                dbSearch.focus(); dbSearch.select();
+            }
+            if (e.key === 'Escape') {
+                if (document.activeElement === dbSearch) { dbSearch.blur(); clearSearch(); }
+                else closePopupDirect();
+            }
+        });
+
+        /* ─────────────────────────────────────────
+           POPUP
+        ───────────────────────────────────────── */
+        const ICON_COLORS = ['#111111', '#374151', '#6B7280', '#EF4444', '#F97316', '#EAB308', '#22C55E', '#3B82F6', '#8B5CF6', '#EC4899', '#FFFFFF', '#F3F4F6'];
+        const BG_COLORS = [null, '#FFFFFF', '#F3F4F6', '#111111', '#1E3A5F', '#FEF3C7', '#DCFCE7', '#EDE9FE'];
+
+        async function openPopup(iconIndex) {
+            currentIconData = { ...allIcons[iconIndex], index: iconIndex };
+
+            // Load SVG content if file-based
+            if (currentIconData.type === 'file' && !currentIconData.path) {
+                try {
+                    const res = await fetch(currentIconData.svgUrl);
+                    const text = await res.text();
+                    // Extract inner content of <svg>
+                    const match = text.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
+                    currentIconData.path = match ? match[1] : text;
+                } catch (e) {
+                    currentIconData.path = '<circle cx="12" cy="12" r="8"/>';
+                }
+            }
+
+            // Reset controls
+            document.getElementById('stroke-slider').value = 2;
+            document.getElementById('size-slider').value = 24;
+            document.getElementById('padding-slider').value = 16;
+            document.getElementById('radius-slider').value = 12;
+            document.getElementById('icon-color-picker').value = '#111111';
+            document.getElementById('icon-color-hex').value = '#111111';
+            document.getElementById('bg-color-picker').value = '#ffffff';
+            document.getElementById('bg-color-hex').value = '#ffffff';
+
+            // Populate color swatches
+            renderColorSwatches();
+
+            // Set labels
+            document.getElementById('popup-icon-name').textContent = currentIconData.name;
+            document.getElementById('popup-icon-collection').textContent = currentIconData.collection;
+            document.getElementById('popup-preview-label').textContent = currentIconData.name.toLowerCase().replace(/ /g, '-') + '.svg';
+
+            updatePreview();
+
+            // Open
+            document.getElementById('popup-overlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function renderColorSwatches() {
+            // Icon color swatches
+            const iconSwatchContainer = document.getElementById('icon-color-swatches');
+            iconSwatchContainer.innerHTML = ICON_COLORS.map(c => `
+    <div class="color-swatch ${c === '#111111' ? 'selected' : ''}"
+      style="background:${c};${c === '#FFFFFF' ? 'border:1.5px solid #e5e5e5;' : ''}"
+      onclick="setIconColor('${c}', this)" title="${c}"></div>
+  `).join('');
+
+            // BG swatches
+            const bgContainer = document.getElementById('bg-swatches');
+            bgContainer.innerHTML = BG_COLORS.map((c, i) => {
+                if (c === null) return `<div class="bg-swatch transparent-swatch ${i === 0 ? 'selected' : ''}" onclick="setBgColor(null, this)" title="Transparent"></div>`;
+                return `<div class="bg-swatch ${c === '#FFFFFF' ? 'selected' : ''}" style="background:${c};${c === '#FFFFFF' || c === '#F3F4F6' ? 'border:1.5px solid #e5e5e5;' : ''}" onclick="setBgColor('${c}', this)" title="${c}"></div>`;
+            }).join('');
+        }
+
+        function setIconColor(hex, el) {
+            document.querySelectorAll('#icon-color-swatches .color-swatch').forEach(s => s.classList.remove('selected'));
+            el.classList.add('selected');
+            document.getElementById('icon-color-picker').value = hex;
+            document.getElementById('icon-color-hex').value = hex;
+            updatePreview();
+        }
+
+        function setBgColor(hex, el) {
+            document.querySelectorAll('#bg-swatches .bg-swatch').forEach(s => s.classList.remove('selected'));
+            el.classList.add('selected');
+            if (hex) {
+                document.getElementById('bg-color-picker').value = hex;
+                document.getElementById('bg-color-hex').value = hex;
+            } else {
+                document.getElementById('bg-color-hex').value = 'transparent';
+            }
+            updatePreview();
+        }
+
+        function onPickerChange(type) {
+            const hex = document.getElementById(`${type}-color-picker`).value;
+            document.getElementById(`${type}-color-hex`).value = hex;
+            updatePreview();
+        }
+
+        function onHexChange(type) {
+            let hex = document.getElementById(`${type}-color-hex`).value;
+            if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+                document.getElementById(`${type}-color-picker`).value = hex;
+                updatePreview();
+            }
+        }
+
+        function getSettings() {
+            return {
+                stroke: parseFloat(document.getElementById('stroke-slider').value),
+                size: parseInt(document.getElementById('size-slider').value),
+                padding: parseInt(document.getElementById('padding-slider').value),
+                radius: parseInt(document.getElementById('radius-slider').value),
+                iconColor: document.getElementById('icon-color-hex').value || '#111111',
+                bgColor: document.getElementById('bg-color-hex').value,
+            };
+        }
+
+        function updatePreview() {
+            const s = getSettings();
+
+            // Update value labels
+            document.getElementById('stroke-val').textContent = s.stroke.toFixed(2).replace(/\.?0+$/, '') + '';
+            document.getElementById('size-val').textContent = s.size + 'px';
+            document.getElementById('padding-val').textContent = s.padding + 'px';
+            document.getElementById('radius-val').textContent = s.radius + 'px';
+
+            // Update badges
+            document.getElementById('size-badge').textContent = `${s.size} × ${s.size}`;
+            document.getElementById('stroke-badge').textContent = `Stroke ${s.stroke}`;
+
+            // Build SVG
+            const svgContent = buildInlineSVG(currentIconData.path || '', s.size, s.iconColor, s.stroke);
+
+            // Canvas
+            const canvas = document.getElementById('preview-canvas');
+            const wrap = document.getElementById('popup-svg-wrap');
+
+            const bgActual = s.bgColor === 'transparent' ? 'transparent' : s.bgColor;
+            canvas.style.background = bgActual;
+            canvas.style.borderRadius = s.radius + 'px';
+            canvas.style.padding = s.padding + 'px';
+
+            wrap.innerHTML = svgContent;
+        }
+
+        function buildSVGOutput() {
+            const s = getSettings();
+            const totalSize = s.size + s.padding * 2;
+            const bgActual = s.bgColor === 'transparent' ? 'none' : s.bgColor;
+
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="${totalSize}" height="${totalSize}" viewBox="0 0 ${totalSize} ${totalSize}">
+  <rect width="${totalSize}" height="${totalSize}" rx="${s.radius}" fill="${bgActual}"/>
+  <g transform="translate(${s.padding},${s.padding})">
+    <svg width="${s.size}" height="${s.size}" viewBox="0 0 24 24" fill="none" stroke="${s.iconColor}" stroke-width="${s.stroke}" stroke-linecap="round" stroke-linejoin="round">
+      ${currentIconData.path || ''}
+    </svg>
+  </g>
+</svg>`;
+        }
+
+        function downloadSVG() {
+            const svg = buildSVGOutput();
+            const blob = new Blob([svg], { type: 'image/svg+xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = (currentIconData.name || 'icon').toLowerCase().replace(/ /g, '-') + '.svg';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('SVG downloaded!');
+        }
+
+        function copySVGCode() {
+            const svg = buildSVGOutput();
+            navigator.clipboard.writeText(svg).then(() => showToast('SVG code copied!'));
+        }
+
+        function copyPNG() {
+            const s = getSettings();
+            const totalSize = s.size + s.padding * 2;
+            const scale = Math.max(2, 192 / totalSize); // min 2x, target ~192px
+            const canvasEl = document.createElement('canvas');
+            canvasEl.width = totalSize * scale;
+            canvasEl.height = totalSize * scale;
+            const ctx = canvasEl.getContext('2d');
+            ctx.scale(scale, scale);
+
+            const svg = buildSVGOutput();
+            const img = new Image();
+            const url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+            img.onload = () => {
+                ctx.drawImage(img, 0, 0, totalSize, totalSize);
+                canvasEl.toBlob(blob => {
+                    if (!blob) return;
+                    const item = new ClipboardItem({ 'image/png': blob });
+                    navigator.clipboard.write([item]).then(() => showToast('PNG copied to clipboard!'));
+                });
+            };
+            img.src = url;
+        }
+
+        function closePopup(e) {
+            if (e.target === document.getElementById('popup-overlay')) closePopupDirect();
+        }
+        function closePopupDirect() {
+            document.getElementById('popup-overlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        /* ─────────────────────────────────────────
+           TOAST
+        ───────────────────────────────────────── */
+        let toastTimer;
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            t.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+        }
+
+        /* ─────────────────────────────────────────
+           SCROLL REVEAL
+        ───────────────────────────────────────── */
+        function initSR() {
+            const obs = new IntersectionObserver(entries => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+            }, { threshold: 0.08 });
+            document.querySelectorAll('.sr:not(.in)').forEach(el => obs.observe(el));
+        }
+
+        /* ─────────────────────────────────────────
+           INIT
+        ───────────────────────────────────────── */
+        bootstrap().then(() => initSR());
+    </script>
+</body>
+
+</html>
