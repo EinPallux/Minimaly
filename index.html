@@ -548,8 +548,8 @@
 
       <div class="hero-badge"
         style="display:inline-flex;align-items:center;border-radius:999px;padding:8px 22px;margin-bottom:44px;background:rgba(255,255,255,0.78);border:1px solid rgba(0,0,0,0.09);backdrop-filter:blur(10px);box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-        <span style="font-family:'Parkinsans',sans-serif;font-size:14px;color:#222;">Over <strong
-            style="font-weight:700;">100+</strong> Icons available</span>
+        <span style="font-family:'Parkinsans',sans-serif;font-size:14px;color:#222;">Over <strong id="hero-icon-count"
+            style="font-weight:700;">…</strong> Icons available</span>
       </div>
 
       <h1
@@ -557,10 +557,10 @@
         <span style="display:block;">
           Get a <span style="font-weight:900;">looooot</span> of
           <span
-            style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;border-radius:20px;background:#fff;box-shadow:0 6px 28px rgba(0,0,0,0.11);margin:0 8px;animation:float 4s ease-in-out infinite;position:relative;overflow:hidden;"
+            style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;border-radius:20px;background:#fff;box-shadow:0 6px 28px rgba(0,0,0,0.11);margin:0 8px;animation:float 4s ease-in-out infinite;position:relative;overflow:hidden;width:72px;height:72px;flex-shrink:0;"
             id="icon-card-1">
             <span id="rotating-icon-wrap"
-              style="position:relative;display:flex;align-items:center;justify-content:center;"></span>
+              style="position:relative;display:flex;align-items:center;justify-content:center;width:38px;height:38px;"></span>
           </span>
         </span>
         <span style="display:block;">
@@ -1162,7 +1162,8 @@
       const wrap = document.getElementById('rotating-icon-wrap');
       if (!wrap) return;
       wrap.innerHTML = '';
-      const base = 'position:absolute;display:flex;align-items:center;justify-content:center;transition:opacity 0.4s ease,transform 0.4s ease;';
+      // slots use inset:0 / position:absolute inside a sized wrap
+      const base = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:opacity 0.4s ease,transform 0.4s ease;';
       iconSlotA = document.createElement('span');
       iconSlotB = document.createElement('span');
       iconSlotA.style.cssText = base + 'opacity:1;transform:scale(1) rotate(0deg);';
@@ -1184,7 +1185,7 @@
       incoming.style.transition = 'none';
       incoming.style.opacity = '0';
       incoming.style.transform = 'scale(0.7) rotate(-12deg)';
-      incoming.getBoundingClientRect();
+      incoming.getBoundingClientRect(); // force reflow
       incoming.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
       outgoing.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
       incoming.style.opacity = '1';
@@ -1202,8 +1203,16 @@
       iconSizePx = Math.round(cardPx * 0.52);
       const card = document.getElementById('icon-card-1');
       if (card) { card.style.width = cardPx + 'px'; card.style.height = cardPx + 'px'; }
+      const wrap = document.getElementById('rotating-icon-wrap');
+      if (wrap) { wrap.style.width = iconSizePx + 'px'; wrap.style.height = iconSizePx + 'px'; }
       const dollar = document.getElementById('dollar-img');
       if (dollar) { dollar.style.width = dollarPx + 'px'; dollar.style.height = 'auto'; }
+    }
+
+    function updateIconCount(count) {
+      const el = document.getElementById('hero-icon-count');
+      if (!el) return;
+      el.textContent = count > 0 ? String(count) : '…';
     }
 
     window.addEventListener('resize', sizeHeroImages);
@@ -1232,14 +1241,19 @@
       initHeroSlots();
 
       loadLandingIcons().then(() => {
-        // Populate hero icons from real loaded icons
+        // Update the dynamic icon count badge
+        updateIconCount(landingIcons.length);
+
+        // Populate hero rotating icons
         if (landingIcons.length > 0) {
           heroIcons = [...landingIcons].sort(() => Math.random() - 0.5);
           heroIdx = 0;
+          // Show first icon immediately in slot A
           if (iconSlotA && heroIcons[0]) {
             setHeroSlotContent(iconSlotA, heroIcons[0]);
             heroIdx = 1;
           }
+          // Start rotation interval
           setInterval(rotateHeroIcon, 1400);
         }
       });
