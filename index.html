@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minimaly — Free Icon Database</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { parkinsans: ['Parkinsans', 'sans-serif'] },
+          colors: {
+            bg: '#f0f0f0',
+            dark: '#111111',
+          },
+          keyframes: {
+            fadeUp: { '0%': { opacity: '0', transform: 'translateY(24px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } },
+            marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-8px)' } },
+            shimmer: { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+          },
+          animation: {
+            fadeUp: 'fadeUp 0.7s ease forwards',
+            fadeIn: 'fadeIn 0.5s ease forwards',
+            marquee: 'marquee 28s linear infinite',
+            float: 'float 4s ease-in-out infinite',
+            shimmer: 'shimmer 3s linear infinite',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Parkinsans', sans-serif; background: #f0f0f0; color: #111; overflow-x: hidden; }
+
+    .nav-pill { background: rgba(255,255,255,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0,0,0,0.08); }
+    .search-bar { background: rgba(255,255,255,0.6); backdrop-filter: blur(8px); border: 1px solid rgba(0,0,0,0.1); transition: all 0.3s ease; }
+    .search-bar:focus-within { background: rgba(255,255,255,0.95); border-color: rgba(0,0,0,0.2); box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    .search-bar input::placeholder { color: #aaa; }
+    .search-bar input { background: transparent; outline: none; }
+
+    /* Hero */
+    .hero-bg { background-image: url('images/frontpage_images/grid_background_hero_section.png'); background-size: cover; background-position: center top; }
+
+    /* Animated badge */
+    .badge-pill { background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+
+    /* CTA Button */
+    .btn-dark { background: #111; color: #fff; transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .btn-dark::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); transition: left 0.5s ease; }
+    .btn-dark:hover::before { left: 100%; }
+    .btn-dark:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+
+    /* Staggered fade-up for hero elements */
+    .reveal { opacity: 0; }
+    .reveal.visible { animation: fadeUp 0.7s ease forwards; }
+
+    /* Marquee */
+    .marquee-track { display: flex; width: max-content; }
+    .marquee-wrap { overflow: hidden; }
+    .marquee-icon { width: 48px; height: 48px; background: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); transition: transform 0.3s ease; }
+    .marquee-icon:hover { transform: scale(1.15) rotate(-5deg); }
+
+    /* Feature cards */
+    .feature-card { background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: 24px; transition: all 0.4s ease; position: relative; overflow: hidden; }
+    .feature-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 60%, rgba(0,0,0,0.02)); transition: opacity 0.3s; }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(0,0,0,0.1); }
+    .feature-card:hover::before { opacity: 0; }
+
+    /* Stats */
+    .stat-card { background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: 20px; transition: all 0.3s ease; }
+    .stat-card:hover { transform: scale(1.02); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+
+    /* Category pill */
+    .cat-pill { background: white; border: 1px solid rgba(0,0,0,0.08); border-radius: 100px; transition: all 0.25s ease; cursor: pointer; }
+    .cat-pill:hover, .cat-pill.active { background: #111; color: white; border-color: #111; transform: scale(1.04); }
+
+    /* Icon card */
+    .icon-card { background: white; border: 1px solid rgba(0,0,0,0.07); border-radius: 16px; transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden; }
+    .icon-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+    .icon-card .download-overlay { position: absolute; bottom: -40px; left: 0; right: 0; background: #111; color: white; font-size: 11px; text-align: center; padding: 8px; transition: bottom 0.3s ease; border-radius: 0 0 16px 16px; }
+    .icon-card:hover .download-overlay { bottom: 0; }
+
+    /* Comparison table */
+    .compare-row { border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .compare-row:last-child { border-bottom: none; }
+    .check { color: #22c55e; font-size: 18px; }
+    .cross { color: #d1d5db; font-size: 18px; }
+
+    /* Footer */
+    footer { background: #111; color: #fff; }
+    .footer-link { color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .footer-link:hover { color: white; }
+
+    /* Scroll reveal via IntersectionObserver */
+    .sr { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .sr.in-view { opacity: 1; transform: translateY(0); }
+    .sr-delay-1 { transition-delay: 0.1s; }
+    .sr-delay-2 { transition-delay: 0.2s; }
+    .sr-delay-3 { transition-delay: 0.3s; }
+    .sr-delay-4 { transition-delay: 0.4s; }
+
+    /* Noise texture overlay */
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.4; }
+
+    @media (max-width: 640px) {
+      .hero-headline { font-size: 2.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="fixed top-0 left-0 right-0 z-50 px-4 py-3">
+  <div class="max-w-6xl mx-auto flex items-center gap-3">
+    <!-- Logo -->
+    <div class="nav-pill rounded-full px-4 py-2 flex-shrink-0">
+      <img src="images/frontpage_images/logo_top_left.png" alt="Minimaly" class="h-5 w-auto" />
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar flex-1 rounded-full px-4 py-2.5 flex items-center gap-2">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" placeholder="Search for your dream icon or name..." class="flex-1 text-sm text-gray-800 font-parkinsans" />
+      <span class="text-xs text-gray-400 hidden sm:block">⌘K</span>
+    </div>
+
+    <!-- Nav links -->
+    <div class="nav-pill rounded-full px-5 py-2.5 hidden md:flex items-center gap-6">
+      <a href="#icons" class="text-sm font-medium text-gray-600 hover:text-black transition-colors">Icons</a>
+      <a href="#features" class="text-sm font-medium text-gray-600 hover:text-black transition-colors">Features</a>
+      <a href="https://github.com/EinPallux/Minimaly" target="_blank" class="text-sm font-medium text-gray-600 hover:text-black transition-colors">GitHub</a>
+    </div>
+
+    <!-- Star Button -->
+    <a href="https://github.com/EinPallux/Minimaly" target="_blank" class="nav-pill rounded-full px-4 py-2.5 flex items-center gap-2 hover:bg-white transition-all hidden sm:flex flex-shrink-0">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b" stroke="#f59e0b" stroke-width="1.5">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
+      <span class="text-sm font-medium">Star</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero-bg min-h-screen flex flex-col items-center justify-center pt-24 pb-20 px-4 relative overflow-hidden">
+  <!-- Subtle radial glow -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_60%,rgba(255,255,255,0.4),transparent)] pointer-events-none"></div>
+
+  <div class="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto">
+    <!-- Badge -->
+    <div class="badge-pill inline-flex items-center gap-2 rounded-full px-4 py-1.5 mb-8 reveal" style="animation-delay:0.1s">
+      <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block"></span>
+      <span class="text-sm font-medium text-gray-700">Over <strong>100+</strong> Icons available</span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="hero-headline font-parkinsans font-black leading-[1.05] tracking-tight mb-6 reveal" style="animation-delay:0.25s; font-size: clamp(2.4rem, 7vw, 5rem);">
+      Get a <span class="font-black italic">looooot</span> of
+      <img src="images/frontpage_images/headline_icon.png" alt="icons" class="inline-block w-12 h-12 md:w-16 md:h-16 mx-1 align-middle animate-float" style="animation-delay:0.5s" />
+      <br/>
+      <strong>without</strong> any
+      <img src="images/frontpage_images/dollarsign.png" alt="$" class="inline-block w-10 h-12 md:w-12 md:h-14 mx-1 align-middle animate-float" style="animation-delay:1s" />
+      at all.
+    </h1>
+
+    <!-- Subheadline -->
+    <p class="text-gray-500 text-base md:text-lg max-w-md leading-relaxed mb-10 reveal" style="animation-delay:0.4s">
+      We help startups, brands, individuals &amp; everything in between to create beautiful and stunning designs — fast and free.
+    </p>
+
+    <!-- CTA -->
+    <div class="flex flex-col sm:flex-row gap-3 items-center reveal" style="animation-delay:0.55s">
+      <a href="#icons" class="btn-dark rounded-full px-7 py-3.5 text-sm font-semibold flex items-center gap-2">
+        Find your Icon
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://github.com/EinPallux/Minimaly" target="_blank" class="rounded-full px-7 py-3.5 text-sm font-semibold border border-black/10 bg-white/60 hover:bg-white transition-all flex items-center gap-2">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+    </div>
+
+    <!-- Small social proof -->
+    <div class="flex items-center gap-4 mt-10 reveal" style="animation-delay:0.7s">
+      <div class="flex -space-x-2">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-pink-300 to-red-300 border-2 border-white"></div>
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-300 to-indigo-300 border-2 border-white"></div>
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-green-300 to-teal-300 border-2 border-white"></div>
+        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-yellow-300 to-orange-300 border-2 border-white"></div>
+      </div>
+      <p class="text-sm text-gray-500">Loved by <strong class="text-gray-800">1,200+</strong> designers & developers</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE STRIP ===== -->
+<section class="py-10 bg-white border-y border-black/5 overflow-hidden">
+  <p class="text-center text-xs uppercase tracking-widest text-gray-400 mb-6 font-medium">Icons for every use case</p>
+  <div class="marquee-wrap">
+    <div class="marquee-track" style="animation: marquee 30s linear infinite;">
+      <!-- SVG icons repeated twice for seamless loop -->
+      <!-- Set 1 -->
+      <div class="flex items-center gap-4 px-2">
+        <!-- We'll use inline SVGs as placeholder icons since we can't load a full icon set -->
+        <div class="marquee-icon" title="Home"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="marquee-icon" title="Star"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="marquee-icon" title="Heart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="marquee-icon" title="Search"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <div class="marquee-icon" title="Settings"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <div class="marquee-icon" title="Bell"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+        <div class="marquee-icon" title="User"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="marquee-icon" title="Download"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+        <div class="marquee-icon" title="Mail"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="marquee-icon" title="Camera"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <div class="marquee-icon" title="Lock"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="marquee-icon" title="Zap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="marquee-icon" title="Globe"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="marquee-icon" title="Cloud"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+        <div class="marquee-icon" title="Layers"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+        <div class="marquee-icon" title="Code"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      </div>
+      <!-- Set 2 (duplicate for seamless) -->
+      <div class="flex items-center gap-4 px-2">
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+        <div class="marquee-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS SECTION ===== -->
+<section class="py-20 px-4 bg-[#f0f0f0]">
+  <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="stat-card p-6 text-center sr sr-delay-1">
+      <div class="text-4xl font-black mb-1">100+</div>
+      <div class="text-sm text-gray-500">Free Icons</div>
+    </div>
+    <div class="stat-card p-6 text-center sr sr-delay-2">
+      <div class="text-4xl font-black mb-1">SVG</div>
+      <div class="text-sm text-gray-500">Ready Format</div>
+    </div>
+    <div class="stat-card p-6 text-center sr sr-delay-3">
+      <div class="text-4xl font-black mb-1">0€</div>
+      <div class="text-sm text-gray-500">Cost Forever</div>
+    </div>
+    <div class="stat-card p-6 text-center sr sr-delay-4">
+      <div class="text-4xl font-black mb-1">MIT</div>
+      <div class="text-sm text-gray-500">Open License</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ICON BROWSER SECTION ===== -->
+<section id="icons" class="py-20 px-4 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div class="sr">
+        <span class="text-xs uppercase tracking-widest text-gray-400 font-medium block mb-3">Icon Library</span>
+        <h2 class="text-4xl md:text-5xl font-black leading-tight">Browse the collection.</h2>
+        <p class="text-gray-500 mt-3 max-w-md">Crisp, clean, hand-crafted icons for any project. Download as SVG, PNG or copy the code.</p>
+      </div>
+      <!-- Category pills -->
+      <div class="flex flex-wrap gap-2 sr sr-delay-2">
+        <button class="cat-pill active px-4 py-1.5 text-sm font-medium" onclick="filterIcons('all')">All</button>
+        <button class="cat-pill px-4 py-1.5 text-sm font-medium" onclick="filterIcons('ui')">UI / Interface</button>
+        <button class="cat-pill px-4 py-1.5 text-sm font-medium" onclick="filterIcons('social')">Social</button>
+        <button class="cat-pill px-4 py-1.5 text-sm font-medium" onclick="filterIcons('media')">Media</button>
+        <button class="cat-pill px-4 py-1.5 text-sm font-medium" onclick="filterIcons('tech')">Tech</button>
+      </div>
+    </div>
+
+    <!-- Icon Grid -->
+    <div id="icon-grid" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3">
+      <!-- Icons will be injected by JS -->
+    </div>
+
+    <div class="flex justify-center mt-10 sr">
+      <a href="https://github.com/EinPallux/Minimaly" target="_blank" class="btn-dark rounded-full px-8 py-3.5 text-sm font-semibold flex items-center gap-2">
+        View all icons on GitHub
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES SECTION ===== -->
+<section id="features" class="py-20 px-4 bg-[#f0f0f0]">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-16 sr">
+      <span class="text-xs uppercase tracking-widest text-gray-400 font-medium block mb-3">Why Minimaly</span>
+      <h2 class="text-4xl md:text-5xl font-black">Built for creators,<br/>not corporations.</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <!-- Card 1 -->
+      <div class="feature-card p-8 sr sr-delay-1">
+        <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-3">100% Free. Forever.</h3>
+        <p class="text-gray-500 leading-relaxed text-sm">No subscriptions, no paywalls, no "premium" tiers. Every single icon is yours to use without a single cent.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="feature-card p-8 sr sr-delay-2">
+        <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-3">Open Source</h3>
+        <p class="text-gray-500 leading-relaxed text-sm">MIT licensed and fully open on GitHub. Fork it, contribute to it, ship it in your product — no strings attached.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="feature-card p-8 sr sr-delay-3">
+        <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-3">SVG Native</h3>
+        <p class="text-gray-500 leading-relaxed text-sm">All icons are pure SVG — infinitely scalable, tiny in file size, and fully customizable with CSS and code.</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="feature-card p-8 sr sr-delay-1">
+        <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-3">Constantly Growing</h3>
+        <p class="text-gray-500 leading-relaxed text-sm">New icons are added regularly. The library grows with every release — and you're always welcome to submit yours.</p>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="feature-card p-8 sr sr-delay-2">
+        <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-3">Pixel Perfect</h3>
+        <p class="text-gray-500 leading-relaxed text-sm">Crafted on a consistent grid so every icon feels like it belongs together — sharp at any size.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="feature-card p-8 sr sr-delay-3">
+        <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3 class="text-xl font-bold mb-3">One-Click Copy</h3>
+        <p class="text-gray-500 leading-relaxed text-sm">Copy the SVG code directly to clipboard with a single click, or download as a file. Your workflow, your way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON SECTION ===== -->
+<section class="py-20 px-4 bg-white">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-14 sr">
+      <span class="text-xs uppercase tracking-widest text-gray-400 font-medium block mb-3">How we compare</span>
+      <h2 class="text-4xl md:text-5xl font-black">The honest comparison.</h2>
+      <p class="text-gray-500 mt-3">Why pay for icons when you don't have to?</p>
+    </div>
+
+    <div class="bg-[#f8f8f8] rounded-3xl overflow-hidden border border-black/06 sr">
+      <!-- Header -->
+      <div class="grid grid-cols-4 text-center text-sm font-bold p-5 border-b border-black/06">
+        <div class="text-left pl-2">Feature</div>
+        <div class="text-black font-extrabold">Minimaly</div>
+        <div class="text-gray-400">SVGRepo</div>
+        <div class="text-gray-400">Icons8</div>
+      </div>
+      <!-- Rows -->
+      <div class="divide-y divide-black/05">
+        <div class="grid grid-cols-4 text-center text-sm p-4 compare-row">
+          <div class="text-left text-gray-600 pl-2 font-medium">Free to use</div>
+          <div class="check">✓</div>
+          <div class="check">✓</div>
+          <div class="cross">~</div>
+        </div>
+        <div class="grid grid-cols-4 text-center text-sm p-4 compare-row">
+          <div class="text-left text-gray-600 pl-2 font-medium">No attribution required</div>
+          <div class="check">✓</div>
+          <div class="cross">✗</div>
+          <div class="cross">✗</div>
+        </div>
+        <div class="grid grid-cols-4 text-center text-sm p-4 compare-row">
+          <div class="text-left text-gray-600 pl-2 font-medium">Open Source</div>
+          <div class="check">✓</div>
+          <div class="cross">✗</div>
+          <div class="cross">✗</div>
+        </div>
+        <div class="grid grid-cols-4 text-center text-sm p-4 compare-row">
+          <div class="text-left text-gray-600 pl-2 font-medium">No account needed</div>
+          <div class="check">✓</div>
+          <div class="cross">✗</div>
+          <div class="cross">✗</div>
+        </div>
+        <div class="grid grid-cols-4 text-center text-sm p-4 compare-row">
+          <div class="text-left text-gray-600 pl-2 font-medium">Consistent design style</div>
+          <div class="check">✓</div>
+          <div class="cross">~</div>
+          <div class="cross">~</div>
+        </div>
+        <div class="grid grid-cols-4 text-center text-sm p-4">
+          <div class="text-left text-gray-600 pl-2 font-medium">Community contributions</div>
+          <div class="check">✓</div>
+          <div class="cross">✗</div>
+          <div class="cross">✗</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="py-20 px-4 bg-[#f0f0f0]">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-16 sr">
+      <span class="text-xs uppercase tracking-widest text-gray-400 font-medium block mb-3">How it works</span>
+      <h2 class="text-4xl md:text-5xl font-black">Three steps. That's it.</h2>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 relative">
+      <!-- Connector line (desktop) -->
+      <div class="hidden md:block absolute top-12 left-1/4 right-1/4 h-px bg-black/10" style="left:18%;right:18%;top:3rem;"></div>
+
+      <div class="feature-card p-8 text-center sr sr-delay-1">
+        <div class="w-14 h-14 rounded-2xl bg-[#f0f0f0] border border-black/08 flex items-center justify-center mx-auto mb-5 text-2xl font-black">1</div>
+        <h3 class="font-bold text-lg mb-2">Search</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Type a keyword in the search bar. Find exactly what you're looking for in seconds.</p>
+      </div>
+      <div class="feature-card p-8 text-center sr sr-delay-2">
+        <div class="w-14 h-14 rounded-2xl bg-[#f0f0f0] border border-black/08 flex items-center justify-center mx-auto mb-5 text-2xl font-black">2</div>
+        <h3 class="font-bold text-lg mb-2">Pick</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Click your icon to preview it in different sizes. Customize stroke width and color.</p>
+      </div>
+      <div class="feature-card p-8 text-center sr sr-delay-3">
+        <div class="w-14 h-14 rounded-2xl bg-[#f0f0f0] border border-black/08 flex items-center justify-center mx-auto mb-5 text-2xl font-black">3</div>
+        <h3 class="font-bold text-lg mb-2">Download</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Copy SVG code directly or download as a file. Zero sign-up, zero friction.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA SECTION ===== -->
+<section class="py-24 px-4 bg-[#111] overflow-hidden relative">
+  <!-- Decorative circles -->
+  <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full border border-white/5"></div>
+  <div class="absolute -bottom-32 -left-20 w-96 h-96 rounded-full border border-white/5"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-white/03 pointer-events-none"></div>
+
+  <div class="max-w-3xl mx-auto text-center relative z-10 sr">
+    <span class="text-xs uppercase tracking-widest text-gray-500 font-medium block mb-6">Open Source & Free</span>
+    <h2 class="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
+      Start creating<br/>something beautiful.
+    </h2>
+    <p class="text-gray-400 text-lg mb-10 leading-relaxed max-w-xl mx-auto">
+      Join thousands of designers and developers using Minimaly to bring their ideas to life — completely free.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a href="#icons" class="rounded-full px-8 py-4 text-sm font-semibold bg-white text-black hover:bg-gray-100 transition-all flex items-center gap-2 justify-center hover:shadow-lg">
+        Browse Icons
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://github.com/EinPallux/Minimaly" target="_blank" class="rounded-full px-8 py-4 text-sm font-semibold border border-white/20 text-white hover:border-white/40 transition-all flex items-center gap-2 justify-center">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        Star on GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-[#111] border-t border-white/08 py-12 px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between gap-10 mb-12">
+      <div class="max-w-xs">
+        <img src="images/frontpage_images/logo_top_left.png" alt="Minimaly" class="h-6 w-auto mb-4 brightness-0 invert" />
+        <p class="text-gray-500 text-sm leading-relaxed">A 100% free & open source icon database for students, startups, freelancers & everyone in between.</p>
+        <div class="flex items-center gap-3 mt-5">
+          <a href="https://github.com/EinPallux/Minimaly" target="_blank" class="w-8 h-8 rounded-full bg-white/08 flex items-center justify-center hover:bg-white/15 transition-colors">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+        <div>
+          <h4 class="text-white text-sm font-bold mb-4">Product</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#icons" class="footer-link text-sm">Browse Icons</a></li>
+            <li><a href="#features" class="footer-link text-sm">Features</a></li>
+            <li><a href="https://github.com/EinPallux/Minimaly" target="_blank" class="footer-link text-sm">Changelog</a></li>
+            <li><a href="https://github.com/EinPallux/Minimaly/issues" target="_blank" class="footer-link text-sm">Roadmap</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white text-sm font-bold mb-4">Resources</h4>
+          <ul class="space-y-2.5">
+            <li><a href="https://github.com/EinPallux/Minimaly" target="_blank" class="footer-link text-sm">Documentation</a></li>
+            <li><a href="https://github.com/EinPallux/Minimaly" target="_blank" class="footer-link text-sm">GitHub</a></li>
+            <li><a href="https://github.com/EinPallux/Minimaly/issues" target="_blank" class="footer-link text-sm">Report a Bug</a></li>
+            <li><a href="https://github.com/EinPallux/Minimaly" target="_blank" class="footer-link text-sm">Contribute</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white text-sm font-bold mb-4">Legal</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#" class="footer-link text-sm">MIT License</a></li>
+            <li><a href="#" class="footer-link text-sm">Privacy Policy</a></li>
+            <li><a href="#" class="footer-link text-sm">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-white/08 gap-3">
+      <p class="text-gray-600 text-xs">© 2025 Minimaly. Made with ♥ and released under the MIT License.</p>
+      <p class="text-gray-600 text-xs">Free forever. No exceptions.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  // ---- Hero reveal on load ----
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.reveal').forEach(el => {
+      el.style.animationDelay = el.style.animationDelay || '0s';
+      setTimeout(() => el.classList.add('visible'), 100);
+    });
+  });
+
+  // ---- Scroll reveal ----
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.sr').forEach(el => observer.observe(el));
+
+  // ---- Icon data ----
+  const icons = [
+    { name: 'Home', cat: 'ui', svg: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>' },
+    { name: 'Star', cat: 'ui', svg: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>' },
+    { name: 'Heart', cat: 'ui', svg: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>' },
+    { name: 'Search', cat: 'ui', svg: '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>' },
+    { name: 'Bell', cat: 'ui', svg: '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>' },
+    { name: 'User', cat: 'ui', svg: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>' },
+    { name: 'Settings', cat: 'ui', svg: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>' },
+    { name: 'Download', cat: 'ui', svg: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>' },
+    { name: 'Lock', cat: 'ui', svg: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>' },
+    { name: 'Mail', cat: 'social', svg: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>' },
+    { name: 'Share', cat: 'social', svg: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>' },
+    { name: 'Globe', cat: 'social', svg: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' },
+    { name: 'Link', cat: 'social', svg: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' },
+    { name: 'Play', cat: 'media', svg: '<polygon points="5 3 19 12 5 21 5 3"/>' },
+    { name: 'Pause', cat: 'media', svg: '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>' },
+    { name: 'Volume', cat: 'media', svg: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>' },
+    { name: 'Camera', cat: 'media', svg: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>' },
+    { name: 'Image', cat: 'media', svg: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>' },
+    { name: 'Code', cat: 'tech', svg: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>' },
+    { name: 'Zap', cat: 'tech', svg: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>' },
+    { name: 'Cloud', cat: 'tech', svg: '<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>' },
+    { name: 'Layers', cat: 'tech', svg: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>' },
+    { name: 'Database', cat: 'tech', svg: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>' },
+    { name: 'CPU', cat: 'tech', svg: '<rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>' },
+    { name: 'Wifi', cat: 'tech', svg: '<path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>' },
+    { name: 'Shield', cat: 'ui', svg: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' },
+    { name: 'Box', cat: 'ui', svg: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>' },
+    { name: 'Flag', cat: 'ui', svg: '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>' },
+    { name: 'Arrow Right', cat: 'ui', svg: '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>' },
+    { name: 'Check', cat: 'ui', svg: '<polyline points="20 6 9 17 4 12"/>' },
+    { name: 'X', cat: 'ui', svg: '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>' },
+  ];
+
+  let activeFilter = 'all';
+
+  function svgWrap(inner) {
+    return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+  }
+
+  function renderIcons(filter) {
+    const grid = document.getElementById('icon-grid');
+    const filtered = filter === 'all' ? icons : icons.filter(i => i.cat === filter);
+    grid.innerHTML = filtered.map(icon => `
+      <div class="icon-card p-3 flex flex-col items-center gap-2 group" title="${icon.name}" onclick="copyIcon('${encodeURIComponent(svgWrap(icon.svg))}', '${icon.name}', this)">
+        <div class="w-10 h-10 flex items-center justify-center text-gray-700 group-hover:text-black transition-colors">
+          ${svgWrap(icon.svg)}
+        </div>
+        <span class="text-[10px] text-gray-400 font-medium text-center leading-tight hidden sm:block">${icon.name}</span>
+        <div class="download-overlay font-medium">Copy SVG</div>
+      </div>
+    `).join('');
+    // Animate in
+    grid.querySelectorAll('.icon-card').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'scale(0.85)';
+      setTimeout(() => {
+        el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        el.style.opacity = '1';
+        el.style.transform = 'scale(1)';
+      }, i * 20);
+    });
+  }
+
+  function filterIcons(cat) {
+    activeFilter = cat;
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+    renderIcons(cat);
+  }
+
+  function copyIcon(encodedSvg, name, el) {
+    const svg = decodeURIComponent(encodedSvg);
+    navigator.clipboard.writeText(svg).then(() => {
+      const overlay = el.querySelector('.download-overlay');
+      if (overlay) {
+        overlay.textContent = 'Copied!';
+        overlay.style.background = '#22c55e';
+        setTimeout(() => {
+          overlay.textContent = 'Copy SVG';
+          overlay.style.background = '#111';
+        }, 1200);
+      }
+    });
+  }
+
+  // Initial render
+  renderIcons('all');
+
+  // ---- Keyboard shortcut for search ----
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      document.querySelector('.search-bar input').focus();
+    }
+  });
+
+  // ---- Search live filter ----
+  document.querySelector('.search-bar input').addEventListener('input', (e) => {
+    const q = e.target.value.toLowerCase();
+    if (!q) { renderIcons(activeFilter); return; }
+    const grid = document.getElementById('icon-grid');
+    const filtered = icons.filter(i => i.name.toLowerCase().includes(q));
+    grid.innerHTML = filtered.map(icon => `
+      <div class="icon-card p-3 flex flex-col items-center gap-2 group" title="${icon.name}" onclick="copyIcon('${encodeURIComponent(svgWrap(icon.svg))}', '${icon.name}', this)">
+        <div class="w-10 h-10 flex items-center justify-center text-gray-700 group-hover:text-black transition-colors">${svgWrap(icon.svg)}</div>
+        <span class="text-[10px] text-gray-400 font-medium text-center leading-tight hidden sm:block">${icon.name}</span>
+        <div class="download-overlay font-medium">Copy SVG</div>
+      </div>
+    `).join('');
+  });
+</script>
+</body>
+</html>
