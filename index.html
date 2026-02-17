@@ -321,6 +321,11 @@
       opacity: 0.4;
     }
 
+    /* CTA arrow hover */
+    .btn-dark:hover .cta-arrow {
+      transform: translateX(3px);
+    }
+
     @keyframes float {
 
       0%,
@@ -401,17 +406,12 @@
         <!-- Line 1 -->
         <span style="display:block;">
           Get a <span style="font-weight:900;">looooot</span> of
-          <!-- White card with sharp inline SVG icon -->
+          <!-- White card with rotating icons -->
           <span
-            style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;border-radius:20px;background:#fff;box-shadow:0 6px 28px rgba(0,0,0,0.11);margin:0 8px;animation:float 4s ease-in-out infinite;"
+            style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;border-radius:20px;background:#fff;box-shadow:0 6px 28px rgba(0,0,0,0.11);margin:0 8px;animation:float 4s ease-in-out infinite;position:relative;overflow:hidden;"
             id="icon-card-1">
-            <svg id="headline-svg" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.55"
-              stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
+            <span id="rotating-icon-wrap"
+              style="position:relative;display:flex;align-items:center;justify-content:center;"></span>
           </span>
         </span>
         <!-- Line 2 -->
@@ -434,32 +434,101 @@
 
       <!-- CTA -->
       <a href="#icons" class="btn-dark"
-        style="display:inline-block;border-radius:999px;padding:15px 44px;font-family:'Parkinsans',sans-serif;font-size:15px;font-weight:600;text-decoration:none;">
+        style="display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:15px 28px 15px 44px;font-family:'Parkinsans',sans-serif;font-size:15px;font-weight:600;text-decoration:none;">
         Find your icon
+        <span
+          style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;background:rgba(255,255,255,0.15);border-radius:50%;flex-shrink:0;transition:transform 0.3s ease;"
+          class="cta-arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </span>
       </a>
     </div>
   </section>
 
   <script>
+    // ---- Rotating icons data ----
+    const rotatingIcons = [
+      // Users/people
+      '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+      // Star
+      '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+      // Zap / lightning
+      '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+      // Heart
+      '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
+      // Layers
+      '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+      // Globe
+      '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+      // Command / grid
+      '<path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>',
+      // Smile
+      '<circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>',
+    ];
+
+    let currentIconIdx = 0;
+    let iconSizePx = 40;
+
+    function makeSVG(paths, sizePx) {
+      return `<svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:${sizePx}px;height:${sizePx}px;">${paths}</svg>`;
+    }
+
+    function rotateIcon() {
+      const wrap = document.getElementById('rotating-icon-wrap');
+      if (!wrap) return;
+
+      // Build new icon element
+      const next = document.createElement('span');
+      next.style.cssText = 'position:absolute;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.6) rotate(-15deg);transition:opacity 0.35s ease,transform 0.35s ease;';
+      next.innerHTML = makeSVG(rotatingIcons[currentIconIdx], iconSizePx);
+
+      // Fade out current
+      const current = wrap.querySelector('span.icon-visible');
+      if (current) {
+        current.style.opacity = '0';
+        current.style.transform = 'scale(1.2) rotate(15deg)';
+        setTimeout(() => current.remove(), 380);
+      }
+
+      wrap.appendChild(next);
+      // Trigger animation on next frame
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        next.style.opacity = '1';
+        next.style.transform = 'scale(1) rotate(0deg)';
+        next.classList.add('icon-visible');
+      }));
+
+      currentIconIdx = (currentIconIdx + 1) % rotatingIcons.length;
+    }
+
     // ---- Size hero elements responsively ----
     function sizeHeroImages() {
       const vw = window.innerWidth;
       const cardPx = Math.min(88, Math.max(52, vw * 0.075));
       const dollarPx = Math.min(72, Math.max(44, vw * 0.062));
-      const svgIconPx = cardPx * 0.52;
+      iconSizePx = Math.round(cardPx * 0.52);
 
       const card = document.getElementById('icon-card-1');
       if (card) {
         card.style.width = cardPx + 'px';
         card.style.height = cardPx + 'px';
+        // Update current icon size if present
         const svg = card.querySelector('svg');
-        if (svg) { svg.style.width = svgIconPx + 'px'; svg.style.height = svgIconPx + 'px'; }
+        if (svg) { svg.style.width = iconSizePx + 'px'; svg.style.height = iconSizePx + 'px'; }
       }
       const dollar = document.getElementById('dollar-img');
       if (dollar) { dollar.style.width = dollarPx + 'px'; dollar.style.height = 'auto'; }
     }
+
     window.addEventListener('resize', sizeHeroImages);
-    document.addEventListener('DOMContentLoaded', sizeHeroImages);
+    document.addEventListener('DOMContentLoaded', () => {
+      sizeHeroImages();
+      rotateIcon(); // show first icon immediately
+      setInterval(rotateIcon, 1200); // rotate every 1.2s
+    });
     sizeHeroImages();
 
     // ---- ⌘K / Ctrl+K keyboard shortcut for search ----
