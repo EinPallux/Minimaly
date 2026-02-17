@@ -15,24 +15,18 @@
       theme: {
         extend: {
           fontFamily: { parkinsans: ['Parkinsans', 'sans-serif'] },
-          colors: {
-            bg: '#f0f0f0',
-            dark: '#111111',
-          },
+          colors: { bg: '#f0f0f0', dark: '#111111' },
           keyframes: {
             fadeUp: { '0%': { opacity: '0', transform: 'translateY(24px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
             fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-            pulse2: { '0%,100%': { transform: 'scale(1)' }, '50%': { transform: 'scale(1.04)' } },
             marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
             float: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-8px)' } },
-            shimmer: { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
           },
           animation: {
             fadeUp: 'fadeUp 0.7s ease forwards',
             fadeIn: 'fadeIn 0.5s ease forwards',
             marquee: 'marquee 28s linear infinite',
             float: 'float 4s ease-in-out infinite',
-            shimmer: 'shimmer 3s linear infinite',
           }
         }
       }
@@ -86,14 +80,6 @@
       outline: none;
     }
 
-    /* Animated badge */
-    .badge-pill {
-      background: linear-gradient(135deg, #fff 0%, #f5f5f5 100%);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-    }
-
-    /* CTA Button */
     .btn-dark {
       background: #111;
       color: #fff;
@@ -122,7 +108,6 @@
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
     }
 
-    /* Staggered fade-up for hero elements */
     .reveal {
       opacity: 0;
     }
@@ -131,8 +116,6 @@
       animation: fadeUp 0.7s ease forwards;
     }
 
-
-    /* Feature cards */
     .feature-card {
       background: white;
       border: 1px solid rgba(0, 0, 0, 0.07);
@@ -142,25 +125,11 @@
       overflow: hidden;
     }
 
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, transparent 60%, rgba(0, 0, 0, 0.02));
-      transition: opacity 0.3s;
-    }
-
     .feature-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 24px 48px rgba(0, 0, 0, 0.1);
     }
 
-    .feature-card:hover::before {
-      opacity: 0;
-    }
-
-
-    /* Category pill */
     .cat-pill {
       background: white;
       border: 1px solid rgba(0, 0, 0, 0.08);
@@ -177,7 +146,6 @@
       transform: scale(1.04);
     }
 
-    /* Icon card */
     .icon-card {
       background: white;
       border: 1px solid rgba(0, 0, 0, 0.07);
@@ -193,7 +161,7 @@
       box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
     }
 
-    .icon-card .download-overlay {
+    .icon-card .copy-overlay {
       position: absolute;
       bottom: -40px;
       left: 0;
@@ -207,11 +175,10 @@
       border-radius: 0 0 16px 16px;
     }
 
-    .icon-card:hover .download-overlay {
+    .icon-card:hover .copy-overlay {
       bottom: 0;
     }
 
-    /* Comparison table */
     .compare-row {
       border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
@@ -230,7 +197,6 @@
       font-size: 18px;
     }
 
-    /* Footer */
     footer {
       background: #111;
       color: #fff;
@@ -245,7 +211,6 @@
       color: white;
     }
 
-    /* Scroll reveal via IntersectionObserver */
     .sr {
       opacity: 0;
       transform: translateY(30px);
@@ -269,11 +234,6 @@
       transition-delay: 0.3s;
     }
 
-    .sr-delay-4 {
-      transition-delay: 0.4s;
-    }
-
-    /* Noise texture overlay */
     body::before {
       content: '';
       position: fixed;
@@ -284,8 +244,7 @@
       opacity: 0.4;
     }
 
-
-    /* ── Search Dropdown (shared) ── */
+    /* ── Search Dropdown ── */
     .search-container {
       position: relative;
     }
@@ -330,6 +289,8 @@
       padding: 10px 16px;
       cursor: pointer;
       transition: background 0.15s;
+      text-decoration: none;
+      color: inherit;
     }
 
     .dropdown-collection-row:hover {
@@ -353,9 +314,10 @@
       flex-shrink: 0;
     }
 
-    .dropdown-col-icon-strip span svg {
+    .dropdown-col-icon-strip span img {
       width: 14px;
       height: 14px;
+      object-fit: contain;
     }
 
     .dropdown-col-info {
@@ -402,6 +364,8 @@
       padding: 9px 16px;
       cursor: pointer;
       transition: background 0.15s;
+      text-decoration: none;
+      color: inherit;
     }
 
     .dropdown-icon-row:hover {
@@ -419,9 +383,10 @@
       flex-shrink: 0;
     }
 
-    .dropdown-icon-thumb svg {
+    .dropdown-icon-thumb img {
       width: 16px;
       height: 16px;
+      object-fit: contain;
     }
 
     .dropdown-icon-info {
@@ -493,7 +458,6 @@
       text-decoration: underline;
     }
 
-    /* CTA arrow hover */
     .btn-dark:hover .cta-arrow {
       transform: translateX(3px);
     }
@@ -515,6 +479,25 @@
         font-size: 2.4rem;
       }
     }
+
+    /* Icon grid loading */
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-spinner {
+      width: 24px;
+      height: 24px;
+      border: 2px solid #e5e5e5;
+      border-top-color: #111;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
   </style>
 </head>
 
@@ -524,7 +507,6 @@
   <nav
     style="position:absolute;top:0;left:0;right:0;z-index:50;padding:20px 28px;display:flex;align-items:center;justify-content:center;gap:10px;">
 
-    <!-- Logo text pill -->
     <div class="nav-pill"
       style="display:inline-flex;align-items:center;border-radius:999px;padding:9px 22px;flex-shrink:0;">
       <span style="font-family:'Parkinsans',sans-serif;font-size:15px;letter-spacing:-0.01em;white-space:nowrap;">
@@ -532,7 +514,6 @@
       </span>
     </div>
 
-    <!-- Search bar with ⌘K shortcut -->
     <div class="search-container" id="main-search-container">
       <div class="search-bar" id="search-bar"
         style="display:flex;align-items:center;gap:10px;border-radius:999px;padding:9px 18px;width:400px;max-width:60vw;cursor:text;"
@@ -544,7 +525,6 @@
         </svg>
         <input id="main-search" type="text" placeholder="Search for your dream icon or vector..." autocomplete="off"
           style="flex:1;border:none;outline:none;background:transparent;font-family:'Parkinsans',sans-serif;font-size:13.5px;color:#444;" />
-        <!-- Shortcut keys -->
         <div style="display:flex;align-items:center;gap:3px;flex-shrink:0;" id="kbd-hint">
           <kbd
             style="display:inline-flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.07);border:1px solid rgba(0,0,0,0.11);border-radius:5px;padding:2px 6px;font-family:'Parkinsans',sans-serif;font-size:11px;color:#aaa;line-height:1.5;">⌘</kbd>
@@ -560,28 +540,22 @@
   <section
     style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#efefef;overflow:hidden;">
 
-    <!-- Grid background image -->
     <img src="images/frontpage_images/grid_background_hero_section.png" alt=""
       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;pointer-events:none;z-index:0;" />
 
-    <!-- Hero content -->
     <div
       style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 24px;max-width:1000px;width:100%;">
 
-      <!-- Badge -->
       <div class="hero-badge"
         style="display:inline-flex;align-items:center;border-radius:999px;padding:8px 22px;margin-bottom:44px;background:rgba(255,255,255,0.78);border:1px solid rgba(0,0,0,0.09);backdrop-filter:blur(10px);box-shadow:0 2px 12px rgba(0,0,0,0.06);">
         <span style="font-family:'Parkinsans',sans-serif;font-size:14px;color:#222;">Over <strong
             style="font-weight:700;">100+</strong> Icons available</span>
       </div>
 
-      <!-- Headline -->
       <h1
         style="font-family:'Parkinsans',sans-serif;line-height:1.06;letter-spacing:-0.02em;margin:0 0 32px 0;font-size:clamp(2.8rem,7.5vw,5.8rem);color:#111;">
-        <!-- Line 1 -->
         <span style="display:block;">
           Get a <span style="font-weight:900;">looooot</span> of
-          <!-- White card with rotating icons -->
           <span
             style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;border-radius:20px;background:#fff;box-shadow:0 6px 28px rgba(0,0,0,0.11);margin:0 8px;animation:float 4s ease-in-out infinite;position:relative;overflow:hidden;"
             id="icon-card-1">
@@ -589,10 +563,8 @@
               style="position:relative;display:flex;align-items:center;justify-content:center;"></span>
           </span>
         </span>
-        <!-- Line 2 -->
         <span style="display:block;">
           <span style="font-weight:900;">without</span> any
-          <!-- Raw 3D dollar sign -->
           <img src="images/frontpage_images/dollarsign.png" alt="$"
             style="display:inline-block;vertical-align:middle;margin:0 4px;animation:float 4s ease-in-out infinite;animation-delay:0.8s;"
             id="dollar-img" />
@@ -600,14 +572,12 @@
         </span>
       </h1>
 
-      <!-- Subheading -->
       <p
         style="font-family:'Parkinsans',sans-serif;font-size:clamp(14px,1.5vw,17px);color:#888;line-height:1.65;max-width:400px;margin:0 0 44px 0;">
         We help startups, brands, individuals &amp; everything in between to create beautiful and stunning designs —
         fast and free.
       </p>
 
-      <!-- CTA -->
       <a href="database.html" class="btn-dark"
         style="display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:15px 28px 15px 44px;font-family:'Parkinsans',sans-serif;font-size:15px;font-weight:600;text-decoration:none;">
         Find your icon
@@ -623,293 +593,6 @@
     </div>
   </section>
 
-  <script>
-    // ---- Rotating icons data ----
-    const rotatingIcons = [
-      // Users/people
-      '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
-      // Star
-      '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
-      // Zap / lightning
-      '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
-      // Heart
-      '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
-      // Layers
-      '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
-      // Globe
-      '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
-      // Command / grid
-      '<path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>',
-      // Smile
-      '<circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>',
-    ];
-
-    let currentIconIdx = 0;
-    let iconSizePx = 40;
-
-    function makeSVG(paths, sizePx) {
-      return `<svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:${sizePx}px;height:${sizePx}px;">${paths}</svg>`;
-    }
-
-    // Two fixed SVG slots — swap innerHTML, never add DOM nodes
-    let iconSlotA = null;
-    let iconSlotB = null;
-    let activeSlot = 'a'; // which slot is currently visible
-
-    function initSlots() {
-      const wrap = document.getElementById('rotating-icon-wrap');
-      if (!wrap) return;
-      wrap.innerHTML = '';
-
-      const baseStyle = 'position:absolute;display:flex;align-items:center;justify-content:center;transition:opacity 0.4s ease,transform 0.4s ease;';
-      iconSlotA = document.createElement('span');
-      iconSlotB = document.createElement('span');
-      iconSlotA.style.cssText = baseStyle + 'opacity:1;transform:scale(1) rotate(0deg);';
-      iconSlotB.style.cssText = baseStyle + 'opacity:0;transform:scale(0.7) rotate(-12deg);';
-      wrap.appendChild(iconSlotA);
-      wrap.appendChild(iconSlotB);
-    }
-
-    function rotateIcon() {
-      if (!iconSlotA || !iconSlotB) return;
-
-      const incoming = activeSlot === 'a' ? iconSlotB : iconSlotA;
-      const outgoing = activeSlot === 'a' ? iconSlotA : iconSlotB;
-
-      // Pre-load next icon into the hidden slot (already invisible)
-      incoming.innerHTML = makeSVG(rotatingIcons[currentIconIdx], iconSizePx);
-      incoming.style.transition = 'none';
-      incoming.style.opacity = '0';
-      incoming.style.transform = 'scale(0.7) rotate(-12deg)';
-
-      // Force reflow so transition resets properly
-      incoming.getBoundingClientRect();
-
-      // Now animate both slots
-      incoming.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      outgoing.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-
-      incoming.style.opacity = '1';
-      incoming.style.transform = 'scale(1) rotate(0deg)';
-      outgoing.style.opacity = '0';
-      outgoing.style.transform = 'scale(1.2) rotate(12deg)';
-
-      activeSlot = activeSlot === 'a' ? 'b' : 'a';
-      currentIconIdx = (currentIconIdx + 1) % rotatingIcons.length;
-    }
-
-    // ---- Size hero elements responsively ----
-    function sizeHeroImages() {
-      const vw = window.innerWidth;
-      const cardPx = Math.min(88, Math.max(52, vw * 0.075));
-      const dollarPx = Math.min(72, Math.max(44, vw * 0.062));
-      iconSizePx = Math.round(cardPx * 0.52);
-
-      const card = document.getElementById('icon-card-1');
-      if (card) {
-        card.style.width = cardPx + 'px';
-        card.style.height = cardPx + 'px';
-        // Update current icon size if present
-        const svg = card.querySelector('svg');
-        if (svg) { svg.style.width = iconSizePx + 'px'; svg.style.height = iconSizePx + 'px'; }
-      }
-      const dollar = document.getElementById('dollar-img');
-      if (dollar) { dollar.style.width = dollarPx + 'px'; dollar.style.height = 'auto'; }
-    }
-
-    window.addEventListener('resize', sizeHeroImages);
-    document.addEventListener('DOMContentLoaded', () => {
-      sizeHeroImages();
-      initSlots();
-      iconSlotA.innerHTML = makeSVG(rotatingIcons[currentIconIdx], iconSizePx);
-      currentIconIdx = 1;
-      setInterval(rotateIcon, 1400); // rotate every 1.4s
-    });
-    sizeHeroImages();
-
-    // ---- ⌘K / Ctrl+K keyboard shortcut for search ----
-    document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        const input = document.getElementById('main-search');
-        if (input) {
-          input.focus();
-          input.select();
-        }
-      }
-      // ESC to blur search
-      if (e.key === 'Escape') {
-        const input = document.getElementById('main-search');
-        if (document.activeElement === input) input.blur();
-      }
-    });
-
-    // ── Search Dropdown (Landing Page) ──────────────────────────
-    const searchInput = document.getElementById('main-search');
-    const kbdHint = document.getElementById('kbd-hint');
-    const mainDropdown = document.getElementById('main-search-dropdown');
-
-    // Same icon data the page already has — built-in fallbacks
-    const LANDING_ICONS = [
-      { name: 'Home', collection: 'UI Essentials', path: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>' },
-      { name: 'Search', collection: 'UI Essentials', path: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>' },
-      { name: 'Star', collection: 'UI Essentials', path: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>' },
-      { name: 'Heart', collection: 'UI Essentials', path: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>' },
-      { name: 'Bell', collection: 'UI Essentials', path: '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>' },
-      { name: 'Settings', collection: 'UI Essentials', path: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>' },
-      { name: 'User', collection: 'UI Essentials', path: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>' },
-      { name: 'Lock', collection: 'UI Essentials', path: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>' },
-      { name: 'Download', collection: 'UI Essentials', path: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>' },
-      { name: 'Shield', collection: 'UI Essentials', path: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' },
-      { name: 'Smile', collection: 'UI Essentials', path: '<circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>' },
-      { name: 'Mail', collection: 'Social', path: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>' },
-      { name: 'Share', collection: 'Social', path: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>' },
-      { name: 'Globe', collection: 'Social', path: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' },
-      { name: 'Link', collection: 'Social', path: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' },
-      { name: 'Play', collection: 'Media', path: '<polygon points="5 3 19 12 5 21 5 3"/>' },
-      { name: 'Camera', collection: 'Media', path: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>' },
-      { name: 'Volume', collection: 'Media', path: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>' },
-      { name: 'Code', collection: 'Tech', path: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>' },
-      { name: 'Zap', collection: 'Tech', path: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>' },
-      { name: 'Cloud', collection: 'Tech', path: '<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>' },
-      { name: 'Database', collection: 'Tech', path: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>' },
-      { name: 'Layers', collection: 'Tech', path: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>' },
-      { name: 'Wifi', collection: 'Tech', path: '<path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>' },
-    ];
-
-    function escH(s) {
-      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    }
-
-    function landingSVG(path, size) {
-      return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="#333" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
-    }
-
-    function openMainDropdown() { mainDropdown.classList.add('open'); }
-    function closeMainDropdown() { mainDropdown.classList.remove('open'); }
-
-    function renderMainDropdown(q) {
-      if (!q) { closeMainDropdown(); return; }
-      const ql = q.toLowerCase();
-
-      // Group by collection
-      const colMap = {};
-      for (const ic of LANDING_ICONS) {
-        if (!colMap[ic.collection]) colMap[ic.collection] = [];
-        colMap[ic.collection].push(ic);
-      }
-
-      // Collections that match
-      const matchedCols = Object.entries(colMap).filter(([name]) => name.toLowerCase().includes(ql));
-      // Icons that directly match by name
-      const matchedIcons = LANDING_ICONS.filter(ic => ic.name.toLowerCase().includes(ql)).slice(0, 5);
-      // Icons from matched collections (fill up to 4)
-      const colIcons = [];
-      for (const [, icns] of matchedCols) {
-        icns.slice(0, 3).forEach(ic => {
-          if (!matchedIcons.find(m => m.name === ic.name)) colIcons.push(ic);
-        });
-        if (colIcons.length >= 4) break;
-      }
-
-      const hasResults = matchedCols.length || matchedIcons.length;
-      if (!hasResults) {
-        mainDropdown.innerHTML = `
-        <div class="dropdown-empty">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-          </svg>
-          No results for "<strong style="color:#999">${escH(q)}</strong>"
-        </div>`;
-        openMainDropdown();
-        return;
-      }
-
-      let html = '';
-
-      // Collections
-      if (matchedCols.length) {
-        html += `<div class="dropdown-section-label">Collections</div>`;
-        html += matchedCols.slice(0, 3).map(([colName, icns]) => {
-          const strip = icns.slice(0, 3).map(ic =>
-            `<span>${landingSVG(ic.path, 14)}</span>`
-          ).join('');
-          return `<a class="dropdown-collection-row" href="database.html">
-          <div class="dropdown-col-icon-strip">${strip}</div>
-          <div class="dropdown-col-info">
-            <div class="dropdown-col-name">${escH(colName)}</div>
-            <div class="dropdown-col-count">${icns.length} icon${icns.length !== 1 ? 's' : ''}</div>
-          </div>
-          <div class="dropdown-col-arrow">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </a>`;
-        }).join('');
-        if (matchedIcons.length || colIcons.length) html += `<div class="dropdown-divider"></div>`;
-      }
-
-      // Icons
-      const iconResults = [...matchedIcons, ...colIcons].slice(0, 6);
-      if (iconResults.length) {
-        html += `<div class="dropdown-section-label">Icons</div>`;
-        html += iconResults.map(ic => `
-        <a class="dropdown-icon-row" href="database.html">
-          <div class="dropdown-icon-thumb">${landingSVG(ic.path, 16)}</div>
-          <div class="dropdown-icon-info">
-            <div class="dropdown-icon-name">${escH(ic.name)}</div>
-            <div class="dropdown-icon-col">${escH(ic.collection)}</div>
-          </div>
-          <span class="dropdown-icon-badge">SVG</span>
-        </a>`).join('');
-      }
-
-      // Footer
-      const total = matchedCols.reduce((s, [, v]) => s + v.length, 0) + matchedIcons.length;
-      html += `<div class="dropdown-footer">
-      <span>${total} result${total !== 1 ? 's' : ''} for "${escH(q)}"</span>
-      <a href="database.html">
-        Browse all <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>`;
-
-      mainDropdown.innerHTML = html;
-      openMainDropdown();
-    }
-
-    // ── Badge hide/show ──
-    if (searchInput && kbdHint) {
-      searchInput.addEventListener('focus', () => {
-        kbdHint.style.opacity = '0';
-        kbdHint.style.transform = 'scale(0.85)';
-        kbdHint.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
-        if (searchInput.value.trim()) renderMainDropdown(searchInput.value.trim());
-      });
-      searchInput.addEventListener('blur', () => {
-        setTimeout(() => {
-          kbdHint.style.opacity = '1';
-          kbdHint.style.transform = 'scale(1)';
-        }, 200);
-      });
-      searchInput.addEventListener('input', () => {
-        renderMainDropdown(searchInput.value.trim());
-      });
-    }
-
-    // Close on outside click
-    document.addEventListener('mousedown', e => {
-      const container = document.getElementById('main-search-container');
-      if (container && !container.contains(e.target)) closeMainDropdown();
-    });
-
-    // ⌘K / Ctrl+K already handled above — just add Escape for dropdown
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && mainDropdown && mainDropdown.classList.contains('open')) {
-        closeMainDropdown();
-        searchInput.blur();
-      }
-    });
-  </script>
-
   <!-- ===== ICON BROWSER SECTION ===== -->
   <section id="icons" class="py-20 px-4 bg-white">
     <div class="max-w-6xl mx-auto">
@@ -917,28 +600,25 @@
         <div class="sr">
           <span class="text-xs uppercase tracking-widest text-gray-400 font-medium block mb-3">Icon Library</span>
           <h2 class="text-4xl md:text-5xl font-black leading-tight">Browse the collection.</h2>
-          <p class="text-gray-500 mt-3 max-w-md">Crisp, clean, hand-crafted icons for any project. Download as SVG, PNG
-            or copy the code.</p>
+          <p class="text-gray-500 mt-3 max-w-md">Crisp, clean icons for any project. Download as SVG or copy the code.
+          </p>
         </div>
-        <!-- Category pills -->
-        <div class="flex flex-wrap gap-2 sr sr-delay-2">
-          <button class="cat-pill active px-4 py-1.5 text-sm font-medium" onclick="filterIcons('all')">All</button>
-          <button class="cat-pill px-4 py-1.5 text-sm font-medium" onclick="filterIcons('ui')">UI / Interface</button>
-          <button class="cat-pill px-4 py-1.5 text-sm font-medium" onclick="filterIcons('social')">Social</button>
-          <button class="cat-pill px-4 py-1.5 text-sm font-medium" onclick="filterIcons('media')">Media</button>
-          <button class="cat-pill px-4 py-1.5 text-sm font-medium" onclick="filterIcons('tech')">Tech</button>
+        <!-- Category pills injected by JS -->
+        <div class="flex flex-wrap gap-2 sr sr-delay-2" id="landing-cat-pills">
+          <button class="cat-pill active px-4 py-1.5 text-sm font-medium"
+            onclick="filterLandingIcons('all', this)">All</button>
         </div>
       </div>
 
-      <!-- Icon Grid -->
       <div id="icon-grid" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3">
-        <!-- Icons will be injected by JS -->
+        <div style="grid-column:1/-1;text-align:center;padding:30px;color:#bbb;font-size:13px;">
+          <span class="loading-spinner"></span>Loading icons…
+        </div>
       </div>
 
       <div class="flex justify-center mt-10 sr">
-        <a href="https://github.com/EinPallux/Minimaly" target="_blank"
-          class="btn-dark rounded-full px-8 py-3.5 text-sm font-semibold flex items-center gap-2">
-          View all icons on GitHub
+        <a href="database.html" class="btn-dark rounded-full px-8 py-3.5 text-sm font-semibold flex items-center gap-2">
+          View full icon database
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
             stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14M12 5l7 7-7 7" />
@@ -957,7 +637,6 @@
       </div>
 
       <div class="grid md:grid-cols-3 gap-5">
-        <!-- Card 1 -->
         <div class="feature-card p-8 sr sr-delay-1">
           <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
@@ -970,7 +649,6 @@
             single icon is yours to use without a single cent.</p>
         </div>
 
-        <!-- Card 2 -->
         <div class="feature-card p-8 sr sr-delay-2">
           <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
@@ -984,7 +662,6 @@
             it, ship it in your product — no strings attached.</p>
         </div>
 
-        <!-- Card 3 -->
         <div class="feature-card p-8 sr sr-delay-3">
           <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
@@ -996,10 +673,9 @@
           </div>
           <h3 class="text-xl font-bold mb-3">SVG Native</h3>
           <p class="text-gray-500 leading-relaxed text-sm">All icons are pure SVG — infinitely scalable, tiny in file
-            size, and fully customizable with CSS and code.</p>
+            size, and fully customizable.</p>
         </div>
 
-        <!-- Card 4 -->
         <div class="feature-card p-8 sr sr-delay-1">
           <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
@@ -1013,7 +689,6 @@
             release — and you're always welcome to submit yours.</p>
         </div>
 
-        <!-- Card 5 -->
         <div class="feature-card p-8 sr sr-delay-2">
           <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
@@ -1028,7 +703,6 @@
             belongs together — sharp at any size.</p>
         </div>
 
-        <!-- Card 6 -->
         <div class="feature-card p-8 sr sr-delay-3">
           <div class="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"
@@ -1055,14 +729,12 @@
       </div>
 
       <div class="bg-[#f8f8f8] rounded-3xl overflow-hidden border border-black/06 sr">
-        <!-- Header -->
         <div class="grid grid-cols-4 text-center text-sm font-bold p-5 border-b border-black/06">
           <div class="text-left pl-2">Feature</div>
           <div class="text-black font-extrabold">Minimaly</div>
           <div class="text-gray-400">SVGRepo</div>
           <div class="text-gray-400">Icons8</div>
         </div>
-        <!-- Rows -->
         <div class="divide-y divide-black/05">
           <div class="grid grid-cols-4 text-center text-sm p-4 compare-row">
             <div class="text-left text-gray-600 pl-2 font-medium">Free to use</div>
@@ -1114,10 +786,6 @@
       </div>
 
       <div class="grid md:grid-cols-3 gap-6 relative">
-        <!-- Connector line (desktop) -->
-        <div class="hidden md:block absolute top-12 left-1/4 right-1/4 h-px bg-black/10"
-          style="left:18%;right:18%;top:3rem;"></div>
-
         <div class="feature-card p-8 text-center sr sr-delay-1">
           <div
             class="w-14 h-14 rounded-2xl bg-[#f0f0f0] border border-black/08 flex items-center justify-center mx-auto mb-5 text-2xl font-black">
@@ -1131,8 +799,8 @@
             class="w-14 h-14 rounded-2xl bg-[#f0f0f0] border border-black/08 flex items-center justify-center mx-auto mb-5 text-2xl font-black">
             2</div>
           <h3 class="font-bold text-lg mb-2">Pick</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">Click your icon to preview it in different sizes. Customize
-            stroke width and color.</p>
+          <p class="text-gray-500 text-sm leading-relaxed">Click your icon to preview it. Customize background color and
+            size.</p>
         </div>
         <div class="feature-card p-8 text-center sr sr-delay-3">
           <div
@@ -1211,73 +879,154 @@
 
   <!-- ===== JAVASCRIPT ===== -->
   <script>
-    // ---- Hero reveal on load ----
-    window.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.reveal').forEach(el => {
-        el.style.animationDelay = el.style.animationDelay || '0s';
-        setTimeout(() => el.classList.add('visible'), 100);
-      });
-    });
+    'use strict';
 
-    // ---- Scroll reveal ----
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.sr').forEach(el => observer.observe(el));
+    /* ── CONFIG (same as database.html) ── */
+    const GITHUB_REPO = 'EinPallux/Minimaly';
+    const GITHUB_BRANCH = 'main';
+    const ICON_DB_PATH = 'images/icon_database';
 
-    // ---- Icon data ----
-    const icons = [
-      { name: 'Home', cat: 'ui', svg: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>' },
-      { name: 'Star', cat: 'ui', svg: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>' },
-      { name: 'Heart', cat: 'ui', svg: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>' },
-      { name: 'Search', cat: 'ui', svg: '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>' },
-      { name: 'Bell', cat: 'ui', svg: '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>' },
-      { name: 'User', cat: 'ui', svg: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>' },
-      { name: 'Settings', cat: 'ui', svg: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>' },
-      { name: 'Download', cat: 'ui', svg: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>' },
-      { name: 'Lock', cat: 'ui', svg: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>' },
-      { name: 'Mail', cat: 'social', svg: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>' },
-      { name: 'Share', cat: 'social', svg: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>' },
-      { name: 'Globe', cat: 'social', svg: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' },
-      { name: 'Link', cat: 'social', svg: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' },
-      { name: 'Play', cat: 'media', svg: '<polygon points="5 3 19 12 5 21 5 3"/>' },
-      { name: 'Pause', cat: 'media', svg: '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>' },
-      { name: 'Volume', cat: 'media', svg: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>' },
-      { name: 'Camera', cat: 'media', svg: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>' },
-      { name: 'Image', cat: 'media', svg: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>' },
-      { name: 'Code', cat: 'tech', svg: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>' },
-      { name: 'Zap', cat: 'tech', svg: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>' },
-      { name: 'Cloud', cat: 'tech', svg: '<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>' },
-      { name: 'Layers', cat: 'tech', svg: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>' },
-      { name: 'Database', cat: 'tech', svg: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>' },
-      { name: 'CPU', cat: 'tech', svg: '<rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>' },
-      { name: 'Wifi', cat: 'tech', svg: '<path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>' },
-      { name: 'Shield', cat: 'ui', svg: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' },
-      { name: 'Box', cat: 'ui', svg: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>' },
-      { name: 'Flag', cat: 'ui', svg: '<path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/>' },
-      { name: 'Arrow Right', cat: 'ui', svg: '<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>' },
-      { name: 'Check', cat: 'ui', svg: '<polyline points="20 6 9 17 4 12"/>' },
-      { name: 'X', cat: 'ui', svg: '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>' },
-    ];
+    /* ── STATE ── */
+    let landingIcons = [];       // flat list: { name, collection, collectionKey, svgUrl }
+    let landingFilter = 'all';
 
-    let activeFilter = 'all';
-
-    function svgWrap(inner) {
-      return `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+    /* ── HELPERS ── */
+    function toDisplayName(slug) {
+      return slug.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
     }
 
-    function renderIcons(filter) {
+    function escH(s) {
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    /* ── LOAD ICONS ── */
+    async function loadLandingIcons() {
+      // Try manifest first
+      try {
+        const res = await fetch('icon-manifest.json');
+        if (res.ok) {
+          const manifest = await res.json();
+          landingIcons = manifestToIcons(manifest);
+          renderLanding();
+          return;
+        }
+      } catch (e) { }
+
+      // Try GitHub API
+      if (GITHUB_REPO && GITHUB_REPO !== 'YOUR_USERNAME/YOUR_REPO') {
+        try {
+          landingIcons = await discoverViaGitHubAPI();
+          if (landingIcons.length > 0) { renderLanding(); return; }
+        } catch (e) { console.warn('GitHub API failed on landing:', e); }
+      }
+
+      // Nothing found
+      document.getElementById('icon-grid').innerHTML =
+        '<div style="grid-column:1/-1;text-align:center;padding:30px;color:#bbb;font-size:13px;">Add icons to images/icon_database/ to see them here.</div>';
+    }
+
+    function manifestToIcons(manifest) {
+      const icons = [];
+      for (const [colKey, data] of Object.entries(manifest)) {
+        const label = data.label || toDisplayName(colKey);
+        for (const iconSlug of data.icons) {
+          icons.push({
+            name: toDisplayName(iconSlug),
+            slug: iconSlug,
+            collection: label,
+            collectionKey: colKey,
+            svgUrl: `${ICON_DB_PATH}/${colKey}/${iconSlug}.svg`,
+          });
+        }
+      }
+      return icons;
+    }
+
+    async function discoverViaGitHubAPI() {
+      const base = `https://api.github.com/repos/${GITHUB_REPO}/contents/${ICON_DB_PATH}?ref=${GITHUB_BRANCH}`;
+      const colRes = await fetch(base, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+      if (!colRes.ok) throw new Error('GitHub API: ' + colRes.status);
+      const collections = await colRes.json();
+      const icons = [];
+      const folders = collections.filter(item => item.type === 'dir');
+
+      await Promise.all(folders.map(async folder => {
+        const colKey = folder.name;
+        const label = toDisplayName(colKey);
+        try {
+          const iconsRes = await fetch(folder.url, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+          const files = await iconsRes.json();
+          files.filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.svg')).forEach(file => {
+            const iconSlug = file.name.replace(/\.svg$/i, '');
+            icons.push({ name: toDisplayName(iconSlug), slug: iconSlug, collection: label, collectionKey: colKey, svgUrl: `${ICON_DB_PATH}/${colKey}/${file.name}` });
+          });
+        } catch (e) { console.warn('Could not load collection:', colKey, e); }
+      }));
+
+      return icons;
+    }
+
+    /* ── RENDER LANDING ICON GRID ── */
+    function renderLanding() {
+      renderCatPills();
+      renderIconGrid(landingIcons);
+      renderMainDropdownContent();
+    }
+
+    function renderCatPills() {
+      const colMap = getLandingColMap();
+      const container = document.getElementById('landing-cat-pills');
+      // Remove existing non-"All" pills
+      [...container.querySelectorAll('[data-col]')].forEach(el => el.remove());
+      Object.keys(colMap).forEach(col => {
+        const btn = document.createElement('button');
+        btn.className = 'cat-pill px-4 py-1.5 text-sm font-medium';
+        btn.dataset.col = col;
+        btn.textContent = col;
+        btn.onclick = function () { filterLandingIcons(col, this); };
+        container.appendChild(btn);
+      });
+    }
+
+    function getLandingColMap() {
+      const map = {};
+      for (const ic of landingIcons) {
+        if (!map[ic.collection]) map[ic.collection] = [];
+        map[ic.collection].push(ic);
+      }
+      return map;
+    }
+
+    function filterLandingIcons(col, btn) {
+      landingFilter = col;
+      document.querySelectorAll('#landing-cat-pills .cat-pill').forEach(p => p.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      else {
+        const all = document.querySelector('#landing-cat-pills [data-col="' + col + '"]') ||
+          document.querySelector('#landing-cat-pills .cat-pill');
+        if (all) all.classList.add('active');
+      }
+      const filtered = col === 'all' ? landingIcons : landingIcons.filter(i => i.collection === col);
+      renderIconGrid(filtered);
+    }
+
+    function renderIconGrid(icons) {
       const grid = document.getElementById('icon-grid');
-      const filtered = filter === 'all' ? icons : icons.filter(i => i.cat === filter);
-      grid.innerHTML = filtered.map(icon => `
-      <div class="icon-card p-3 flex flex-col items-center gap-2 group" title="${icon.name}" onclick="copyIcon('${encodeURIComponent(svgWrap(icon.svg))}', '${icon.name}', this)">
-        <div class="w-10 h-10 flex items-center justify-center text-gray-700 group-hover:text-black transition-colors">
-          ${svgWrap(icon.svg)}
-        </div>
-        <span class="text-[10px] text-gray-400 font-medium text-center leading-tight hidden sm:block">${icon.name}</span>
-        <div class="download-overlay font-medium">Copy SVG</div>
-      </div>
-    `).join('');
+      if (!icons.length) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:30px;color:#bbb;font-size:13px;">No icons found.</div>';
+        return;
+      }
+      grid.innerHTML = icons.map(icon => `
+        <div class="icon-card p-3 flex flex-col items-center gap-2 group" title="${escH(icon.name)}"
+          onclick="copyIconSVG('${escH(icon.svgUrl)}', '${escH(icon.name)}', this)">
+          <div class="w-10 h-10 flex items-center justify-center">
+            <img src="${escH(icon.svgUrl)}" alt="${escH(icon.name)}" width="28" height="28" loading="lazy" style="object-fit:contain;" />
+          </div>
+          <span class="text-[10px] text-gray-400 font-medium text-center leading-tight hidden sm:block">${escH(icon.name)}</span>
+          <div class="copy-overlay font-medium">Copy SVG</div>
+        </div>`
+      ).join('');
+
       // Animate in
       grid.querySelectorAll('.icon-card').forEach((el, i) => {
         el.style.opacity = '0';
@@ -1290,53 +1039,213 @@
       });
     }
 
-    function filterIcons(cat) {
-      activeFilter = cat;
-      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
-      event.target.classList.add('active');
-      renderIcons(cat);
-    }
-
-    function copyIcon(encodedSvg, name, el) {
-      const svg = decodeURIComponent(encodedSvg);
-      navigator.clipboard.writeText(svg).then(() => {
-        const overlay = el.querySelector('.download-overlay');
+    async function copyIconSVG(svgUrl, name, el) {
+      const overlay = el.querySelector('.copy-overlay');
+      try {
+        const res = await fetch(svgUrl);
+        const text = await res.text();
+        await navigator.clipboard.writeText(text);
         if (overlay) {
           overlay.textContent = 'Copied!';
           overlay.style.background = '#22c55e';
-          setTimeout(() => {
-            overlay.textContent = 'Copy SVG';
-            overlay.style.background = '#111';
-          }, 1200);
+          setTimeout(() => { overlay.textContent = 'Copy SVG'; overlay.style.background = '#111'; }, 1400);
         }
-      });
+      } catch (e) {
+        if (overlay) { overlay.textContent = 'Error'; setTimeout(() => { overlay.textContent = 'Copy SVG'; }, 1400); }
+      }
     }
 
-    // Initial render
-    renderIcons('all');
+    /* ── SEARCH DROPDOWN ── */
+    const searchInput = document.getElementById('main-search');
+    const kbdHint = document.getElementById('kbd-hint');
+    const mainDropdown = document.getElementById('main-search-dropdown');
 
-    // ---- Keyboard shortcut for search ----
+    function openMainDropdown() { mainDropdown.classList.add('open'); }
+    function closeMainDropdown() { mainDropdown.classList.remove('open'); }
+
+    function renderMainDropdownContent() { /* ready for search */ }
+
+    function renderMainDropdown(q) {
+      if (!q) { closeMainDropdown(); return; }
+      const ql = q.toLowerCase();
+      const colMap = getLandingColMap();
+
+      const matchedCols = Object.entries(colMap).filter(([name]) => name.toLowerCase().includes(ql));
+      const matchedIcons = landingIcons.filter(ic => ic.name.toLowerCase().includes(ql)).slice(0, 5);
+      const colIcons = [];
+      for (const [, icns] of matchedCols) {
+        icns.slice(0, 3).forEach(ic => { if (!matchedIcons.find(m => m.name === ic.name)) colIcons.push(ic); });
+        if (colIcons.length >= 4) break;
+      }
+
+      const hasResults = matchedCols.length || matchedIcons.length;
+      if (!hasResults) {
+        mainDropdown.innerHTML = `
+          <div class="dropdown-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            No results for "<strong style="color:#999">${escH(q)}</strong>"
+          </div>`;
+        openMainDropdown();
+        return;
+      }
+
+      let html = '';
+
+      if (matchedCols.length) {
+        html += `<div class="dropdown-section-label">Collections</div>`;
+        html += matchedCols.slice(0, 3).map(([colName, icns]) => {
+          const strip = icns.slice(0, 3).map(ic => `<span><img src="${escH(ic.svgUrl)}" alt="${escH(ic.name)}" /></span>`).join('');
+          return `<a class="dropdown-collection-row" href="database.html">
+            <div class="dropdown-col-icon-strip">${strip}</div>
+            <div class="dropdown-col-info">
+              <div class="dropdown-col-name">${escH(colName)}</div>
+              <div class="dropdown-col-count">${icns.length} icon${icns.length !== 1 ? 's' : ''}</div>
+            </div>
+            <div class="dropdown-col-arrow">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>`;
+        }).join('');
+        if (matchedIcons.length || colIcons.length) html += `<div class="dropdown-divider"></div>`;
+      }
+
+      const iconResults = [...matchedIcons, ...colIcons].slice(0, 6);
+      if (iconResults.length) {
+        html += `<div class="dropdown-section-label">Icons</div>`;
+        html += iconResults.map(ic => `
+          <a class="dropdown-icon-row" href="database.html">
+            <div class="dropdown-icon-thumb"><img src="${escH(ic.svgUrl)}" alt="${escH(ic.name)}" /></div>
+            <div class="dropdown-icon-info">
+              <div class="dropdown-icon-name">${escH(ic.name)}</div>
+              <div class="dropdown-icon-col">${escH(ic.collection)}</div>
+            </div>
+            <span class="dropdown-icon-badge">SVG</span>
+          </a>`).join('');
+      }
+
+      const total = matchedCols.reduce((s, [, v]) => s + v.length, 0) + matchedIcons.length;
+      html += `<div class="dropdown-footer">
+        <span>${total} result${total !== 1 ? 's' : ''} for "${escH(q)}"</span>
+        <a href="database.html">Browse all <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>`;
+
+      mainDropdown.innerHTML = html;
+      openMainDropdown();
+    }
+
+    if (searchInput && kbdHint) {
+      searchInput.addEventListener('focus', () => {
+        kbdHint.style.opacity = '0';
+        if (searchInput.value.trim()) renderMainDropdown(searchInput.value.trim());
+      });
+      searchInput.addEventListener('blur', () => {
+        setTimeout(() => { kbdHint.style.opacity = '1'; }, 200);
+      });
+      searchInput.addEventListener('input', () => { renderMainDropdown(searchInput.value.trim()); });
+    }
+
+    document.addEventListener('mousedown', e => {
+      const container = document.getElementById('main-search-container');
+      if (container && !container.contains(e.target)) closeMainDropdown();
+    });
+
+    /* ── ROTATING HERO ICONS ── */
+    // Will be populated from real icons once loaded
+    let heroIcons = [];
+    let heroIdx = 0;
+    let iconSlotA = null, iconSlotB = null, activeSlot = 'a';
+    let iconSizePx = 40;
+
+    function initHeroSlots() {
+      const wrap = document.getElementById('rotating-icon-wrap');
+      if (!wrap) return;
+      wrap.innerHTML = '';
+      const base = 'position:absolute;display:flex;align-items:center;justify-content:center;transition:opacity 0.4s ease,transform 0.4s ease;';
+      iconSlotA = document.createElement('span');
+      iconSlotB = document.createElement('span');
+      iconSlotA.style.cssText = base + 'opacity:1;transform:scale(1) rotate(0deg);';
+      iconSlotB.style.cssText = base + 'opacity:0;transform:scale(0.7) rotate(-12deg);';
+      wrap.appendChild(iconSlotA);
+      wrap.appendChild(iconSlotB);
+    }
+
+    function setHeroSlotContent(slot, icon) {
+      slot.innerHTML = `<img src="${icon.svgUrl}" width="${iconSizePx}" height="${iconSizePx}" style="display:block;object-fit:contain;" />`;
+    }
+
+    function rotateHeroIcon() {
+      if (!iconSlotA || !iconSlotB || heroIcons.length < 2) return;
+      const incoming = activeSlot === 'a' ? iconSlotB : iconSlotA;
+      const outgoing = activeSlot === 'a' ? iconSlotA : iconSlotB;
+
+      setHeroSlotContent(incoming, heroIcons[heroIdx]);
+      incoming.style.transition = 'none';
+      incoming.style.opacity = '0';
+      incoming.style.transform = 'scale(0.7) rotate(-12deg)';
+      incoming.getBoundingClientRect();
+      incoming.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      outgoing.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      incoming.style.opacity = '1';
+      incoming.style.transform = 'scale(1) rotate(0deg)';
+      outgoing.style.opacity = '0';
+      outgoing.style.transform = 'scale(1.2) rotate(12deg)';
+      activeSlot = activeSlot === 'a' ? 'b' : 'a';
+      heroIdx = (heroIdx + 1) % heroIcons.length;
+    }
+
+    function sizeHeroImages() {
+      const vw = window.innerWidth;
+      const cardPx = Math.min(88, Math.max(52, vw * 0.075));
+      const dollarPx = Math.min(72, Math.max(44, vw * 0.062));
+      iconSizePx = Math.round(cardPx * 0.52);
+      const card = document.getElementById('icon-card-1');
+      if (card) { card.style.width = cardPx + 'px'; card.style.height = cardPx + 'px'; }
+      const dollar = document.getElementById('dollar-img');
+      if (dollar) { dollar.style.width = dollarPx + 'px'; dollar.style.height = 'auto'; }
+    }
+
+    window.addEventListener('resize', sizeHeroImages);
+
+    /* ── SCROLL REVEAL ── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.sr').forEach(el => observer.observe(el));
+
+    /* ── KEYBOARD SHORTCUTS ── */
     document.addEventListener('keydown', (e) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault();
-        document.querySelector('.search-bar input').focus();
+        document.getElementById('main-search').focus();
+      }
+      if (e.key === 'Escape') {
+        closeMainDropdown();
+        document.getElementById('main-search').blur();
       }
     });
 
-    // ---- Search live filter ----
-    document.querySelector('.search-bar input').addEventListener('input', (e) => {
-      const q = e.target.value.toLowerCase();
-      if (!q) { renderIcons(activeFilter); return; }
-      const grid = document.getElementById('icon-grid');
-      const filtered = icons.filter(i => i.name.toLowerCase().includes(q));
-      grid.innerHTML = filtered.map(icon => `
-      <div class="icon-card p-3 flex flex-col items-center gap-2 group" title="${icon.name}" onclick="copyIcon('${encodeURIComponent(svgWrap(icon.svg))}', '${icon.name}', this)">
-        <div class="w-10 h-10 flex items-center justify-center text-gray-700 group-hover:text-black transition-colors">${svgWrap(icon.svg)}</div>
-        <span class="text-[10px] text-gray-400 font-medium text-center leading-tight hidden sm:block">${icon.name}</span>
-        <div class="download-overlay font-medium">Copy SVG</div>
-      </div>
-    `).join('');
+    /* ── INIT ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      sizeHeroImages();
+      initHeroSlots();
+
+      loadLandingIcons().then(() => {
+        // Populate hero icons from real loaded icons
+        if (landingIcons.length > 0) {
+          heroIcons = [...landingIcons].sort(() => Math.random() - 0.5);
+          heroIdx = 0;
+          if (iconSlotA && heroIcons[0]) {
+            setHeroSlotContent(iconSlotA, heroIcons[0]);
+            heroIdx = 1;
+          }
+          setInterval(rotateHeroIcon, 1400);
+        }
+      });
     });
+
+    sizeHeroImages();
   </script>
 </body>
 

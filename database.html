@@ -91,11 +91,6 @@
             transition: opacity 0.2s;
         }
 
-        /* ── Page layout ── */
-        .page-content {
-            padding-top: 104px;
-        }
-
         /* ── Section titles ── */
         .section-label {
             font-size: 11px;
@@ -140,9 +135,10 @@
             justify-content: center;
         }
 
-        .collection-card .preview-cell svg {
+        .collection-card .preview-cell img {
             width: 22px;
             height: 22px;
+            object-fit: contain;
         }
 
         .collection-card .coll-name {
@@ -209,14 +205,23 @@
             border-color: rgba(0, 0, 0, 0.13);
         }
 
-        .icon-tile svg {
+        .icon-tile .tile-img-wrap {
             width: 28px;
             height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: transform 0.2s;
         }
 
-        .icon-tile:hover svg {
+        .icon-tile:hover .tile-img-wrap {
             transform: scale(1.12);
+        }
+
+        .icon-tile .tile-img-wrap img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
         }
 
         .icon-tile .tile-name {
@@ -256,18 +261,6 @@
             border-color: #111;
         }
 
-        /* ── Search results banner ── */
-        .search-results-bar {
-            background: #fff;
-            border: 1px solid rgba(0, 0, 0, 0.07);
-            border-radius: 14px;
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 24px;
-        }
-
         /* ── Empty state ── */
         .empty-state {
             text-align: center;
@@ -287,9 +280,33 @@
             color: #aaa;
         }
 
+        /* ── Loading state ── */
+        .loading-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid #e5e5e5;
+            border-top-color: #111;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 16px;
+        }
+
         /* ══════════════════════════════
-       POPUP / MODAL
-    ══════════════════════════════ */
+           POPUP / MODAL
+        ══════════════════════════════ */
         .popup-overlay {
             position: fixed;
             inset: 0;
@@ -328,7 +345,6 @@
             transform: scale(1) translateY(0);
         }
 
-        /* Popup header */
         .popup-header {
             padding: 24px 28px 20px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -356,14 +372,12 @@
             transform: scale(1.08);
         }
 
-        /* Popup body */
         .popup-body {
             display: flex;
             flex: 1;
             overflow: hidden;
         }
 
-        /* Left: preview pane */
         .popup-preview {
             flex: 1;
             display: flex;
@@ -386,6 +400,7 @@
             transition: background 0.2s;
         }
 
+        .preview-canvas img,
         .preview-canvas svg {
             display: block;
             transition: all 0.2s ease;
@@ -399,7 +414,6 @@
             letter-spacing: 0.01em;
         }
 
-        /* Right: controls pane */
         .popup-controls {
             width: 260px;
             padding: 24px 24px;
@@ -420,7 +434,6 @@
             margin-bottom: 10px;
         }
 
-        /* Sliders */
         .ctrl-slider {
             -webkit-appearance: none;
             appearance: none;
@@ -521,7 +534,6 @@
             border-color: #111;
         }
 
-        /* BG Color row */
         .bg-swatches {
             display: flex;
             gap: 6px;
@@ -549,7 +561,6 @@
             background: repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%) 0 0 / 10px 10px;
         }
 
-        /* Popup footer / actions */
         .popup-footer {
             padding: 16px 28px;
             border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -665,25 +676,6 @@
             transition-delay: 0.40s;
         }
 
-        /* Loading skeleton */
-        @keyframes shimmer {
-            0% {
-                background-position: -400px 0;
-            }
-
-            100% {
-                background-position: 400px 0;
-            }
-        }
-
-        .skeleton {
-            background: linear-gradient(90deg, #ebebeb 25%, #f5f5f5 50%, #ebebeb 75%);
-            background-size: 800px 100%;
-            animation: shimmer 1.4s infinite;
-            border-radius: 10px;
-        }
-
-
         /* ── Search Dropdown ── */
         .search-container {
             position: relative;
@@ -738,10 +730,6 @@
             background: #f7f7f7;
         }
 
-        .dropdown-collection-row:last-child {
-            border-radius: 0 0 20px 20px;
-        }
-
         .dropdown-col-icon-strip {
             display: flex;
             gap: 4px;
@@ -759,9 +747,10 @@
             flex-shrink: 0;
         }
 
-        .dropdown-col-icon-strip span svg {
+        .dropdown-col-icon-strip span img {
             width: 14px;
             height: 14px;
+            object-fit: contain;
         }
 
         .dropdown-col-info {
@@ -825,9 +814,10 @@
             flex-shrink: 0;
         }
 
-        .dropdown-icon-thumb svg {
+        .dropdown-icon-thumb img {
             width: 16px;
             height: 16px;
+            object-fit: contain;
         }
 
         .dropdown-icon-info {
@@ -925,12 +915,11 @@
 <body>
 
     <!-- ══════════════════════════════════════
-     NAVBAR
-══════════════════════════════════════ -->
+         NAVBAR
+    ══════════════════════════════════════ -->
     <nav
         style="position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 24px;display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(239,239,239,0.85);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.05);">
 
-        <!-- Logo -->
         <a href="index.html" class="nav-pill"
             style="display:inline-flex;align-items:center;padding:9px 22px;text-decoration:none;flex-shrink:0;">
             <span style="font-size:15px;letter-spacing:-0.01em;color:#111;">
@@ -938,7 +927,6 @@
             </span>
         </a>
 
-        <!-- Search -->
         <div class="search-container" id="db-search-container">
             <div class="search-wrap" id="db-search-wrap" onclick="document.getElementById('db-search').focus()">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.2"
@@ -954,7 +942,6 @@
             <div class="search-dropdown" id="db-search-dropdown"></div>
         </div>
 
-        <!-- Back link -->
         <a href="index.html"
             style="display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:999px;background:rgba(255,255,255,0.85);border:1px solid rgba(0,0,0,0.09);font-size:13px;font-weight:600;color:#555;text-decoration:none;flex-shrink:0;transition:color 0.2s,border-color 0.2s;white-space:nowrap;"
             onmouseover="this.style.color='#111'" onmouseout="this.style.color='#555'">
@@ -967,18 +954,20 @@
     </nav>
 
     <!-- ══════════════════════════════════════
-     PAGE CONTENT
-══════════════════════════════════════ -->
+         PAGE CONTENT
+    ══════════════════════════════════════ -->
     <main
         style="max-width:1200px;margin:0 auto;padding-top:104px;padding-left:24px;padding-right:24px;padding-bottom:80px;">
 
-
         <!-- Featured Collections -->
         <section style="margin-bottom:52px;">
-            <p class="section-label sr">Featured Collections</p>
+            <p class="section-label sr">Collections</p>
             <div id="collections-grid"
                 style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;">
-                <!-- Injected by JS -->
+                <div class="loading-state" style="grid-column:1/-1;">
+                    <div class="loading-spinner"></div>
+                    Loading collections…
+                </div>
             </div>
         </section>
 
@@ -987,15 +976,16 @@
             <div
                 style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
                 <p class="section-label sr" style="margin-bottom:0;">All Icons</p>
-                <!-- Filter pills -->
                 <div id="filter-pills" style="display:flex;gap:8px;flex-wrap:wrap;" class="sr sr-d1">
                     <button class="filter-pill active" data-filter="all"
                         onclick="filterByCollection('all',this)">All</button>
-                    <!-- Collection filters injected by JS -->
                 </div>
             </div>
             <div class="icon-grid" id="all-icons-grid">
-                <!-- Injected by JS -->
+                <div class="loading-state" style="grid-column:1/-1;">
+                    <div class="loading-spinner"></div>
+                    Loading icons…
+                </div>
             </div>
             <div id="empty-state" class="empty-state" style="display:none;">
                 <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round"
@@ -1003,21 +993,17 @@
                     <circle cx="11" cy="11" r="8" />
                     <path d="m21 21-4.35-4.35" />
                 </svg>
-                <p>No icons found in this collection yet.</p>
-                <p style="font-size:13px;margin-top:6px;color:#bbb;">Icons will appear here once added to the database.
-                </p>
+                <p>No icons found.</p>
             </div>
         </section>
-        </div>
     </main>
 
     <!-- ══════════════════════════════════════
-     ICON EDITOR POPUP
-══════════════════════════════════════ -->
+         ICON EDITOR POPUP
+    ══════════════════════════════════════ -->
     <div class="popup-overlay" id="popup-overlay" onclick="closePopup(event)">
         <div class="popup" id="popup">
 
-            <!-- Header -->
             <div class="popup-header">
                 <div>
                     <div style="font-size:18px;font-weight:800;color:#111;" id="popup-icon-name">Icon Name</div>
@@ -1033,52 +1019,33 @@
                 </button>
             </div>
 
-            <!-- Body -->
             <div class="popup-body">
 
-                <!-- Preview -->
                 <div class="popup-preview">
                     <div class="preview-canvas" id="preview-canvas" style="width:160px;height:160px;">
                         <div id="popup-svg-wrap"></div>
                     </div>
                     <div class="preview-name" id="popup-preview-label">preview</div>
-                    <!-- Size indicator -->
                     <div style="margin-top:12px;display:flex;gap:8px;">
                         <span id="size-badge"
                             style="background:#f0f0f0;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#888;">24
                             × 24</span>
-                        <span id="stroke-badge"
-                            style="background:#f0f0f0;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#888;">Stroke
-                            2</span>
+                        <span id="padding-badge"
+                            style="background:#f0f0f0;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#888;">Padding
+                            16</span>
                     </div>
                 </div>
 
-                <!-- Controls -->
                 <div class="popup-controls">
-
-                    <!-- Stroke weight -->
-                    <div class="control-group">
-                        <label>Stroke Weight</label>
-                        <div class="slider-row">
-                            <span style="font-size:12px;color:#aaa;">0.5</span>
-                            <span class="slider-val" id="stroke-val">2.0</span>
-                        </div>
-                        <input type="range" class="ctrl-slider" id="stroke-slider" min="0.5" max="4" step="0.25"
-                            value="2" oninput="updatePreview()" />
-                        <div class="slider-row" style="margin-top:4px;">
-                            <span style="font-size:12px;color:#aaa;">Thin</span>
-                            <span style="font-size:12px;color:#aaa;">Heavy</span>
-                        </div>
-                    </div>
 
                     <!-- Icon size -->
                     <div class="control-group">
                         <label>Icon Size</label>
                         <div class="slider-row">
                             <span style="font-size:12px;color:#aaa;">16px</span>
-                            <span class="slider-val" id="size-val">24px</span>
+                            <span class="slider-val" id="size-val">64px</span>
                         </div>
-                        <input type="range" class="ctrl-slider" id="size-slider" min="16" max="96" step="4" value="24"
+                        <input type="range" class="ctrl-slider" id="size-slider" min="16" max="128" step="4" value="64"
                             oninput="updatePreview()" />
                         <div class="slider-row" style="margin-top:4px;">
                             <span style="font-size:12px;color:#aaa;">Small</span>
@@ -1097,26 +1064,10 @@
                             oninput="updatePreview()" />
                     </div>
 
-                    <!-- Icon color -->
-                    <div class="control-group">
-                        <label>Icon Color</label>
-                        <div class="color-grid" id="icon-color-swatches">
-                            <!-- injected by JS -->
-                        </div>
-                        <div class="color-input-row">
-                            <input type="color" id="icon-color-picker" value="#111111"
-                                oninput="onPickerChange('icon')" />
-                            <input type="text" id="icon-color-hex" value="#111111" maxlength="7" placeholder="#111111"
-                                oninput="onHexChange('icon')" />
-                        </div>
-                    </div>
-
                     <!-- Background color -->
                     <div class="control-group">
                         <label>Background</label>
-                        <div class="bg-swatches" id="bg-swatches">
-                            <!-- injected by JS -->
-                        </div>
+                        <div class="bg-swatches" id="bg-swatches"></div>
                         <div class="color-input-row" style="margin-top:10px;">
                             <input type="color" id="bg-color-picker" value="#ffffff" oninput="onPickerChange('bg')" />
                             <input type="text" id="bg-color-hex" value="#ffffff" maxlength="7" placeholder="#ffffff"
@@ -1138,7 +1089,6 @@
                 </div>
             </div>
 
-            <!-- Footer -->
             <div class="popup-footer">
                 <button class="btn-primary" onclick="downloadSVG()">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
@@ -1155,7 +1105,7 @@
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                     </svg>
-                    Copy
+                    Copy SVG
                 </button>
                 <button class="btn-secondary" onclick="copyPNG()">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
@@ -1180,183 +1130,198 @@
     </div>
 
     <!-- ══════════════════════════════════════
-     JAVASCRIPT
-══════════════════════════════════════ -->
+         JAVASCRIPT
+    ══════════════════════════════════════ -->
     <script>
         'use strict';
 
         /* ─────────────────────────────────────────
-           DATABASE STRUCTURE
-           Icons live at: images/icon_database/<collection>/<icon>.svg
-           We define the manifest here. Once you add icons to the repo,
-           update the COLLECTIONS object below.
-        
-           Format:
-           {
-             collectionName: {
-               label: 'Display Name',
-               icons: ['icon-name-1', 'icon-name-2', ...]
-             }
-           }
-        ───────────────────────────────────────── */
-        const COLLECTIONS = {
-            // ── Placeholder collections (replace with your real icons) ──
-            // When you add real icons, just add the collection key and icon filenames (without .svg)
-            // Example:
-            // 'ui-essentials': {
-            //   label: 'UI Essentials',
-            //   icons: ['home', 'search', 'settings', 'user', 'bell', 'lock']
-            // },
-        };
+           AUTO-DISCOVERY CONFIGURATION
+           ─────────────────────────────────────────
+           The site automatically discovers all collections and icons from
+           the images/icon_database/ folder using one of three methods:
 
-        /* ─────────────────────────────────────────
-           FALLBACK BUILT-IN ICONS
-           These are shown when no real SVG files exist yet.
-           Each entry has an inline SVG path string.
+           METHOD 1 (Recommended for GitHub Pages):
+             Add a file at: icon-manifest.json
+             Generate it by running: node generate-manifest.js
+             (A generate-manifest.js script is included in the repo)
+
+           METHOD 2 (GitHub API — works automatically if hosted on GitHub):
+             Set GITHUB_REPO below to your "username/reponame"
+             The page will query the GitHub API to discover files dynamically.
+             No manual steps needed when you add new icons!
+
+           METHOD 3 (Fallback):
+             If neither manifest nor GitHub API is available, the page shows
+             an empty state with instructions.
+
+           IMPORTANT: Set your GitHub repo path below for auto-discovery:
         ───────────────────────────────────────── */
-        const BUILTIN_ICONS = [
-            { name: 'Home', collection: 'UI Essentials', path: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>' },
-            { name: 'Search', collection: 'UI Essentials', path: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>' },
-            { name: 'Star', collection: 'UI Essentials', path: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>' },
-            { name: 'Heart', collection: 'UI Essentials', path: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>' },
-            { name: 'Bell', collection: 'UI Essentials', path: '<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/>' },
-            { name: 'Settings', collection: 'UI Essentials', path: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>' },
-            { name: 'User', collection: 'UI Essentials', path: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>' },
-            { name: 'Lock', collection: 'UI Essentials', path: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>' },
-            { name: 'Download', collection: 'UI Essentials', path: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>' },
-            { name: 'Mail', collection: 'Social', path: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>' },
-            { name: 'Share', collection: 'Social', path: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>' },
-            { name: 'Globe', collection: 'Social', path: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' },
-            { name: 'Link', collection: 'Social', path: '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>' },
-            { name: 'Play', collection: 'Media', path: '<polygon points="5 3 19 12 5 21 5 3"/>' },
-            { name: 'Pause', collection: 'Media', path: '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>' },
-            { name: 'Volume', collection: 'Media', path: '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>' },
-            { name: 'Camera', collection: 'Media', path: '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>' },
-            { name: 'Code', collection: 'Tech', path: '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>' },
-            { name: 'Zap', collection: 'Tech', path: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>' },
-            { name: 'Cloud', collection: 'Tech', path: '<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>' },
-            { name: 'Database', collection: 'Tech', path: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>' },
-            { name: 'Layers', collection: 'Tech', path: '<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>' },
-            { name: 'Shield', collection: 'UI Essentials', path: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>' },
-            { name: 'Smile', collection: 'UI Essentials', path: '<circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>' },
-            { name: 'Wifi', collection: 'Tech', path: '<path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>' },
-        ];
+        const GITHUB_REPO = 'EinPallux/Minimaly'; // ← your GitHub username/reponame
+        const GITHUB_BRANCH = 'main';              // ← your default branch (main or master)
+        const ICON_DB_PATH = 'images/icon_database';
 
         /* ─────────────────────────────────────────
            STATE
         ───────────────────────────────────────── */
-        let allIcons = [];        // flat list of all icon objects
-        let activeFilter = 'all'; // current collection filter
-        let currentIconData = {}; // icon open in popup
+        let allIcons = [];
+        let activeFilter = 'all';
+        let currentIconData = {};
+        let currentSvgContent = ''; // raw SVG text for the open popup
 
         /* ─────────────────────────────────────────
-           BOOTSTRAP: load from real files OR fallback
+           DISPLAY NAME HELPER
         ───────────────────────────────────────── */
-        async function bootstrap() {
-            // Try to load real icons from COLLECTIONS manifest first
-            const hasRealCollections = Object.keys(COLLECTIONS).length > 0;
-
-            if (hasRealCollections) {
-                allIcons = await loadRealIcons();
-            }
-
-            // Always merge built-ins (so the page is never empty)
-            // Built-ins are replaced as real icons with matching names are found
-            const builtinMapped = BUILTIN_ICONS.map(ic => ({
-                name: ic.name,
-                collection: ic.collection,
-                type: 'builtin',
-                path: ic.path,
-                svgUrl: null,
-            }));
-
-            // If we have real icons, only add builtins that aren't already loaded
-            if (allIcons.length > 0) {
-                const realNames = new Set(allIcons.map(i => i.name.toLowerCase()));
-                builtinMapped.filter(b => !realNames.has(b.name.toLowerCase()))
-                    .forEach(b => allIcons.push(b));
-            } else {
-                allIcons = builtinMapped;
-            }
-
-            renderCollections();
-            renderAllIcons(allIcons);
-            renderFilterPills();
+        function toDisplayName(slug) {
+            return slug
+                .replace(/[-_]/g, ' ')
+                .replace(/\b\w/g, c => c.toUpperCase());
         }
 
-        async function loadRealIcons() {
+        /* ─────────────────────────────────────────
+           BOOTSTRAP: Auto-discover icons
+        ───────────────────────────────────────── */
+        async function bootstrap() {
+            // Try manifest file first (fastest, works everywhere)
+            try {
+                const res = await fetch('icon-manifest.json');
+                if (res.ok) {
+                    const manifest = await res.json();
+                    allIcons = manifestToIcons(manifest);
+                    finishLoad();
+                    return;
+                }
+            } catch (e) { /* manifest not found, try next method */ }
+
+            // Try GitHub API (works automatically on GitHub Pages)
+            if (GITHUB_REPO && GITHUB_REPO !== 'YOUR_USERNAME/YOUR_REPO') {
+                try {
+                    allIcons = await discoverViaGitHubAPI();
+                    if (allIcons.length > 0) {
+                        finishLoad();
+                        return;
+                    }
+                } catch (e) {
+                    console.warn('GitHub API discovery failed:', e);
+                }
+            }
+
+            // Nothing found
+            document.getElementById('collections-grid').innerHTML = `
+                <div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:#aaa;font-size:14px;line-height:1.7;">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto 12px;">
+                        <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                    </svg>
+                    <strong style="color:#888;">No icons found.</strong><br/>
+                    Add SVG files to <code>images/icon_database/&lt;collection&gt;/</code> and either:<br/>
+                    1. Run <code>node generate-manifest.js</code> to create a manifest, or<br/>
+                    2. Set your GitHub repo in the <code>GITHUB_REPO</code> variable.
+                </div>`;
+            document.getElementById('all-icons-grid').innerHTML = '';
+        }
+
+        function manifestToIcons(manifest) {
             const icons = [];
-            for (const [colKey, colData] of Object.entries(COLLECTIONS)) {
-                for (const iconName of colData.icons) {
-                    const url = `images/icon_database/${colKey}/${iconName}.svg`;
+            for (const [colKey, data] of Object.entries(manifest)) {
+                const label = data.label || toDisplayName(colKey);
+                for (const iconSlug of data.icons) {
                     icons.push({
-                        name: toDisplayName(iconName),
-                        collection: colData.label,
+                        name: toDisplayName(iconSlug),
+                        slug: iconSlug,
+                        collection: label,
                         collectionKey: colKey,
-                        type: 'file',
-                        svgUrl: url,
-                        path: null, // loaded lazily on open
+                        svgUrl: `${ICON_DB_PATH}/${colKey}/${iconSlug}.svg`,
+                        svgContent: null,
                     });
                 }
             }
             return icons;
         }
 
-        function toDisplayName(slug) {
-            return slug.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        async function discoverViaGitHubAPI() {
+            const base = `https://api.github.com/repos/${GITHUB_REPO}/contents/${ICON_DB_PATH}?ref=${GITHUB_BRANCH}`;
+            const colRes = await fetch(base, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+            if (!colRes.ok) throw new Error('GitHub API error: ' + colRes.status);
+            const collections = await colRes.json();
+
+            const icons = [];
+            const folders = collections.filter(item => item.type === 'dir');
+
+            await Promise.all(folders.map(async folder => {
+                const colKey = folder.name;
+                const label = toDisplayName(colKey);
+                try {
+                    const iconsRes = await fetch(folder.url, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
+                    const files = await iconsRes.json();
+                    const svgFiles = files.filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.svg'));
+                    for (const file of svgFiles) {
+                        const iconSlug = file.name.replace(/\.svg$/i, '');
+                        icons.push({
+                            name: toDisplayName(iconSlug),
+                            slug: iconSlug,
+                            collection: label,
+                            collectionKey: colKey,
+                            svgUrl: `${ICON_DB_PATH}/${colKey}/${file.name}`,
+                            svgContent: null,
+                        });
+                    }
+                } catch (e) {
+                    console.warn('Could not load collection:', colKey, e);
+                }
+            }));
+
+            return icons;
+        }
+
+        function finishLoad() {
+            renderCollections();
+            renderAllIcons(allIcons);
+            renderFilterPills();
+            requestAnimationFrame(() => initSR());
         }
 
         /* ─────────────────────────────────────────
            COLLECTIONS GRID
         ───────────────────────────────────────── */
-        function getCollections() {
+        function getCollectionMap() {
             const map = {};
             for (const icon of allIcons) {
-                const col = icon.collection;
-                if (!map[col]) map[col] = [];
-                map[col].push(icon);
+                if (!map[icon.collection]) map[icon.collection] = [];
+                map[icon.collection].push(icon);
             }
             return map;
         }
 
         function renderCollections() {
-            const colMap = getCollections();
+            const colMap = getCollectionMap();
             const grid = document.getElementById('collections-grid');
             const colKeys = Object.keys(colMap);
 
-            // Pick up to 6 collections (shuffled)
-            const shuffled = colKeys.sort(() => Math.random() - 0.5).slice(0, 6);
+            if (colKeys.length === 0) {
+                grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:30px;color:#bbb;">No collections found.</div>';
+                return;
+            }
 
-            grid.innerHTML = shuffled.map((col, i) => {
-                const icons = colMap[col].slice(0, 9);
+            grid.innerHTML = colKeys.map((col, i) => {
+                const icons = colMap[col];
                 const delayClass = `sr-d${Math.min(i + 1, 6)}`;
-                const previewCells = icons.slice(0, 9).map(ic => `
-      <div class="preview-cell">
-        ${ic.type === 'builtin' ? buildInlineSVG(ic.path, 20) : `<img src="${ic.svgUrl}" width="20" height="20" loading="lazy" style="opacity:0.8;" />`}
-      </div>
-    `).join('');
-
-                // Pad to 9
-                const empty = Array(Math.max(0, 9 - icons.length)).fill('<div class="preview-cell"></div>').join('');
+                const previewIcons = icons.slice(0, 9);
+                const previewCells = previewIcons.map(ic =>
+                    `<div class="preview-cell"><img src="${ic.svgUrl}" alt="${ic.name}" loading="lazy" /></div>`
+                ).join('');
+                const empty = Array(Math.max(0, 9 - previewIcons.length))
+                    .fill('<div class="preview-cell"></div>').join('');
 
                 return `
-      <div class="collection-card sr ${delayClass}" onclick="filterByCollection('${col}', null)">
-        <div class="coll-arrow">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </div>
-        <div class="preview-grid">${previewCells}${empty}</div>
-        <div class="coll-name">${col}</div>
-        <div class="coll-count">${colMap[col].length} icon${colMap[col].length !== 1 ? 's' : ''}</div>
-      </div>
-    `;
+                    <div class="collection-card sr ${delayClass}" onclick="filterByCollection('${escHtml(col)}', null)">
+                        <div class="coll-arrow">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </div>
+                        <div class="preview-grid">${previewCells}${empty}</div>
+                        <div class="coll-name">${escHtml(col)}</div>
+                        <div class="coll-count">${icons.length} icon${icons.length !== 1 ? 's' : ''}</div>
+                    </div>`;
             }).join('');
-
-            // Trigger scroll reveal
-            requestAnimationFrame(() => initSR());
-        }
-
-        function buildInlineSVG(path, size = 24, stroke = '#333', strokeW = 1.6) {
-            return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="${stroke}" stroke-width="${strokeW}" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
         }
 
         /* ─────────────────────────────────────────
@@ -1373,27 +1338,23 @@
             }
             empty.style.display = 'none';
 
-            grid.innerHTML = icons.map((ic, i) => {
-                const inner = ic.type === 'builtin'
-                    ? buildInlineSVG(ic.path, 28)
-                    : `<img src="${ic.svgUrl}" width="28" height="28" loading="lazy" />`;
-                return `
-      <div class="icon-tile" onclick="openPopup(${i})" title="${ic.name}">
-        ${inner}
-        <span class="tile-name">${ic.name}</span>
-      </div>
-    `;
-            }).join('');
+            grid.innerHTML = icons.map((ic, i) => `
+                <div class="icon-tile" onclick="openPopup(${allIcons.indexOf(ic)})" title="${escHtml(ic.name)}">
+                    <div class="tile-img-wrap">
+                        <img src="${ic.svgUrl}" alt="${escHtml(ic.name)}" loading="lazy" />
+                    </div>
+                    <span class="tile-name">${escHtml(ic.name)}</span>
+                </div>`
+            ).join('');
         }
 
         /* ─────────────────────────────────────────
            FILTER PILLS
         ───────────────────────────────────────── */
         function renderFilterPills() {
-            const colMap = getCollections();
+            const colMap = getCollectionMap();
             const container = document.getElementById('filter-pills');
-            const existingAll = container.querySelector('[data-filter="all"]');
-            // Clear except "All"
+            // Clear all except "All"
             [...container.querySelectorAll('[data-filter]:not([data-filter="all"])')].forEach(el => el.remove());
 
             Object.keys(colMap).forEach(col => {
@@ -1408,21 +1369,15 @@
 
         function filterByCollection(col, btn) {
             activeFilter = col;
-
-            // Update pills
             document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
             if (btn) {
                 btn.classList.add('active');
             } else {
-                // called from collection card — find the matching pill
-                const match = document.querySelector(`[data-filter="${col}"]`);
+                const match = document.querySelector(`[data-filter="${escHtml(col)}"]`);
                 if (match) match.classList.add('active');
                 else document.querySelector('[data-filter="all"]').classList.add('active');
             }
-
-            // Scroll to icons section
             document.getElementById('all-icons-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
-
             const filtered = col === 'all' ? allIcons : allIcons.filter(i => i.collection === col);
             renderAllIcons(filtered);
         }
@@ -1434,38 +1389,19 @@
         const kbdHint = document.getElementById('db-kbd');
         const dbDropdown = document.getElementById('db-search-dropdown');
 
-        // ── Helpers ──
-        function getCollectionMap() {
-            const map = {};
-            for (const ic of allIcons) {
-                if (!map[ic.collection]) map[ic.collection] = [];
-                map[ic.collection].push(ic);
-            }
-            return map;
-        }
-
         function openDropdown() { dbDropdown.classList.add('open'); }
         function closeDropdown() { dbDropdown.classList.remove('open'); }
 
         function renderDropdown(q) {
             if (!q) { closeDropdown(); return; }
-
             const ql = q.toLowerCase();
             const colMap = getCollectionMap();
 
-            // ── Collections that match ──
-            const matchedCols = Object.entries(colMap).filter(([name]) =>
-                name.toLowerCase().includes(ql)
-            );
+            const matchedCols = Object.entries(colMap).filter(([name]) => name.toLowerCase().includes(ql));
+            const matchedIcons = allIcons.filter(ic => ic.name.toLowerCase().includes(ql)).slice(0, 5);
 
-            // ── Icons that match (max 5, deduplicated from matched collections) ──
-            const matchedIcons = allIcons.filter(ic =>
-                ic.name.toLowerCase().includes(ql)
-            ).slice(0, 5);
-
-            // ── Also grab icons from matching collections (up to 3 per col, max 4 total) ──
             const colIcons = [];
-            for (const [colName, icons] of matchedCols) {
+            for (const [, icons] of matchedCols) {
                 icons.slice(0, 3).forEach(ic => {
                     if (!matchedIcons.find(m => m.name === ic.name)) colIcons.push(ic);
                 });
@@ -1476,70 +1412,64 @@
 
             if (!hasResults) {
                 dbDropdown.innerHTML = `
-      <div class="dropdown-empty">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-        </svg>
-        No results for "<strong style="color:#aaa">${escHtml(q)}</strong>"
-      </div>`;
+                    <div class="dropdown-empty">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                        </svg>
+                        No results for "<strong style="color:#aaa">${escHtml(q)}</strong>"
+                    </div>`;
                 openDropdown();
                 return;
             }
 
             let html = '';
 
-            // ── Collections section ──
             if (matchedCols.length > 0) {
                 html += `<div class="dropdown-section-label">Collections</div>`;
                 html += matchedCols.slice(0, 3).map(([colName, icons]) => {
-                    const strip = icons.slice(0, 3).map(ic => `
-        <span>${ic.type === 'builtin' ? buildInlineSVG(ic.path, 14) : `<img src="${ic.svgUrl}" width="14" height="14"/>`}</span>
-      `).join('');
+                    const strip = icons.slice(0, 3).map(ic =>
+                        `<span><img src="${ic.svgUrl}" alt="${escHtml(ic.name)}" /></span>`
+                    ).join('');
                     return `
-        <div class="dropdown-collection-row" onclick="pickCollection('${escHtml(colName)}')">
-          <div class="dropdown-col-icon-strip">${strip}</div>
-          <div class="dropdown-col-info">
-            <div class="dropdown-col-name">${escHtml(colName)}</div>
-            <div class="dropdown-col-count">${icons.length} icon${icons.length !== 1 ? 's' : ''}</div>
-          </div>
-          <div class="dropdown-col-arrow">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </div>
-        </div>`;
+                        <div class="dropdown-collection-row" onclick="pickCollection('${escHtml(colName)}')">
+                            <div class="dropdown-col-icon-strip">${strip}</div>
+                            <div class="dropdown-col-info">
+                                <div class="dropdown-col-name">${escHtml(colName)}</div>
+                                <div class="dropdown-col-count">${icons.length} icon${icons.length !== 1 ? 's' : ''}</div>
+                            </div>
+                            <div class="dropdown-col-arrow">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </div>
+                        </div>`;
                 }).join('');
                 if (matchedIcons.length > 0 || colIcons.length > 0) html += `<div class="dropdown-divider"></div>`;
             }
 
-            // ── Icons section ──
             const iconResults = [...matchedIcons, ...colIcons].slice(0, 6);
             if (iconResults.length > 0) {
                 html += `<div class="dropdown-section-label">Icons</div>`;
                 html += iconResults.map(ic => {
                     const idx = allIcons.indexOf(ic);
-                    const thumb = ic.type === 'builtin'
-                        ? buildInlineSVG(ic.path, 16)
-                        : `<img src="${ic.svgUrl}" width="16" height="16"/>`;
                     return `
-        <div class="dropdown-icon-row" onclick="pickIcon(${idx})">
-          <div class="dropdown-icon-thumb">${thumb}</div>
-          <div class="dropdown-icon-info">
-            <div class="dropdown-icon-name">${escHtml(ic.name)}</div>
-            <div class="dropdown-icon-col">${escHtml(ic.collection)}</div>
-          </div>
-          <span class="dropdown-icon-badge">SVG</span>
-        </div>`;
+                        <div class="dropdown-icon-row" onclick="pickIcon(${idx})">
+                            <div class="dropdown-icon-thumb"><img src="${ic.svgUrl}" alt="${escHtml(ic.name)}" /></div>
+                            <div class="dropdown-icon-info">
+                                <div class="dropdown-icon-name">${escHtml(ic.name)}</div>
+                                <div class="dropdown-icon-col">${escHtml(ic.collection)}</div>
+                            </div>
+                            <span class="dropdown-icon-badge">SVG</span>
+                        </div>`;
                 }).join('');
             }
 
-            // ── Footer ──
             const totalCount = matchedCols.reduce((s, [, v]) => s + v.length, 0) + matchedIcons.length;
             html += `
-    <div class="dropdown-footer">
-      <span>${totalCount} result${totalCount !== 1 ? 's' : ''} for "${escHtml(q)}"</span>
-      <a href="#" onclick="showAllResults('${escHtml(q)}');return false;">
-        See all <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>`;
+                <div class="dropdown-footer">
+                    <span>${totalCount} result${totalCount !== 1 ? 's' : ''} for "${escHtml(q)}"</span>
+                    <a href="#" onclick="showAllResults('${escHtml(q)}');return false;">
+                        See all <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </a>
+                </div>`;
 
             dbDropdown.innerHTML = html;
             openDropdown();
@@ -1549,7 +1479,6 @@
             closeDropdown();
             dbSearch.value = '';
             filterByCollection(colName, null);
-            document.getElementById('all-icons-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function pickIcon(idx) {
@@ -1559,8 +1488,6 @@
         }
 
         function showAllResults(q) {
-            // Future: could navigate to a full results page
-            // For now just filter icons by query
             closeDropdown();
             dbSearch.value = '';
             const filtered = allIcons.filter(ic =>
@@ -1572,33 +1499,29 @@
         }
 
         function escHtml(str) {
-            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            return String(str)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
 
-        // ── Event listeners ──
         dbSearch.addEventListener('focus', () => {
             kbdHint.style.opacity = '0';
             if (dbSearch.value.trim()) renderDropdown(dbSearch.value.trim());
         });
 
-        dbSearch.addEventListener('input', () => {
-            renderDropdown(dbSearch.value.trim());
-        });
+        dbSearch.addEventListener('input', () => { renderDropdown(dbSearch.value.trim()); });
 
-        // Close on outside click (use mousedown so it fires before blur)
         document.addEventListener('mousedown', e => {
-            const container = document.getElementById('db-search-container');
-            if (container && !container.contains(e.target)) {
+            if (!document.getElementById('db-search-container').contains(e.target)) {
                 closeDropdown();
                 kbdHint.style.opacity = '1';
             }
         });
-        // Delay blur fade so dropdown clicks fire first
+
         dbSearch.addEventListener('blur', () => {
             setTimeout(() => { kbdHint.style.opacity = '1'; }, 200);
         });
 
-        // ⌘K / Ctrl+K
         document.addEventListener('keydown', e => {
             if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
                 e.preventDefault();
@@ -1607,105 +1530,62 @@
             if (e.key === 'Escape') {
                 if (dbDropdown.classList.contains('open')) {
                     closeDropdown(); dbSearch.blur();
-                } else closePopupDirect();
-            }
-            // Arrow key navigation in dropdown
-            if (e.key === 'ArrowDown' && dbDropdown.classList.contains('open')) {
-                e.preventDefault();
-                const rows = dbDropdown.querySelectorAll('.dropdown-collection-row, .dropdown-icon-row');
-                const focused = dbDropdown.querySelector('.dd-focused');
-                if (focused) {
-                    focused.classList.remove('dd-focused');
-                    const next = [...rows].indexOf(focused) + 1;
-                    if (rows[next]) { rows[next].classList.add('dd-focused'); rows[next].style.background = '#f0f0f0'; }
-                } else if (rows[0]) { rows[0].classList.add('dd-focused'); rows[0].style.background = '#f0f0f0'; }
-            }
-            if (e.key === 'ArrowUp' && dbDropdown.classList.contains('open')) {
-                e.preventDefault();
-                const rows = dbDropdown.querySelectorAll('.dropdown-collection-row, .dropdown-icon-row');
-                const focused = dbDropdown.querySelector('.dd-focused');
-                if (focused) {
-                    focused.classList.remove('dd-focused');
-                    const prev = [...rows].indexOf(focused) - 1;
-                    if (rows[prev]) { rows[prev].classList.add('dd-focused'); rows[prev].style.background = '#f0f0f0'; }
+                } else {
+                    closePopupDirect();
                 }
-            }
-            if (e.key === 'Enter' && dbDropdown.classList.contains('open')) {
-                const focused = dbDropdown.querySelector('.dd-focused');
-                if (focused) focused.click();
             }
         });
 
         /* ─────────────────────────────────────────
            POPUP
         ───────────────────────────────────────── */
-        const ICON_COLORS = ['#111111', '#374151', '#6B7280', '#EF4444', '#F97316', '#EAB308', '#22C55E', '#3B82F6', '#8B5CF6', '#EC4899', '#FFFFFF', '#F3F4F6'];
         const BG_COLORS = [null, '#FFFFFF', '#F3F4F6', '#111111', '#1E3A5F', '#FEF3C7', '#DCFCE7', '#EDE9FE'];
 
         async function openPopup(iconIndex) {
             currentIconData = { ...allIcons[iconIndex], index: iconIndex };
 
-            // Load SVG content if file-based
-            if (currentIconData.type === 'file' && !currentIconData.path) {
+            // Load SVG content if not already cached
+            if (!currentIconData.svgContent) {
                 try {
                     const res = await fetch(currentIconData.svgUrl);
-                    const text = await res.text();
-                    // Extract inner content of <svg>
-                    const match = text.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
-                    currentIconData.path = match ? match[1] : text;
+                    currentIconData.svgContent = await res.text();
+                    allIcons[iconIndex].svgContent = currentIconData.svgContent;
                 } catch (e) {
-                    currentIconData.path = '<circle cx="12" cy="12" r="8"/>';
+                    currentIconData.svgContent = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="#eee"/></svg>';
                 }
             }
+            currentSvgContent = currentIconData.svgContent;
 
             // Reset controls
-            document.getElementById('stroke-slider').value = 2;
-            document.getElementById('size-slider').value = 24;
+            document.getElementById('size-slider').value = 64;
             document.getElementById('padding-slider').value = 16;
             document.getElementById('radius-slider').value = 12;
-            document.getElementById('icon-color-picker').value = '#111111';
-            document.getElementById('icon-color-hex').value = '#111111';
             document.getElementById('bg-color-picker').value = '#ffffff';
             document.getElementById('bg-color-hex').value = '#ffffff';
 
-            // Populate color swatches
-            renderColorSwatches();
+            renderBgSwatches();
 
-            // Set labels
             document.getElementById('popup-icon-name').textContent = currentIconData.name;
             document.getElementById('popup-icon-collection').textContent = currentIconData.collection;
-            document.getElementById('popup-preview-label').textContent = currentIconData.name.toLowerCase().replace(/ /g, '-') + '.svg';
+            document.getElementById('popup-preview-label').textContent =
+                currentIconData.name.toLowerCase().replace(/ /g, '-') + '.svg';
 
             updatePreview();
 
-            // Open
             document.getElementById('popup-overlay').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
 
-        function renderColorSwatches() {
-            // Icon color swatches
-            const iconSwatchContainer = document.getElementById('icon-color-swatches');
-            iconSwatchContainer.innerHTML = ICON_COLORS.map(c => `
-    <div class="color-swatch ${c === '#111111' ? 'selected' : ''}"
-      style="background:${c};${c === '#FFFFFF' ? 'border:1.5px solid #e5e5e5;' : ''}"
-      onclick="setIconColor('${c}', this)" title="${c}"></div>
-  `).join('');
-
-            // BG swatches
-            const bgContainer = document.getElementById('bg-swatches');
-            bgContainer.innerHTML = BG_COLORS.map((c, i) => {
+        function renderBgSwatches() {
+            const container = document.getElementById('bg-swatches');
+            container.innerHTML = BG_COLORS.map((c, i) => {
                 if (c === null) return `<div class="bg-swatch transparent-swatch ${i === 0 ? 'selected' : ''}" onclick="setBgColor(null, this)" title="Transparent"></div>`;
-                return `<div class="bg-swatch ${c === '#FFFFFF' ? 'selected' : ''}" style="background:${c};${c === '#FFFFFF' || c === '#F3F4F6' ? 'border:1.5px solid #e5e5e5;' : ''}" onclick="setBgColor('${c}', this)" title="${c}"></div>`;
+                return `<div class="bg-swatch" style="background:${c};${(c === '#FFFFFF' || c === '#F3F4F6') ? 'border:1.5px solid #e5e5e5;' : ''}${c === '#FFFFFF' ? ' border-color:#111;' : ''}"
+                    onclick="setBgColor('${c}', this)" title="${c}"></div>`;
             }).join('');
-        }
-
-        function setIconColor(hex, el) {
-            document.querySelectorAll('#icon-color-swatches .color-swatch').forEach(s => s.classList.remove('selected'));
-            el.classList.add('selected');
-            document.getElementById('icon-color-picker').value = hex;
-            document.getElementById('icon-color-hex').value = hex;
-            updatePreview();
+            // Default select white
+            const whiteSwatch = container.querySelectorAll('.bg-swatch')[1];
+            if (whiteSwatch) whiteSwatch.classList.add('selected');
         }
 
         function setBgColor(hex, el) {
@@ -1727,7 +1607,7 @@
         }
 
         function onHexChange(type) {
-            let hex = document.getElementById(`${type}-color-hex`).value;
+            const hex = document.getElementById(`${type}-color-hex`).value;
             if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
                 document.getElementById(`${type}-color-picker`).value = hex;
                 updatePreview();
@@ -1736,11 +1616,9 @@
 
         function getSettings() {
             return {
-                stroke: parseFloat(document.getElementById('stroke-slider').value),
                 size: parseInt(document.getElementById('size-slider').value),
                 padding: parseInt(document.getElementById('padding-slider').value),
                 radius: parseInt(document.getElementById('radius-slider').value),
-                iconColor: document.getElementById('icon-color-hex').value || '#111111',
                 bgColor: document.getElementById('bg-color-hex').value,
             };
         }
@@ -1748,20 +1626,12 @@
         function updatePreview() {
             const s = getSettings();
 
-            // Update value labels
-            document.getElementById('stroke-val').textContent = s.stroke.toFixed(2).replace(/\.?0+$/, '') + '';
             document.getElementById('size-val').textContent = s.size + 'px';
             document.getElementById('padding-val').textContent = s.padding + 'px';
             document.getElementById('radius-val').textContent = s.radius + 'px';
-
-            // Update badges
             document.getElementById('size-badge').textContent = `${s.size} × ${s.size}`;
-            document.getElementById('stroke-badge').textContent = `Stroke ${s.stroke}`;
+            document.getElementById('padding-badge').textContent = `Padding ${s.padding}`;
 
-            // Build SVG
-            const svgContent = buildInlineSVG(currentIconData.path || '', s.size, s.iconColor, s.stroke);
-
-            // Canvas
             const canvas = document.getElementById('preview-canvas');
             const wrap = document.getElementById('popup-svg-wrap');
 
@@ -1769,22 +1639,34 @@
             canvas.style.background = bgActual;
             canvas.style.borderRadius = s.radius + 'px';
             canvas.style.padding = s.padding + 'px';
+            canvas.style.width = 'auto';
+            canvas.style.height = 'auto';
 
-            wrap.innerHTML = svgContent;
+            // Display the actual SVG at the chosen size
+            wrap.innerHTML = `<img src="${currentIconData.svgUrl}" width="${s.size}" height="${s.size}" style="display:block;" />`;
         }
 
         function buildSVGOutput() {
             const s = getSettings();
             const totalSize = s.size + s.padding * 2;
-            const bgActual = s.bgColor === 'transparent' ? 'none' : s.bgColor;
+            const bgFill = s.bgColor === 'transparent' ? 'none' : s.bgColor;
+
+            // Embed the SVG as a nested <image> using base64, or wrap the raw SVG content
+            // We strip the outer <svg> tag from the source and re-wrap
+            let innerContent = currentSvgContent || '';
+            // Extract just the inner elements from the source SVG
+            const innerMatch = innerContent.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
+            const innerSvg = innerMatch ? innerMatch[1] : innerContent;
+
+            // Get original viewBox from source
+            const vbMatch = innerContent.match(/viewBox=["']([^"']+)["']/i);
+            const origViewBox = vbMatch ? vbMatch[1] : '0 0 24 24';
 
             return `<svg xmlns="http://www.w3.org/2000/svg" width="${totalSize}" height="${totalSize}" viewBox="0 0 ${totalSize} ${totalSize}">
-  <rect width="${totalSize}" height="${totalSize}" rx="${s.radius}" fill="${bgActual}"/>
-  <g transform="translate(${s.padding},${s.padding})">
-    <svg width="${s.size}" height="${s.size}" viewBox="0 0 24 24" fill="none" stroke="${s.iconColor}" stroke-width="${s.stroke}" stroke-linecap="round" stroke-linejoin="round">
-      ${currentIconData.path || ''}
-    </svg>
-  </g>
+  <rect width="${totalSize}" height="${totalSize}" rx="${s.radius}" fill="${bgFill}"/>
+  <svg x="${s.padding}" y="${s.padding}" width="${s.size}" height="${s.size}" viewBox="${origViewBox}">
+    ${innerSvg}
+  </svg>
 </svg>`;
         }
 
@@ -1808,7 +1690,7 @@
         function copyPNG() {
             const s = getSettings();
             const totalSize = s.size + s.padding * 2;
-            const scale = Math.max(2, 192 / totalSize); // min 2x, target ~192px
+            const scale = Math.max(2, 192 / totalSize);
             const canvasEl = document.createElement('canvas');
             canvasEl.width = totalSize * scale;
             canvasEl.height = totalSize * scale;
@@ -1832,6 +1714,7 @@
         function closePopup(e) {
             if (e.target === document.getElementById('popup-overlay')) closePopupDirect();
         }
+
         function closePopupDirect() {
             document.getElementById('popup-overlay').classList.remove('open');
             document.body.style.overflow = '';
@@ -1854,7 +1737,9 @@
         ───────────────────────────────────────── */
         function initSR() {
             const obs = new IntersectionObserver(entries => {
-                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+                entries.forEach(e => {
+                    if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+                });
             }, { threshold: 0.08 });
             document.querySelectorAll('.sr:not(.in)').forEach(el => obs.observe(el));
         }
@@ -1862,7 +1747,7 @@
         /* ─────────────────────────────────────────
            INIT
         ───────────────────────────────────────── */
-        bootstrap().then(() => initSR());
+        bootstrap();
     </script>
 </body>
 
