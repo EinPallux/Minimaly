@@ -321,6 +321,18 @@
       opacity: 0.4;
     }
 
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-9px);
+      }
+    }
+
     @media (max-width: 640px) {
       .hero-headline {
         font-size: 2.4rem;
@@ -332,82 +344,114 @@
 <body>
 
   <!-- ===== NAVBAR ===== -->
-  <nav class="absolute top-0 left-0 right-0 z-50 px-6 pt-6 flex items-center justify-between gap-4">
-    <!-- Logo pill — standalone, top-left -->
-    <div class="nav-pill rounded-full px-5 py-2.5 flex-shrink-0">
-      <img src="images/frontpage_images/logo_top_left.png" alt="Minimaly" class="h-5 w-auto" />
+  <nav
+    style="position:absolute;top:0;left:0;right:0;z-index:50;padding:20px 28px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;">
+
+    <!-- Left: Logo text pill -->
+    <div style="justify-self:start;">
+      <div class="nav-pill" style="display:inline-flex;align-items:center;border-radius:999px;padding:8px 20px;">
+        <span style="font-family:'Parkinsans',sans-serif;font-size:15px;letter-spacing:-0.01em;">
+          <strong style="font-weight:800;">Mini</strong><span style="font-weight:400;">maly</span>
+        </span>
+      </div>
     </div>
 
-    <!-- Search bar — centered, wide, standalone pill -->
-    <div class="search-bar flex-1 max-w-xl rounded-full px-5 py-3 flex items-center gap-3">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round"
-        stroke-linejoin="round">
+    <!-- Center: Search bar -->
+    <div class="search-bar"
+      style="display:flex;align-items:center;gap:10px;border-radius:999px;padding:11px 20px;width:420px;max-width:90vw;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.2"
+        stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
         <circle cx="11" cy="11" r="8" />
         <path d="m21 21-4.35-4.35" />
       </svg>
       <input type="text" placeholder="Search for your dream icon or vector..."
-        class="flex-1 text-sm text-gray-700 font-parkinsans" />
+        style="flex:1;border:none;outline:none;background:transparent;font-family:'Parkinsans',sans-serif;font-size:13.5px;color:#555;" />
     </div>
 
-    <!-- Right spacer to keep search centered -->
-    <div class="flex-shrink-0 w-[120px] hidden md:block"></div>
+    <!-- Right: empty for balance -->
+    <div style="justify-self:end;"></div>
   </nav>
 
   <!-- ===== HERO SECTION ===== -->
-  <section class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
-    style="background:#efefef;">
-    <!-- Warped grid background -->
-    <div class="absolute inset-0 z-0">
-      <img src="images/frontpage_images/grid_background_hero_section.png" alt=""
-        class="w-full h-full object-cover opacity-60" />
-    </div>
+  <section
+    style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#efefef;overflow:hidden;">
 
-    <!-- Content -->
-    <div class="relative z-10 flex flex-col items-center text-center px-4 w-full max-w-5xl mx-auto">
+    <!-- Grid background image -->
+    <img src="images/frontpage_images/grid_background_hero_section.png" alt=""
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;pointer-events:none;z-index:0;" />
 
-      <!-- Badge pill -->
-      <div class="inline-flex items-center gap-1.5 rounded-full px-5 py-2 mb-12 reveal"
-        style="background:rgba(255,255,255,0.75); border:1px solid rgba(0,0,0,0.08); backdrop-filter:blur(8px); animation-delay:0.05s;">
-        <span class="text-sm text-gray-800">Over <strong class="font-bold">100+</strong> Icons available</span>
+    <!-- Hero content -->
+    <div
+      style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 24px;max-width:1000px;width:100%;">
+
+      <!-- Badge -->
+      <div class="hero-badge"
+        style="display:inline-flex;align-items:center;border-radius:999px;padding:8px 22px;margin-bottom:44px;background:rgba(255,255,255,0.78);border:1px solid rgba(0,0,0,0.09);backdrop-filter:blur(10px);box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+        <span style="font-family:'Parkinsans',sans-serif;font-size:14px;color:#222;">Over <strong
+            style="font-weight:700;">100+</strong> Icons available</span>
       </div>
 
-      <!-- Headline — large, tight, inline images -->
-      <h1 class="reveal font-parkinsans leading-[1.08] tracking-tight mb-8"
-        style="font-size:clamp(3rem,8.5vw,6.2rem); animation-delay:0.15s;">
+      <!-- Headline -->
+      <h1
+        style="font-family:'Parkinsans',sans-serif;line-height:1.06;letter-spacing:-0.02em;margin:0 0 32px 0;font-size:clamp(2.8rem,7.5vw,5.8rem);color:#111;">
         <!-- Line 1 -->
-        <span class="block">
-          Get a <span class="font-black">looooot</span> of
-          <!-- Icon card — white rounded square -->
-          <span class="inline-flex items-center justify-center align-middle rounded-[22px] mx-2 animate-float"
-            style="width:clamp(56px,7.5vw,88px);height:clamp(56px,7.5vw,88px);background:#fff;box-shadow:0 4px 24px rgba(0,0,0,0.10);vertical-align:middle;animation-delay:0.3s;">
-            <img src="images/frontpage_images/headline_icon.png" alt="icon"
-              style="width:55%;height:55%;object-fit:contain;" />
+        <span style="display:block;">
+          Get a <span style="font-weight:900;">looooot</span> of
+          <!-- White card with icon -->
+          <span
+            style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;border-radius:20px;background:#fff;box-shadow:0 6px 28px rgba(0,0,0,0.11);margin:0 6px;animation:float 4s ease-in-out infinite;"
+            id="icon-card-1">
+            <img src="images/frontpage_images/headline_icon.png" alt="icon" style="display:block;" />
           </span>
         </span>
         <!-- Line 2 -->
-        <span class="block">
-          <strong class="font-black">without</strong> any
-          <!-- Dollar sign — raw floating 3D object, no card -->
-          <img src="images/frontpage_images/dollarsign.png" alt="$" class="inline-block align-middle mx-2 animate-float"
-            style="width:clamp(44px,6vw,72px);height:auto;vertical-align:middle;animation-delay:0.8s;" />
+        <span style="display:block;">
+          <span style="font-weight:900;">without</span> any
+          <!-- Raw 3D dollar sign -->
+          <img src="images/frontpage_images/dollarsign.png" alt="$"
+            style="display:inline-block;vertical-align:middle;margin:0 4px;animation:float 4s ease-in-out infinite;animation-delay:0.8s;"
+            id="dollar-img" />
           at all.
         </span>
       </h1>
 
       <!-- Subheading -->
-      <p class="reveal text-gray-500 leading-relaxed mb-12"
-        style="font-size:clamp(0.95rem,1.8vw,1.1rem); max-width:420px; animation-delay:0.3s;">
+      <p
+        style="font-family:'Parkinsans',sans-serif;font-size:clamp(14px,1.5vw,17px);color:#888;line-height:1.65;max-width:400px;margin:0 0 44px 0;">
         We help startups, brands, individuals &amp; everything in between to create beautiful and stunning designs —
         fast and free.
       </p>
 
-      <!-- CTA Button — single, dark pill, no arrow, centered -->
-      <a href="#icons" class="reveal btn-dark rounded-full font-semibold"
-        style="padding:14px 40px; font-size:1rem; animation-delay:0.42s;">
+      <!-- CTA -->
+      <a href="#icons" class="btn-dark"
+        style="display:inline-block;border-radius:999px;padding:15px 44px;font-family:'Parkinsans',sans-serif;font-size:15px;font-weight:600;text-decoration:none;">
         Find your icon
       </a>
     </div>
   </section>
+
+  <script>
+    // Size the icon card and dollar sign responsively
+    function sizeHeroImages() {
+      const fs = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      const vw = window.innerWidth;
+      const cardPx = Math.min(88, Math.max(56, vw * 0.075));
+      const dollarPx = Math.min(72, Math.max(46, vw * 0.062));
+
+      const card = document.getElementById('icon-card-1');
+      if (card) {
+        card.style.width = cardPx + 'px';
+        card.style.height = cardPx + 'px';
+        const img = card.querySelector('img');
+        if (img) { img.style.width = (cardPx * 0.56) + 'px'; img.style.height = (cardPx * 0.56) + 'px'; img.style.objectFit = 'contain'; }
+      }
+      const dollar = document.getElementById('dollar-img');
+      if (dollar) { dollar.style.width = dollarPx + 'px'; dollar.style.height = 'auto'; }
+    }
+    window.addEventListener('resize', sizeHeroImages);
+    document.addEventListener('DOMContentLoaded', sizeHeroImages);
+    sizeHeroImages();
+  </script>
 
   <!-- ===== MARQUEE STRIP ===== -->
   <section class="py-10 bg-white border-y border-black/5 overflow-hidden">
