@@ -683,6 +683,222 @@
             border-radius: 10px;
         }
 
+
+        /* ── Search Dropdown ── */
+        .search-container {
+            position: relative;
+        }
+
+        .search-dropdown {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 520px;
+            max-width: 92vw;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.10);
+            border-radius: 20px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            z-index: 999;
+            opacity: 0;
+            transform: translateX(-50%) translateY(-6px);
+            pointer-events: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .search-dropdown.open {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: all;
+        }
+
+        .dropdown-section-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.10em;
+            text-transform: uppercase;
+            color: #bbb;
+            padding: 14px 16px 8px;
+        }
+
+        .dropdown-collection-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: background 0.15s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .dropdown-collection-row:hover {
+            background: #f7f7f7;
+        }
+
+        .dropdown-collection-row:last-child {
+            border-radius: 0 0 20px 20px;
+        }
+
+        .dropdown-col-icon-strip {
+            display: flex;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+
+        .dropdown-col-icon-strip span {
+            width: 28px;
+            height: 28px;
+            background: #f3f3f3;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .dropdown-col-icon-strip span svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .dropdown-col-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .dropdown-col-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .dropdown-col-count {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 1px;
+        }
+
+        .dropdown-col-arrow {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: background 0.15s;
+        }
+
+        .dropdown-collection-row:hover .dropdown-col-arrow {
+            background: #111;
+        }
+
+        .dropdown-collection-row:hover .dropdown-col-arrow svg {
+            stroke: #fff;
+        }
+
+        .dropdown-icon-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 16px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .dropdown-icon-row:hover {
+            background: #f7f7f7;
+        }
+
+        .dropdown-icon-thumb {
+            width: 34px;
+            height: 34px;
+            background: #f3f3f3;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .dropdown-icon-thumb svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .dropdown-icon-info {
+            flex: 1;
+        }
+
+        .dropdown-icon-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #111;
+        }
+
+        .dropdown-icon-col {
+            font-size: 11px;
+            color: #aaa;
+        }
+
+        .dropdown-icon-badge {
+            font-size: 10px;
+            font-weight: 600;
+            background: #f0f0f0;
+            border-radius: 6px;
+            padding: 3px 8px;
+            color: #888;
+            flex-shrink: 0;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: rgba(0, 0, 0, 0.06);
+            margin: 4px 0;
+        }
+
+        .dropdown-empty {
+            padding: 28px 16px;
+            text-align: center;
+            color: #bbb;
+            font-size: 13px;
+        }
+
+        .dropdown-empty svg {
+            width: 32px;
+            height: 32px;
+            margin: 0 auto 10px;
+            display: block;
+        }
+
+        .dropdown-footer {
+            padding: 10px 16px;
+            background: #fafafa;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: 12px;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .dropdown-footer a {
+            color: #111;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dropdown-footer a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 640px) {
             .search-wrap {
                 max-width: 100%;
@@ -723,16 +939,19 @@
         </a>
 
         <!-- Search -->
-        <div class="search-wrap" id="db-search-wrap" onclick="document.getElementById('db-search').focus()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.2"
-                stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.35-4.35" />
-            </svg>
-            <input id="db-search" type="text" placeholder="Search icons and collections..." />
-            <div id="db-kbd" style="display:flex;gap:3px;flex-shrink:0;transition:opacity 0.2s;">
-                <kbd>⌘</kbd><kbd>K</kbd>
+        <div class="search-container" id="db-search-container">
+            <div class="search-wrap" id="db-search-wrap" onclick="document.getElementById('db-search').focus()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
+                </svg>
+                <input id="db-search" type="text" placeholder="Search icons and collections..." autocomplete="off" />
+                <div id="db-kbd" style="display:flex;gap:3px;flex-shrink:0;transition:opacity 0.2s;">
+                    <kbd>⌘</kbd><kbd>K</kbd>
+                </div>
             </div>
+            <div class="search-dropdown" id="db-search-dropdown"></div>
         </div>
 
         <!-- Back link -->
@@ -753,65 +972,42 @@
     <main
         style="max-width:1200px;margin:0 auto;padding-top:104px;padding-left:24px;padding-right:24px;padding-bottom:80px;">
 
-        <!-- ── SEARCH RESULTS (hidden by default) ── -->
-        <div id="search-results-section" style="display:none;">
-            <div class="search-results-bar">
-                <div>
-                    <span style="font-weight:700;font-size:15px;" id="search-result-count">0 results</span>
-                    <span style="color:#aaa;font-size:14px;" id="search-result-label"> for ""</span>
-                </div>
-                <button onclick="clearSearch()"
-                    style="display:flex;align-items:center;gap:6px;background:#f0f0f0;border:none;border-radius:8px;padding:6px 14px;font-family:'Parkinsans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:background 0.2s;"
-                    onmouseover="this.style.background='#e4e4e4'" onmouseout="this.style.background='#f0f0f0'">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="18" y1="6" x2="6" y2="18" />
-                        <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                    Clear
-                </button>
+
+        <!-- Featured Collections -->
+        <section style="margin-bottom:52px;">
+            <p class="section-label sr">Featured Collections</p>
+            <div id="collections-grid"
+                style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;">
+                <!-- Injected by JS -->
             </div>
-            <div class="icon-grid" id="search-results-grid"></div>
-        </div>
+        </section>
 
-        <!-- ── MAIN CONTENT (shown when not searching) ── -->
-        <div id="main-content">
-
-            <!-- Featured Collections -->
-            <section style="margin-bottom:52px;">
-                <p class="section-label sr">Featured Collections</p>
-                <div id="collections-grid"
-                    style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;">
-                    <!-- Injected by JS -->
+        <!-- All Icons -->
+        <section>
+            <div
+                style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+                <p class="section-label sr" style="margin-bottom:0;">All Icons</p>
+                <!-- Filter pills -->
+                <div id="filter-pills" style="display:flex;gap:8px;flex-wrap:wrap;" class="sr sr-d1">
+                    <button class="filter-pill active" data-filter="all"
+                        onclick="filterByCollection('all',this)">All</button>
+                    <!-- Collection filters injected by JS -->
                 </div>
-            </section>
-
-            <!-- All Icons -->
-            <section>
-                <div
-                    style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
-                    <p class="section-label sr" style="margin-bottom:0;">All Icons</p>
-                    <!-- Filter pills -->
-                    <div id="filter-pills" style="display:flex;gap:8px;flex-wrap:wrap;" class="sr sr-d1">
-                        <button class="filter-pill active" data-filter="all"
-                            onclick="filterByCollection('all',this)">All</button>
-                        <!-- Collection filters injected by JS -->
-                    </div>
-                </div>
-                <div class="icon-grid" id="all-icons-grid">
-                    <!-- Injected by JS -->
-                </div>
-                <div id="empty-state" class="empty-state" style="display:none;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.35-4.35" />
-                    </svg>
-                    <p>No icons found in this collection yet.</p>
-                    <p style="font-size:13px;margin-top:6px;color:#bbb;">Icons will appear here once added to the
-                        database.</p>
-                </div>
-            </section>
+            </div>
+            <div class="icon-grid" id="all-icons-grid">
+                <!-- Injected by JS -->
+            </div>
+            <div id="empty-state" class="empty-state" style="display:none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
+                </svg>
+                <p>No icons found in this collection yet.</p>
+                <p style="font-size:13px;margin-top:6px;color:#bbb;">Icons will appear here once added to the database.
+                </p>
+            </div>
+        </section>
         </div>
     </main>
 
@@ -1232,66 +1428,175 @@
         }
 
         /* ─────────────────────────────────────────
-           SEARCH
+           SEARCH DROPDOWN
         ───────────────────────────────────────── */
         const dbSearch = document.getElementById('db-search');
         const kbdHint = document.getElementById('db-kbd');
-        const searchSection = document.getElementById('search-results-section');
-        const mainContent = document.getElementById('main-content');
+        const dbDropdown = document.getElementById('db-search-dropdown');
 
-        dbSearch.addEventListener('focus', () => {
-            kbdHint.style.opacity = '0';
-        });
-        dbSearch.addEventListener('blur', () => {
-            kbdHint.style.opacity = '1';
-        });
-
-        dbSearch.addEventListener('input', () => {
-            const q = dbSearch.value.trim().toLowerCase();
-            if (!q) {
-                clearSearch(); return;
+        // ── Helpers ──
+        function getCollectionMap() {
+            const map = {};
+            for (const ic of allIcons) {
+                if (!map[ic.collection]) map[ic.collection] = [];
+                map[ic.collection].push(ic);
             }
+            return map;
+        }
 
-            const results = allIcons.filter(ic =>
-                ic.name.toLowerCase().includes(q) ||
-                ic.collection.toLowerCase().includes(q)
+        function openDropdown() { dbDropdown.classList.add('open'); }
+        function closeDropdown() { dbDropdown.classList.remove('open'); }
+
+        function renderDropdown(q) {
+            if (!q) { closeDropdown(); return; }
+
+            const ql = q.toLowerCase();
+            const colMap = getCollectionMap();
+
+            // ── Collections that match ──
+            const matchedCols = Object.entries(colMap).filter(([name]) =>
+                name.toLowerCase().includes(ql)
             );
 
-            searchSection.style.display = 'block';
-            mainContent.style.display = 'none';
+            // ── Icons that match (max 5, deduplicated from matched collections) ──
+            const matchedIcons = allIcons.filter(ic =>
+                ic.name.toLowerCase().includes(ql)
+            ).slice(0, 5);
 
-            document.getElementById('search-result-count').textContent = `${results.length} result${results.length !== 1 ? 's' : ''}`;
-            document.getElementById('search-result-label').textContent = ` for "${dbSearch.value.trim()}"`;
+            // ── Also grab icons from matching collections (up to 3 per col, max 4 total) ──
+            const colIcons = [];
+            for (const [colName, icons] of matchedCols) {
+                icons.slice(0, 3).forEach(ic => {
+                    if (!matchedIcons.find(m => m.name === ic.name)) colIcons.push(ic);
+                });
+                if (colIcons.length >= 4) break;
+            }
 
-            const grid = document.getElementById('search-results-grid');
-            if (!results.length) {
-                grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;margin:0 auto 14px;display:block;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <p>No icons match "<strong>${dbSearch.value.trim()}</strong>"</p>
-      <p style="font-size:13px;margin-top:6px;color:#bbb;">Try a different keyword or browse by collection.</p>
-    </div>`;
+            const hasResults = matchedCols.length > 0 || matchedIcons.length > 0;
+
+            if (!hasResults) {
+                dbDropdown.innerHTML = `
+      <div class="dropdown-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        No results for "<strong style="color:#aaa">${escHtml(q)}</strong>"
+      </div>`;
+                openDropdown();
                 return;
             }
 
-            grid.innerHTML = results.map((ic, i) => {
-                const idx = allIcons.indexOf(ic);
-                const inner = ic.type === 'builtin'
-                    ? buildInlineSVG(ic.path, 28)
-                    : `<img src="${ic.svgUrl}" width="28" height="28" loading="lazy" />`;
-                return `
-      <div class="icon-tile" onclick="openPopup(${idx})" title="${ic.name}">
-        ${inner}
-        <span class="tile-name">${ic.name}</span>
-      </div>
-    `;
-            }).join('');
+            let html = '';
+
+            // ── Collections section ──
+            if (matchedCols.length > 0) {
+                html += `<div class="dropdown-section-label">Collections</div>`;
+                html += matchedCols.slice(0, 3).map(([colName, icons]) => {
+                    const strip = icons.slice(0, 3).map(ic => `
+        <span>${ic.type === 'builtin' ? buildInlineSVG(ic.path, 14) : `<img src="${ic.svgUrl}" width="14" height="14"/>`}</span>
+      `).join('');
+                    return `
+        <div class="dropdown-collection-row" onclick="pickCollection('${escHtml(colName)}')">
+          <div class="dropdown-col-icon-strip">${strip}</div>
+          <div class="dropdown-col-info">
+            <div class="dropdown-col-name">${escHtml(colName)}</div>
+            <div class="dropdown-col-count">${icons.length} icon${icons.length !== 1 ? 's' : ''}</div>
+          </div>
+          <div class="dropdown-col-arrow">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+        </div>`;
+                }).join('');
+                if (matchedIcons.length > 0 || colIcons.length > 0) html += `<div class="dropdown-divider"></div>`;
+            }
+
+            // ── Icons section ──
+            const iconResults = [...matchedIcons, ...colIcons].slice(0, 6);
+            if (iconResults.length > 0) {
+                html += `<div class="dropdown-section-label">Icons</div>`;
+                html += iconResults.map(ic => {
+                    const idx = allIcons.indexOf(ic);
+                    const thumb = ic.type === 'builtin'
+                        ? buildInlineSVG(ic.path, 16)
+                        : `<img src="${ic.svgUrl}" width="16" height="16"/>`;
+                    return `
+        <div class="dropdown-icon-row" onclick="pickIcon(${idx})">
+          <div class="dropdown-icon-thumb">${thumb}</div>
+          <div class="dropdown-icon-info">
+            <div class="dropdown-icon-name">${escHtml(ic.name)}</div>
+            <div class="dropdown-icon-col">${escHtml(ic.collection)}</div>
+          </div>
+          <span class="dropdown-icon-badge">SVG</span>
+        </div>`;
+                }).join('');
+            }
+
+            // ── Footer ──
+            const totalCount = matchedCols.reduce((s, [, v]) => s + v.length, 0) + matchedIcons.length;
+            html += `
+    <div class="dropdown-footer">
+      <span>${totalCount} result${totalCount !== 1 ? 's' : ''} for "${escHtml(q)}"</span>
+      <a href="#" onclick="showAllResults('${escHtml(q)}');return false;">
+        See all <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>`;
+
+            dbDropdown.innerHTML = html;
+            openDropdown();
+        }
+
+        function pickCollection(colName) {
+            closeDropdown();
+            dbSearch.value = '';
+            filterByCollection(colName, null);
+            document.getElementById('all-icons-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function pickIcon(idx) {
+            closeDropdown();
+            dbSearch.value = '';
+            openPopup(idx);
+        }
+
+        function showAllResults(q) {
+            // Future: could navigate to a full results page
+            // For now just filter icons by query
+            closeDropdown();
+            dbSearch.value = '';
+            const filtered = allIcons.filter(ic =>
+                ic.name.toLowerCase().includes(q.toLowerCase()) ||
+                ic.collection.toLowerCase().includes(q.toLowerCase())
+            );
+            renderAllIcons(filtered);
+            document.getElementById('all-icons-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function escHtml(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        // ── Event listeners ──
+        dbSearch.addEventListener('focus', () => {
+            kbdHint.style.opacity = '0';
+            if (dbSearch.value.trim()) renderDropdown(dbSearch.value.trim());
         });
 
-        function clearSearch() {
-            dbSearch.value = '';
-            searchSection.style.display = 'none';
-            mainContent.style.display = 'block';
-        }
+        dbSearch.addEventListener('input', () => {
+            renderDropdown(dbSearch.value.trim());
+        });
+
+        // Close on outside click (use mousedown so it fires before blur)
+        document.addEventListener('mousedown', e => {
+            const container = document.getElementById('db-search-container');
+            if (container && !container.contains(e.target)) {
+                closeDropdown();
+                kbdHint.style.opacity = '1';
+            }
+        });
+        // Delay blur fade so dropdown clicks fire first
+        dbSearch.addEventListener('blur', () => {
+            setTimeout(() => { kbdHint.style.opacity = '1'; }, 200);
+        });
 
         // ⌘K / Ctrl+K
         document.addEventListener('keydown', e => {
@@ -1300,8 +1605,34 @@
                 dbSearch.focus(); dbSearch.select();
             }
             if (e.key === 'Escape') {
-                if (document.activeElement === dbSearch) { dbSearch.blur(); clearSearch(); }
-                else closePopupDirect();
+                if (dbDropdown.classList.contains('open')) {
+                    closeDropdown(); dbSearch.blur();
+                } else closePopupDirect();
+            }
+            // Arrow key navigation in dropdown
+            if (e.key === 'ArrowDown' && dbDropdown.classList.contains('open')) {
+                e.preventDefault();
+                const rows = dbDropdown.querySelectorAll('.dropdown-collection-row, .dropdown-icon-row');
+                const focused = dbDropdown.querySelector('.dd-focused');
+                if (focused) {
+                    focused.classList.remove('dd-focused');
+                    const next = [...rows].indexOf(focused) + 1;
+                    if (rows[next]) { rows[next].classList.add('dd-focused'); rows[next].style.background = '#f0f0f0'; }
+                } else if (rows[0]) { rows[0].classList.add('dd-focused'); rows[0].style.background = '#f0f0f0'; }
+            }
+            if (e.key === 'ArrowUp' && dbDropdown.classList.contains('open')) {
+                e.preventDefault();
+                const rows = dbDropdown.querySelectorAll('.dropdown-collection-row, .dropdown-icon-row');
+                const focused = dbDropdown.querySelector('.dd-focused');
+                if (focused) {
+                    focused.classList.remove('dd-focused');
+                    const prev = [...rows].indexOf(focused) - 1;
+                    if (rows[prev]) { rows[prev].classList.add('dd-focused'); rows[prev].style.background = '#f0f0f0'; }
+                }
+            }
+            if (e.key === 'Enter' && dbDropdown.classList.contains('open')) {
+                const focused = dbDropdown.querySelector('.dd-focused');
+                if (focused) focused.click();
             }
         });
 
