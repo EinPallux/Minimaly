@@ -439,31 +439,50 @@
       return `<svg viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:${sizePx}px;height:${sizePx}px;">${paths}</svg>`;
     }
 
-    function rotateIcon() {
+    // Two fixed SVG slots — swap innerHTML, never add DOM nodes
+    let iconSlotA = null;
+    let iconSlotB = null;
+    let activeSlot = 'a'; // which slot is currently visible
+
+    function initSlots() {
       const wrap = document.getElementById('rotating-icon-wrap');
       if (!wrap) return;
+      wrap.innerHTML = '';
 
-      // Build new icon element
-      const next = document.createElement('span');
-      next.style.cssText = 'position:absolute;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.6) rotate(-15deg);transition:opacity 0.35s ease,transform 0.35s ease;';
-      next.innerHTML = makeSVG(rotatingIcons[currentIconIdx], iconSizePx);
+      const baseStyle = 'position:absolute;display:flex;align-items:center;justify-content:center;transition:opacity 0.4s ease,transform 0.4s ease;';
+      iconSlotA = document.createElement('span');
+      iconSlotB = document.createElement('span');
+      iconSlotA.style.cssText = baseStyle + 'opacity:1;transform:scale(1) rotate(0deg);';
+      iconSlotB.style.cssText = baseStyle + 'opacity:0;transform:scale(0.7) rotate(-12deg);';
+      wrap.appendChild(iconSlotA);
+      wrap.appendChild(iconSlotB);
+    }
 
-      // Fade out current
-      const current = wrap.querySelector('span.icon-visible');
-      if (current) {
-        current.style.opacity = '0';
-        current.style.transform = 'scale(1.2) rotate(15deg)';
-        setTimeout(() => current.remove(), 380);
-      }
+    function rotateIcon() {
+      if (!iconSlotA || !iconSlotB) return;
 
-      wrap.appendChild(next);
-      // Trigger animation on next frame
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        next.style.opacity = '1';
-        next.style.transform = 'scale(1) rotate(0deg)';
-        next.classList.add('icon-visible');
-      }));
+      const incoming = activeSlot === 'a' ? iconSlotB : iconSlotA;
+      const outgoing = activeSlot === 'a' ? iconSlotA : iconSlotB;
 
+      // Pre-load next icon into the hidden slot (already invisible)
+      incoming.innerHTML = makeSVG(rotatingIcons[currentIconIdx], iconSizePx);
+      incoming.style.transition = 'none';
+      incoming.style.opacity = '0';
+      incoming.style.transform = 'scale(0.7) rotate(-12deg)';
+
+      // Force reflow so transition resets properly
+      incoming.getBoundingClientRect();
+
+      // Now animate both slots
+      incoming.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+      outgoing.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+
+      incoming.style.opacity = '1';
+      incoming.style.transform = 'scale(1) rotate(0deg)';
+      outgoing.style.opacity = '0';
+      outgoing.style.transform = 'scale(1.2) rotate(12deg)';
+
+      activeSlot = activeSlot === 'a' ? 'b' : 'a';
       currentIconIdx = (currentIconIdx + 1) % rotatingIcons.length;
     }
 
@@ -489,8 +508,10 @@
     window.addEventListener('resize', sizeHeroImages);
     document.addEventListener('DOMContentLoaded', () => {
       sizeHeroImages();
-      rotateIcon(); // show first icon immediately
-      setInterval(rotateIcon, 1200); // rotate every 1.2s
+      initSlots();
+      iconSlotA.innerHTML = makeSVG(rotatingIcons[currentIconIdx], iconSizePx);
+      currentIconIdx = 1;
+      setInterval(rotateIcon, 1400); // rotate every 1.4s
     });
     sizeHeroImages();
 
