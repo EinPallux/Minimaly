@@ -345,31 +345,35 @@
 
   <!-- ===== NAVBAR ===== -->
   <nav
-    style="position:absolute;top:0;left:0;right:0;z-index:50;padding:20px 28px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;">
+    style="position:absolute;top:0;left:0;right:0;z-index:50;padding:20px 28px;display:flex;align-items:center;justify-content:center;gap:10px;">
 
-    <!-- Left: Logo text pill -->
-    <div style="justify-self:start;">
-      <div class="nav-pill" style="display:inline-flex;align-items:center;border-radius:999px;padding:8px 20px;">
-        <span style="font-family:'Parkinsans',sans-serif;font-size:15px;letter-spacing:-0.01em;">
-          <strong style="font-weight:800;">Mini</strong><span style="font-weight:400;">maly</span>
-        </span>
-      </div>
+    <!-- Logo text pill -->
+    <div class="nav-pill"
+      style="display:inline-flex;align-items:center;border-radius:999px;padding:9px 22px;flex-shrink:0;">
+      <span style="font-family:'Parkinsans',sans-serif;font-size:15px;letter-spacing:-0.01em;white-space:nowrap;">
+        <strong style="font-weight:800;">Mini</strong><span style="font-weight:400;">maly</span>
+      </span>
     </div>
 
-    <!-- Center: Search bar -->
-    <div class="search-bar"
-      style="display:flex;align-items:center;gap:10px;border-radius:999px;padding:11px 20px;width:420px;max-width:90vw;">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.2"
+    <!-- Search bar with ⌘K shortcut -->
+    <div class="search-bar" id="search-bar"
+      style="display:flex;align-items:center;gap:10px;border-radius:999px;padding:9px 18px;width:400px;max-width:60vw;cursor:text;"
+      onclick="document.getElementById('main-search').focus()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2.2"
         stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
         <circle cx="11" cy="11" r="8" />
         <path d="m21 21-4.35-4.35" />
       </svg>
-      <input type="text" placeholder="Search for your dream icon or vector..."
-        style="flex:1;border:none;outline:none;background:transparent;font-family:'Parkinsans',sans-serif;font-size:13.5px;color:#555;" />
+      <input id="main-search" type="text" placeholder="Search for your dream icon or vector..."
+        style="flex:1;border:none;outline:none;background:transparent;font-family:'Parkinsans',sans-serif;font-size:13.5px;color:#444;" />
+      <!-- Shortcut keys -->
+      <div style="display:flex;align-items:center;gap:3px;flex-shrink:0;" id="kbd-hint">
+        <kbd
+          style="display:inline-flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.07);border:1px solid rgba(0,0,0,0.11);border-radius:5px;padding:2px 6px;font-family:'Parkinsans',sans-serif;font-size:11px;color:#aaa;line-height:1.5;">⌘</kbd>
+        <kbd
+          style="display:inline-flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.07);border:1px solid rgba(0,0,0,0.11);border-radius:5px;padding:2px 6px;font-family:'Parkinsans',sans-serif;font-size:11px;color:#aaa;line-height:1.5;">K</kbd>
+      </div>
     </div>
-
-    <!-- Right: empty for balance -->
-    <div style="justify-self:end;"></div>
   </nav>
 
   <!-- ===== HERO SECTION ===== -->
@@ -397,11 +401,17 @@
         <!-- Line 1 -->
         <span style="display:block;">
           Get a <span style="font-weight:900;">looooot</span> of
-          <!-- White card with icon -->
+          <!-- White card with sharp inline SVG icon -->
           <span
-            style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;border-radius:20px;background:#fff;box-shadow:0 6px 28px rgba(0,0,0,0.11);margin:0 6px;animation:float 4s ease-in-out infinite;"
+            style="display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;border-radius:20px;background:#fff;box-shadow:0 6px 28px rgba(0,0,0,0.11);margin:0 8px;animation:float 4s ease-in-out infinite;"
             id="icon-card-1">
-            <img src="images/frontpage_images/headline_icon.png" alt="icon" style="display:block;" />
+            <svg id="headline-svg" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="1.55"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
           </span>
         </span>
         <!-- Line 2 -->
@@ -431,19 +441,19 @@
   </section>
 
   <script>
-    // Size the icon card and dollar sign responsively
+    // ---- Size hero elements responsively ----
     function sizeHeroImages() {
-      const fs = parseFloat(getComputedStyle(document.documentElement).fontSize);
       const vw = window.innerWidth;
-      const cardPx = Math.min(88, Math.max(56, vw * 0.075));
-      const dollarPx = Math.min(72, Math.max(46, vw * 0.062));
+      const cardPx = Math.min(88, Math.max(52, vw * 0.075));
+      const dollarPx = Math.min(72, Math.max(44, vw * 0.062));
+      const svgIconPx = cardPx * 0.52;
 
       const card = document.getElementById('icon-card-1');
       if (card) {
         card.style.width = cardPx + 'px';
         card.style.height = cardPx + 'px';
-        const img = card.querySelector('img');
-        if (img) { img.style.width = (cardPx * 0.56) + 'px'; img.style.height = (cardPx * 0.56) + 'px'; img.style.objectFit = 'contain'; }
+        const svg = card.querySelector('svg');
+        if (svg) { svg.style.width = svgIconPx + 'px'; svg.style.height = svgIconPx + 'px'; }
       }
       const dollar = document.getElementById('dollar-img');
       if (dollar) { dollar.style.width = dollarPx + 'px'; dollar.style.height = 'auto'; }
@@ -451,6 +461,59 @@
     window.addEventListener('resize', sizeHeroImages);
     document.addEventListener('DOMContentLoaded', sizeHeroImages);
     sizeHeroImages();
+
+    // ---- ⌘K / Ctrl+K keyboard shortcut for search ----
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const input = document.getElementById('main-search');
+        if (input) {
+          input.focus();
+          input.select();
+        }
+      }
+      // ESC to blur search
+      if (e.key === 'Escape') {
+        const input = document.getElementById('main-search');
+        if (document.activeElement === input) input.blur();
+      }
+    });
+
+    // ---- Hide ⌘K badge when input is focused, show when blurred ----
+    const searchInput = document.getElementById('main-search');
+    const kbdHint = document.getElementById('kbd-hint');
+    if (searchInput && kbdHint) {
+      searchInput.addEventListener('focus', () => {
+        kbdHint.style.opacity = '0';
+        kbdHint.style.transform = 'scale(0.85)';
+        kbdHint.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+      });
+      searchInput.addEventListener('blur', () => {
+        kbdHint.style.opacity = '1';
+        kbdHint.style.transform = 'scale(1)';
+      });
+    }
+
+    // ---- Live icon search from navbar ----
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase().trim();
+        if (!q) { renderIcons(activeFilter); return; }
+        const filtered = icons.filter(i => i.name.toLowerCase().includes(q));
+        const grid = document.getElementById('icon-grid');
+        if (!grid) return;
+        grid.innerHTML = filtered.map(icon => `
+        <div class="icon-card p-3 flex flex-col items-center gap-2 group" title="${icon.name}" onclick="copyIcon('${encodeURIComponent(svgWrap(icon.svg))}', '${icon.name}', this)">
+          <div class="w-10 h-10 flex items-center justify-center text-gray-700 group-hover:text-black transition-colors">${svgWrap(icon.svg)}</div>
+          <span class="text-[10px] text-gray-400 font-medium text-center leading-tight hidden sm:block">${icon.name}</span>
+          <div class="download-overlay font-medium">Copy SVG</div>
+        </div>
+      `).join('');
+        // Scroll to icons section
+        const section = document.getElementById('icons');
+        if (section && q.length === 1) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
   </script>
 
   <!-- ===== MARQUEE STRIP ===== -->
