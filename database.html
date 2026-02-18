@@ -19,9 +19,7 @@
             padding: 0;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Parkinsans', sans-serif;
@@ -74,9 +72,7 @@
             color: #444;
         }
 
-        .search-wrap input::placeholder {
-            color: #b5b5b5;
-        }
+        .search-wrap input::placeholder { color: #b5b5b5; }
 
         kbd {
             display: inline-flex;
@@ -170,14 +166,8 @@
             transition: background 0.2s, transform 0.2s;
         }
 
-        .collection-card:hover .coll-arrow {
-            background: #111;
-            transform: translateX(2px);
-        }
-
-        .collection-card:hover .coll-arrow svg {
-            stroke: white;
-        }
+        .collection-card:hover .coll-arrow { background: #111; transform: translateX(2px); }
+        .collection-card:hover .coll-arrow svg { stroke: white; }
 
         /* ── Icon grid ── */
         .icon-grid {
@@ -216,9 +206,7 @@
             transition: transform 0.2s;
         }
 
-        .icon-tile:hover .tile-img-wrap {
-            transform: scale(1.12);
-        }
+        .icon-tile:hover .tile-img-wrap { transform: scale(1.12); }
 
         .icon-tile .tile-img-wrap img {
             width: 28px;
@@ -253,48 +241,18 @@
             white-space: nowrap;
         }
 
-        .filter-pill:hover {
-            border-color: #111;
-        }
-
-        .filter-pill.active {
-            background: #111;
-            color: #fff;
-            border-color: #111;
-        }
+        .filter-pill:hover { border-color: #111; }
+        .filter-pill.active { background: #111; color: #fff; border-color: #111; }
 
         /* ── Empty state ── */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #ccc;
-        }
-
-        .empty-state svg {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 16px;
-            display: block;
-        }
-
-        .empty-state p {
-            font-size: 15px;
-            color: #aaa;
-        }
+        .empty-state { text-align: center; padding: 60px 20px; color: #ccc; }
+        .empty-state svg { width: 48px; height: 48px; margin: 0 auto 16px; display: block; }
+        .empty-state p { font-size: 15px; color: #aaa; }
 
         /* ── Loading state ── */
-        .loading-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #bbb;
-            font-size: 14px;
-        }
+        .loading-state { text-align: center; padding: 60px 20px; color: #bbb; font-size: 14px; }
 
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         .loading-spinner {
             width: 32px;
@@ -305,6 +263,23 @@
             animation: spin 0.8s linear infinite;
             margin: 0 auto 16px;
         }
+
+        /* ── Rate-limit banner ── */
+        .rate-limit-banner {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-radius: 14px;
+            padding: 16px 20px;
+            font-size: 13px;
+            color: #7a5800;
+            line-height: 1.6;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            grid-column: 1 / -1;
+        }
+
+        .rate-limit-banner svg { flex-shrink: 0; margin-top: 1px; }
 
         /* ══════════════════════════════
            POPUP / MODAL
@@ -324,10 +299,7 @@
             transition: opacity 0.3s ease;
         }
 
-        .popup-overlay.open {
-            opacity: 1;
-            pointer-events: all;
-        }
+        .popup-overlay.open { opacity: 1; pointer-events: all; }
 
         .popup {
             background: #fff;
@@ -343,9 +315,7 @@
             transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .popup-overlay.open .popup {
-            transform: scale(1) translateY(0);
-        }
+        .popup-overlay.open .popup { transform: scale(1) translateY(0); }
 
         .popup-header {
             padding: 24px 28px 20px;
@@ -369,16 +339,9 @@
             transition: background 0.2s, transform 0.2s;
         }
 
-        .popup-close:hover {
-            background: #e0e0e0;
-            transform: scale(1.08);
-        }
+        .popup-close:hover { background: #e0e0e0; transform: scale(1.08); }
 
-        .popup-body {
-            display: flex;
-            flex: 1;
-            overflow: hidden;
-        }
+        .popup-body { display: flex; flex: 1; overflow: hidden; }
 
         .popup-preview {
             flex: 1;
@@ -403,18 +366,9 @@
         }
 
         .preview-canvas img,
-        .preview-canvas svg {
-            display: block;
-            transition: all 0.2s ease;
-        }
+        .preview-canvas svg { display: block; transition: all 0.2s ease; }
 
-        .preview-name {
-            margin-top: 16px;
-            font-size: 13px;
-            color: #aaa;
-            font-weight: 500;
-            letter-spacing: 0.01em;
-        }
+        .preview-name { margin-top: 16px; font-size: 13px; color: #aaa; font-weight: 500; letter-spacing: 0.01em; }
 
         .popup-controls {
             width: 260px;
@@ -460,9 +414,7 @@
             transition: transform 0.15s;
         }
 
-        .ctrl-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.15);
-        }
+        .ctrl-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
 
         .slider-row {
             display: flex;
@@ -471,21 +423,10 @@
             margin-bottom: 8px;
         }
 
-        .slider-val {
-            font-size: 13px;
-            font-weight: 700;
-            color: #111;
-            min-width: 36px;
-            text-align: right;
-        }
+        .slider-val { font-size: 13px; font-weight: 700; color: #111; min-width: 36px; text-align: right; }
 
         /* Color swatches */
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-            margin-bottom: 10px;
-        }
+        .color-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 10px; }
 
         .color-swatch {
             width: 100%;
@@ -496,29 +437,15 @@
             transition: transform 0.15s, border-color 0.15s;
         }
 
-        .color-swatch:hover {
-            transform: scale(1.12);
-        }
+        .color-swatch:hover { transform: scale(1.12); }
+        .color-swatch.selected { border-color: #111; box-shadow: 0 0 0 2px #fff inset; }
 
-        .color-swatch.selected {
-            border-color: #111;
-            box-shadow: 0 0 0 2px #fff inset;
-        }
-
-        .color-input-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .color-input-row { display: flex; align-items: center; gap: 8px; }
 
         .color-input-row input[type="color"] {
-            width: 36px;
-            height: 36px;
-            border: none;
-            border-radius: 8px;
-            padding: 2px;
-            cursor: pointer;
-            background: transparent;
+            width: 36px; height: 36px;
+            border: none; border-radius: 8px; padding: 2px;
+            cursor: pointer; background: transparent;
         }
 
         .color-input-row input[type="text"] {
@@ -532,33 +459,20 @@
             transition: border-color 0.2s;
         }
 
-        .color-input-row input[type="text"]:focus {
-            border-color: #111;
-        }
+        .color-input-row input[type="text"]:focus { border-color: #111; }
 
-        .bg-swatches {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
+        .bg-swatches { display: flex; gap: 6px; flex-wrap: wrap; }
 
         .bg-swatch {
-            width: 28px;
-            height: 28px;
+            width: 28px; height: 28px;
             border-radius: 7px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: transform 0.15s, border-color 0.15s;
         }
 
-        .bg-swatch:hover {
-            transform: scale(1.12);
-        }
-
-        .bg-swatch.selected {
-            border-color: #111;
-        }
-
+        .bg-swatch:hover { transform: scale(1.12); }
+        .bg-swatch.selected { border-color: #111; }
         .bg-swatch.transparent-swatch {
             background: repeating-conic-gradient(#ccc 0% 25%, #fff 0% 50%) 0 0 / 10px 10px;
         }
@@ -589,10 +503,7 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); }
 
         .btn-secondary {
             background: #f0f0f0;
@@ -610,9 +521,7 @@
             transition: background 0.2s;
         }
 
-        .btn-secondary:hover {
-            background: #e4e4e4;
-        }
+        .btn-secondary:hover { background: #e4e4e4; }
 
         /* Toast */
         .toast {
@@ -637,51 +546,20 @@
             white-space: nowrap;
         }
 
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
         /* Scroll reveal */
-        .sr {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .sr.in {
-            opacity: 1;
-            transform: none;
-        }
-
-        .sr-d1 {
-            transition-delay: 0.05s;
-        }
-
-        .sr-d2 {
-            transition-delay: 0.12s;
-        }
-
-        .sr-d3 {
-            transition-delay: 0.19s;
-        }
-
-        .sr-d4 {
-            transition-delay: 0.26s;
-        }
-
-        .sr-d5 {
-            transition-delay: 0.33s;
-        }
-
-        .sr-d6 {
-            transition-delay: 0.40s;
-        }
+        .sr { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .sr.in { opacity: 1; transform: none; }
+        .sr-d1 { transition-delay: 0.05s; }
+        .sr-d2 { transition-delay: 0.12s; }
+        .sr-d3 { transition-delay: 0.19s; }
+        .sr-d4 { transition-delay: 0.26s; }
+        .sr-d5 { transition-delay: 0.33s; }
+        .sr-d6 { transition-delay: 0.40s; }
 
         /* ── Search Dropdown ── */
-        .search-container {
-            position: relative;
-        }
+        .search-container { position: relative; }
 
         .search-dropdown {
             position: absolute;
@@ -718,221 +596,93 @@
         }
 
         .dropdown-collection-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 16px;
-            cursor: pointer;
-            transition: background 0.15s;
-            text-decoration: none;
-            color: inherit;
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 16px; cursor: pointer; transition: background 0.15s;
+            text-decoration: none; color: inherit;
         }
 
-        .dropdown-collection-row:hover {
-            background: #f7f7f7;
-        }
+        .dropdown-collection-row:hover { background: #f7f7f7; }
 
-        .dropdown-col-icon-strip {
-            display: flex;
-            gap: 4px;
-            flex-shrink: 0;
-        }
+        .dropdown-col-icon-strip { display: flex; gap: 4px; flex-shrink: 0; }
 
         .dropdown-col-icon-strip span {
-            width: 28px;
-            height: 28px;
-            background: #f3f3f3;
-            border-radius: 7px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            width: 28px; height: 28px;
+            background: #f3f3f3; border-radius: 7px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
         }
 
-        .dropdown-col-icon-strip span img {
-            width: 14px;
-            height: 14px;
-            object-fit: contain;
-        }
+        .dropdown-col-icon-strip span img { width: 14px; height: 14px; object-fit: contain; }
 
-        .dropdown-col-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .dropdown-col-name {
-            font-size: 13px;
-            font-weight: 700;
-            color: #111;
-        }
-
-        .dropdown-col-count {
-            font-size: 11px;
-            color: #aaa;
-            margin-top: 1px;
-        }
+        .dropdown-col-info { flex: 1; min-width: 0; }
+        .dropdown-col-name { font-size: 13px; font-weight: 700; color: #111; }
+        .dropdown-col-count { font-size: 11px; color: #aaa; margin-top: 1px; }
 
         .dropdown-col-arrow {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
+            width: 22px; height: 22px; border-radius: 50%;
             background: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
             transition: background 0.15s;
         }
 
-        .dropdown-collection-row:hover .dropdown-col-arrow {
-            background: #111;
-        }
-
-        .dropdown-collection-row:hover .dropdown-col-arrow svg {
-            stroke: #fff;
-        }
+        .dropdown-collection-row:hover .dropdown-col-arrow { background: #111; }
+        .dropdown-collection-row:hover .dropdown-col-arrow svg { stroke: #fff; }
 
         .dropdown-icon-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 9px 16px;
-            cursor: pointer;
-            transition: background 0.15s;
+            display: flex; align-items: center; gap: 10px;
+            padding: 9px 16px; cursor: pointer; transition: background 0.15s;
         }
 
-        .dropdown-icon-row:hover {
-            background: #f7f7f7;
-        }
+        .dropdown-icon-row:hover { background: #f7f7f7; }
 
         .dropdown-icon-thumb {
-            width: 34px;
-            height: 34px;
-            background: #f3f3f3;
-            border-radius: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            width: 34px; height: 34px;
+            background: #f3f3f3; border-radius: 9px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
         }
 
-        .dropdown-icon-thumb img {
-            width: 16px;
-            height: 16px;
-            object-fit: contain;
-        }
+        .dropdown-icon-thumb img { width: 16px; height: 16px; object-fit: contain; }
 
-        .dropdown-icon-info {
-            flex: 1;
-        }
-
-        .dropdown-icon-name {
-            font-size: 13px;
-            font-weight: 600;
-            color: #111;
-        }
-
-        .dropdown-icon-col {
-            font-size: 11px;
-            color: #aaa;
-        }
+        .dropdown-icon-info { flex: 1; }
+        .dropdown-icon-name { font-size: 13px; font-weight: 600; color: #111; }
+        .dropdown-icon-col { font-size: 11px; color: #aaa; }
 
         .dropdown-icon-badge {
-            font-size: 10px;
-            font-weight: 600;
-            background: #f0f0f0;
-            border-radius: 6px;
-            padding: 3px 8px;
-            color: #888;
-            flex-shrink: 0;
+            font-size: 10px; font-weight: 600;
+            background: #f0f0f0; border-radius: 6px;
+            padding: 3px 8px; color: #888; flex-shrink: 0;
         }
 
-        .dropdown-divider {
-            height: 1px;
-            background: rgba(0, 0, 0, 0.06);
-            margin: 4px 0;
-        }
+        .dropdown-divider { height: 1px; background: rgba(0,0,0,0.06); margin: 4px 0; }
 
-        .dropdown-empty {
-            padding: 28px 16px;
-            text-align: center;
-            color: #bbb;
-            font-size: 13px;
-        }
-
-        .dropdown-empty svg {
-            width: 32px;
-            height: 32px;
-            margin: 0 auto 10px;
-            display: block;
-        }
+        .dropdown-empty { padding: 28px 16px; text-align: center; color: #bbb; font-size: 13px; }
+        .dropdown-empty svg { width: 32px; height: 32px; margin: 0 auto 10px; display: block; }
 
         .dropdown-footer {
-            padding: 10px 16px;
-            background: #fafafa;
-            border-top: 1px solid rgba(0, 0, 0, 0.06);
-            font-size: 12px;
-            color: #aaa;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 10px 16px; background: #fafafa;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            font-size: 12px; color: #aaa;
+            display: flex; align-items: center; justify-content: space-between;
         }
 
         .dropdown-footer a {
-            color: #111;
-            font-weight: 600;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            color: #111; font-weight: 600; text-decoration: none;
+            display: flex; align-items: center; gap: 4px;
         }
 
-        .dropdown-footer a:hover {
-            text-decoration: underline;
-        }
+        .dropdown-footer a:hover { text-decoration: underline; }
 
         /* ── Site Footer ── */
-        .site-footer {
-            background: transparent;
-            border-top: 1px solid rgba(0, 0, 0, 0.08);
-            padding: 48px 24px;
-        }
-
-        .footer-link-db {
-            color: #999;
-            transition: color 0.2s;
-            text-decoration: none;
-        }
-
-        .footer-link-db:hover {
-            color: #111;
-        }
+        .site-footer { background: transparent; border-top: 1px solid rgba(0,0,0,0.08); padding: 48px 24px; }
+        .footer-link-db { color: #999; transition: color 0.2s; text-decoration: none; }
+        .footer-link-db:hover { color: #111; }
 
         @media (max-width: 640px) {
-            .search-wrap {
-                max-width: 100%;
-                width: 100%;
-            }
-
-            .popup-body {
-                flex-direction: column;
-            }
-
-            .popup-controls {
-                width: 100%;
-                border-right: none;
-                border-top: 1px solid rgba(0, 0, 0, 0.06);
-            }
-
-            .icon-grid {
-                grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
-            }
-
-            .site-footer-inner {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }        }
+            .search-wrap { max-width: 100%; width: 100%; }
+            .popup-body { flex-direction: column; }
+            .popup-controls { width: 100%; border-right: none; border-top: 1px solid rgba(0,0,0,0.06); }
+            .icon-grid { grid-template-columns: repeat(auto-fill, minmax(72px, 1fr)); }
+            .site-footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+        }
     </style>
 </head>
 
@@ -1080,8 +830,7 @@
             <div class="popup-header">
                 <div>
                     <div style="font-size:18px;font-weight:800;color:#111;" id="popup-icon-name">Icon Name</div>
-                    <div style="font-size:12px;color:#aaa;margin-top:2px;font-weight:500;" id="popup-icon-collection">
-                        Collection</div>
+                    <div style="font-size:12px;color:#aaa;margin-top:2px;font-weight:500;" id="popup-icon-collection">Collection</div>
                 </div>
                 <button class="popup-close" onclick="closePopupDirect()">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5"
@@ -1100,12 +849,8 @@
                     </div>
                     <div class="preview-name" id="popup-preview-label">preview</div>
                     <div style="margin-top:12px;display:flex;gap:8px;">
-                        <span id="size-badge"
-                            style="background:#f0f0f0;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#888;">24
-                            × 24</span>
-                        <span id="padding-badge"
-                            style="background:#f0f0f0;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#888;">Padding
-                            16</span>
+                        <span id="size-badge" style="background:#f0f0f0;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#888;">24 × 24</span>
+                        <span id="padding-badge" style="background:#f0f0f0;border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#888;">Padding 16</span>
                     </div>
                 </div>
 
@@ -1209,30 +954,16 @@
         'use strict';
 
         /* ─────────────────────────────────────────
-           AUTO-DISCOVERY CONFIGURATION
-           ─────────────────────────────────────────
-           The site automatically discovers all collections and icons from
-           the images/icon_database/ folder using one of three methods:
-
-           METHOD 1 (Recommended for GitHub Pages):
-             Add a file at: icon-manifest.json
-             Generate it by running: node generate-manifest.js
-             (A generate-manifest.js script is included in the repo)
-
-           METHOD 2 (GitHub API — works automatically if hosted on GitHub):
-             Set GITHUB_REPO below to your "username/reponame"
-             The page will query the GitHub API to discover files dynamically.
-             No manual steps needed when you add new icons!
-
-           METHOD 3 (Fallback):
-             If neither manifest nor GitHub API is available, the page shows
-             an empty state with instructions.
-
-           IMPORTANT: Set your GitHub repo path below for auto-discovery:
+           CONFIGURATION
         ───────────────────────────────────────── */
-        const GITHUB_REPO = 'EinPallux/Minimaly'; // ← your GitHub username/reponame
-        const GITHUB_BRANCH = 'main';              // ← your default branch (main or master)
-        const ICON_DB_PATH = 'images/icon_database';
+        const GITHUB_REPO   = 'EinPallux/Minimaly';
+        const GITHUB_BRANCH = 'main';
+        const ICON_DB_PATH  = 'images/icon_database';
+
+        // sessionStorage cache — shared with index.html so navigating between pages
+        // doesn't re-burn API quota. Expires after 1 hour.
+        const CACHE_KEY = 'minimaly_icons_v1';
+        const CACHE_TTL = 60 * 60 * 1000;
 
         /* ─────────────────────────────────────────
            STATE
@@ -1240,110 +971,151 @@
         let allIcons = [];
         let activeFilter = 'all';
         let currentIconData = {};
-        let currentSvgContent = ''; // raw SVG text for the open popup
+        let currentSvgContent = '';
 
         /* ─────────────────────────────────────────
-           DISPLAY NAME HELPER
+           HELPERS
         ───────────────────────────────────────── */
         function toDisplayName(slug) {
-            return slug
-                .replace(/[-_]/g, ' ')
-                .replace(/\b\w/g, c => c.toUpperCase());
+            return slug.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+        }
+
+        function escHtml(str) {
+            return String(str)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        /* ─────────────────────────────────────────
+           SESSION CACHE
+        ───────────────────────────────────────── */
+        function readCache() {
+            try {
+                const raw = sessionStorage.getItem(CACHE_KEY);
+                if (!raw) return null;
+                const { ts, data } = JSON.parse(raw);
+                if (Date.now() - ts > CACHE_TTL) { sessionStorage.removeItem(CACHE_KEY); return null; }
+                return data;
+            } catch (e) { return null; }
+        }
+
+        function writeCache(data) {
+            try {
+                sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data }));
+            } catch (e) { /* silently skip if storage unavailable */ }
         }
 
         /* ─────────────────────────────────────────
            BOOTSTRAP: Auto-discover icons
         ───────────────────────────────────────── */
         async function bootstrap() {
-            // Try manifest file first (fastest, works everywhere)
+            // 1. Check session cache first (avoids re-burning API quota on page visits/refreshes)
+            const cached = readCache();
+            if (cached && cached.length > 0) {
+                allIcons = cached;
+                finishLoad();
+                return;
+            }
+
+            // 2. Fetch live from GitHub API
             try {
-                const res = await fetch('icon-manifest.json');
-                if (res.ok) {
-                    const manifest = await res.json();
-                    allIcons = manifestToIcons(manifest);
+                allIcons = await discoverViaGitHubAPI();
+                if (allIcons.length > 0) {
+                    writeCache(allIcons);
                     finishLoad();
                     return;
                 }
-            } catch (e) { /* manifest not found, try next method */ }
-
-            // Try GitHub API (works automatically on GitHub Pages)
-            if (GITHUB_REPO && GITHUB_REPO !== 'YOUR_USERNAME/YOUR_REPO') {
-                try {
-                    allIcons = await discoverViaGitHubAPI();
-                    if (allIcons.length > 0) {
-                        finishLoad();
-                        return;
-                    }
-                } catch (e) {
-                    console.warn('GitHub API discovery failed:', e);
-                }
+            } catch (e) {
+                console.warn('GitHub API discovery failed:', e.message);
+                showRateLimitError();
+                return;
             }
 
-            // Nothing found
+            // 3. Nothing found at all
             document.getElementById('collections-grid').innerHTML = `
                 <div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:#aaa;font-size:14px;line-height:1.7;">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto 12px;">
                         <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
                     </svg>
                     <strong style="color:#888;">No icons found.</strong><br/>
-                    Add SVG files to <code>images/icon_database/&lt;collection&gt;/</code> and either:<br/>
-                    1. Run <code>node generate-manifest.js</code> to create a manifest, or<br/>
-                    2. Set your GitHub repo in the <code>GITHUB_REPO</code> variable.
+                    Add SVG files to <code>images/icon_database/&lt;collection&gt;/</code> and set your GitHub repo in the <code>GITHUB_REPO</code> variable.
                 </div>`;
             document.getElementById('all-icons-grid').innerHTML = '';
         }
 
-        function manifestToIcons(manifest) {
-            const icons = [];
-            for (const [colKey, data] of Object.entries(manifest)) {
-                const label = data.label || toDisplayName(colKey);
-                for (const iconSlug of data.icons) {
-                    icons.push({
-                        name: toDisplayName(iconSlug),
-                        slug: iconSlug,
-                        collection: label,
-                        collectionKey: colKey,
-                        svgUrl: `${ICON_DB_PATH}/${colKey}/${iconSlug}.svg`,
-                        svgContent: null,
-                    });
-                }
-            }
-            return icons;
-        }
-
         async function discoverViaGitHubAPI() {
+            const headers = { 'Accept': 'application/vnd.github.v3+json' };
             const base = `https://api.github.com/repos/${GITHUB_REPO}/contents/${ICON_DB_PATH}?ref=${GITHUB_BRANCH}`;
-            const colRes = await fetch(base, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
-            if (!colRes.ok) throw new Error('GitHub API error: ' + colRes.status);
-            const collections = await colRes.json();
 
+            const colRes = await fetch(base, { headers });
+
+            // Specifically detect rate limiting
+            if (colRes.status === 403 || colRes.status === 429) {
+                const resetHeader = colRes.headers.get('X-RateLimit-Reset');
+                const resetTime = resetHeader
+                    ? new Date(parseInt(resetHeader, 10) * 1000).toLocaleTimeString()
+                    : null;
+                throw new Error(`rate_limited:${resetTime || 'soon'}`);
+            }
+
+            if (!colRes.ok) throw new Error('GitHub API: ' + colRes.status);
+
+            const collections = await colRes.json();
             const icons = [];
             const folders = collections.filter(item => item.type === 'dir');
 
             await Promise.all(folders.map(async folder => {
                 const colKey = folder.name;
-                const label = toDisplayName(colKey);
+                const label  = toDisplayName(colKey);
                 try {
-                    const iconsRes = await fetch(folder.url, { headers: { 'Accept': 'application/vnd.github.v3+json' } });
-                    const files = await iconsRes.json();
-                    const svgFiles = files.filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.svg'));
-                    for (const file of svgFiles) {
-                        const iconSlug = file.name.replace(/\.svg$/i, '');
-                        icons.push({
-                            name: toDisplayName(iconSlug),
-                            slug: iconSlug,
-                            collection: label,
-                            collectionKey: colKey,
-                            svgUrl: `${ICON_DB_PATH}/${colKey}/${file.name}`,
-                            svgContent: null,
-                        });
+                    const iconsRes = await fetch(folder.url, { headers });
+
+                    // If a single collection hits rate limit, skip it gracefully
+                    if (iconsRes.status === 403 || iconsRes.status === 429) {
+                        console.warn(`Rate limited on collection: ${colKey} — skipping`);
+                        return;
                     }
+                    if (!iconsRes.ok) return;
+
+                    const files = await iconsRes.json();
+                    files
+                        .filter(f => f.type === 'file' && f.name.toLowerCase().endsWith('.svg'))
+                        .forEach(file => {
+                            const iconSlug = file.name.replace(/\.svg$/i, '');
+                            icons.push({
+                                name: toDisplayName(iconSlug),
+                                slug: iconSlug,
+                                collection: label,
+                                collectionKey: colKey,
+                                svgUrl: `${ICON_DB_PATH}/${colKey}/${file.name}`,
+                                svgContent: null,
+                            });
+                        });
                 } catch (e) {
                     console.warn('Could not load collection:', colKey, e);
                 }
             }));
 
             return icons;
+        }
+
+        function showRateLimitError() {
+            const banner = `
+                <div class="rate-limit-banner" style="grid-column:1/-1;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                        <line x1="12" y1="9" x2="12" y2="13"/>
+                        <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <div>
+                        <strong>GitHub API rate limit reached.</strong>
+                        GitHub's free API allows 60 requests/hour per IP. This resets automatically —
+                        <strong>try refreshing in a few minutes.</strong>
+                    </div>
+                </div>`;
+            document.getElementById('collections-grid').innerHTML = banner;
+            document.getElementById('all-icons-grid').innerHTML = '';
         }
 
         function finishLoad() {
@@ -1411,7 +1183,7 @@
             }
             empty.style.display = 'none';
 
-            grid.innerHTML = icons.map((ic, i) => `
+            grid.innerHTML = icons.map((ic) => `
                 <div class="icon-tile" onclick="openPopup(${allIcons.indexOf(ic)})" title="${escHtml(ic.name)}">
                     <div class="tile-img-wrap">
                         <img src="${ic.svgUrl}" alt="${escHtml(ic.name)}" loading="lazy" />
@@ -1427,7 +1199,6 @@
         function renderFilterPills() {
             const colMap = getCollectionMap();
             const container = document.getElementById('filter-pills');
-            // Clear all except "All"
             [...container.querySelectorAll('[data-filter]:not([data-filter="all"])')].forEach(el => el.remove());
 
             Object.keys(colMap).forEach(col => {
@@ -1458,11 +1229,11 @@
         /* ─────────────────────────────────────────
            SEARCH DROPDOWN
         ───────────────────────────────────────── */
-        const dbSearch = document.getElementById('db-search');
-        const kbdHint = document.getElementById('db-kbd');
+        const dbSearch   = document.getElementById('db-search');
+        const kbdHint    = document.getElementById('db-kbd');
         const dbDropdown = document.getElementById('db-search-dropdown');
 
-        function openDropdown() { dbDropdown.classList.add('open'); }
+        function openDropdown()  { dbDropdown.classList.add('open'); }
         function closeDropdown() { dbDropdown.classList.remove('open'); }
 
         function renderDropdown(q) {
@@ -1470,7 +1241,7 @@
             const ql = q.toLowerCase();
             const colMap = getCollectionMap();
 
-            const matchedCols = Object.entries(colMap).filter(([name]) => name.toLowerCase().includes(ql));
+            const matchedCols  = Object.entries(colMap).filter(([name]) => name.toLowerCase().includes(ql));
             const matchedIcons = allIcons.filter(ic => ic.name.toLowerCase().includes(ql)).slice(0, 5);
 
             const colIcons = [];
@@ -1571,12 +1342,6 @@
             document.getElementById('all-icons-grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        function escHtml(str) {
-            return String(str)
-                .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-        }
-
         dbSearch.addEventListener('focus', () => {
             kbdHint.style.opacity = '0';
             if (dbSearch.value.trim()) renderDropdown(dbSearch.value.trim());
@@ -1617,7 +1382,6 @@
         async function openPopup(iconIndex) {
             currentIconData = { ...allIcons[iconIndex], index: iconIndex };
 
-            // Load SVG content if not already cached
             if (!currentIconData.svgContent) {
                 try {
                     const res = await fetch(currentIconData.svgUrl);
@@ -1629,12 +1393,11 @@
             }
             currentSvgContent = currentIconData.svgContent;
 
-            // Reset controls
-            document.getElementById('size-slider').value = 64;
+            document.getElementById('size-slider').value    = 64;
             document.getElementById('padding-slider').value = 16;
-            document.getElementById('radius-slider').value = 12;
+            document.getElementById('radius-slider').value  = 12;
             document.getElementById('bg-color-picker').value = '#ffffff';
-            document.getElementById('bg-color-hex').value = '#ffffff';
+            document.getElementById('bg-color-hex').value   = '#ffffff';
 
             renderBgSwatches();
 
@@ -1656,7 +1419,6 @@
                 return `<div class="bg-swatch" style="background:${c};${(c === '#FFFFFF' || c === '#F3F4F6') ? 'border:1.5px solid #e5e5e5;' : ''}${c === '#FFFFFF' ? ' border-color:#111;' : ''}"
                     onclick="setBgColor('${c}', this)" title="${c}"></div>`;
             }).join('');
-            // Default select white
             const whiteSwatch = container.querySelectorAll('.bg-swatch')[1];
             if (whiteSwatch) whiteSwatch.classList.add('selected');
         }
@@ -1689,9 +1451,9 @@
 
         function getSettings() {
             return {
-                size: parseInt(document.getElementById('size-slider').value),
+                size:    parseInt(document.getElementById('size-slider').value),
                 padding: parseInt(document.getElementById('padding-slider').value),
-                radius: parseInt(document.getElementById('radius-slider').value),
+                radius:  parseInt(document.getElementById('radius-slider').value),
                 bgColor: document.getElementById('bg-color-hex').value,
             };
         }
@@ -1699,23 +1461,22 @@
         function updatePreview() {
             const s = getSettings();
 
-            document.getElementById('size-val').textContent = s.size + 'px';
+            document.getElementById('size-val').textContent    = s.size + 'px';
             document.getElementById('padding-val').textContent = s.padding + 'px';
-            document.getElementById('radius-val').textContent = s.radius + 'px';
-            document.getElementById('size-badge').textContent = `${s.size} × ${s.size}`;
+            document.getElementById('radius-val').textContent  = s.radius + 'px';
+            document.getElementById('size-badge').textContent  = `${s.size} × ${s.size}`;
             document.getElementById('padding-badge').textContent = `Padding ${s.padding}`;
 
             const canvas = document.getElementById('preview-canvas');
-            const wrap = document.getElementById('popup-svg-wrap');
+            const wrap   = document.getElementById('popup-svg-wrap');
 
             const bgActual = s.bgColor === 'transparent' ? 'transparent' : s.bgColor;
-            canvas.style.background = bgActual;
+            canvas.style.background   = bgActual;
             canvas.style.borderRadius = s.radius + 'px';
-            canvas.style.padding = s.padding + 'px';
-            canvas.style.width = 'auto';
+            canvas.style.padding      = s.padding + 'px';
+            canvas.style.width  = 'auto';
             canvas.style.height = 'auto';
 
-            // Display the actual SVG at the chosen size
             wrap.innerHTML = `<img src="${currentIconData.svgUrl}" width="${s.size}" height="${s.size}" style="display:block;" />`;
         }
 
@@ -1724,14 +1485,10 @@
             const totalSize = s.size + s.padding * 2;
             const bgFill = s.bgColor === 'transparent' ? 'none' : s.bgColor;
 
-            // Embed the SVG as a nested <image> using base64, or wrap the raw SVG content
-            // We strip the outer <svg> tag from the source and re-wrap
             let innerContent = currentSvgContent || '';
-            // Extract just the inner elements from the source SVG
             const innerMatch = innerContent.match(/<svg[^>]*>([\s\S]*?)<\/svg>/i);
-            const innerSvg = innerMatch ? innerMatch[1] : innerContent;
+            const innerSvg   = innerMatch ? innerMatch[1] : innerContent;
 
-            // Get original viewBox from source
             const vbMatch = innerContent.match(/viewBox=["']([^"']+)["']/i);
             const origViewBox = vbMatch ? vbMatch[1] : '0 0 24 24';
 
@@ -1744,10 +1501,10 @@
         }
 
         function downloadSVG() {
-            const svg = buildSVGOutput();
+            const svg  = buildSVGOutput();
             const blob = new Blob([svg], { type: 'image/svg+xml' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
+            const url  = URL.createObjectURL(blob);
+            const a    = document.createElement('a');
             a.href = url;
             a.download = (currentIconData.name || 'icon').toLowerCase().replace(/ /g, '-') + '.svg';
             a.click();
@@ -1765,7 +1522,7 @@
             const totalSize = s.size + s.padding * 2;
             const scale = Math.max(2, 192 / totalSize);
             const canvasEl = document.createElement('canvas');
-            canvasEl.width = totalSize * scale;
+            canvasEl.width  = totalSize * scale;
             canvasEl.height = totalSize * scale;
             const ctx = canvasEl.getContext('2d');
             ctx.scale(scale, scale);
