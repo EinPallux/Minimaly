@@ -136,6 +136,7 @@
       border-radius: 100px;
       transition: all 0.25s ease;
       cursor: pointer;
+      font-family: 'Parkinsans', sans-serif;
     }
 
     .cat-pill:hover,
@@ -436,7 +437,7 @@
 
   <!-- ===== HERO SECTION ===== -->
   <section
-    style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#efefef;overflow:hidden;">
+    style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#efefef;overflow:hidden;padding:120px 0 72px;">
 
     <img src="images/frontpage_images/grid_background_hero_section.png" alt=""
       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;pointer-events:none;z-index:0;" />
@@ -471,10 +472,41 @@
       </h1>
 
       <p
-        style="font-family:'Parkinsans',sans-serif;font-size:clamp(14px,1.5vw,17px);color:#888;line-height:1.65;max-width:400px;margin:0 0 44px 0;">
+        style="font-family:'Parkinsans',sans-serif;font-size:clamp(14px,1.5vw,17px);color:#888;line-height:1.65;max-width:400px;margin:0 0 32px 0;">
         We help startups, brands, individuals &amp; everything in between to create beautiful and stunning designs —
         fast and free.
       </p>
+
+      <!-- ── Compact inline icon browser ── -->
+      <div id="hero-icon-browser"
+        style="width:100%;max-width:720px;background:rgba(255,255,255,0.72);backdrop-filter:blur(16px);border:1px solid rgba(0,0,0,0.08);border-radius:24px;padding:16px 20px;margin-bottom:32px;box-shadow:0 4px 32px rgba(0,0,0,0.07);">
+
+        <!-- Filter pills row -->
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:14px;" id="landing-cat-pills">
+          <button class="cat-pill active px-3 py-1 text-xs font-medium"
+            onclick="filterLandingIcons('all', this)">All</button>
+        </div>
+
+        <!-- Icon strip -->
+        <div id="icon-grid"
+          style="display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;">
+          <div style="grid-column:1/-1;text-align:center;padding:18px;color:#bbb;font-size:12px;">
+            <span class="loading-spinner" style="width:18px;height:18px;border-width:2px;margin-right:6px;"></span>Loading…
+          </div>
+        </div>
+
+        <!-- Footer row -->
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid rgba(0,0,0,0.06);">
+          <span style="font-size:11px;color:#bbb;font-weight:500;" id="hero-grid-count"></span>
+          <a href="database.html"
+            style="display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:#111;text-decoration:none;transition:opacity 0.2s;"
+            onmouseover="this.style.opacity='0.6'" onmouseout="this.style.opacity='1'">
+            View all icons
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
 
       <a href="database.html" class="btn-dark"
         style="display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:15px 28px 15px 44px;font-family:'Parkinsans',sans-serif;font-size:15px;font-weight:600;text-decoration:none;">
@@ -488,39 +520,6 @@
           </svg>
         </span>
       </a>
-    </div>
-  </section>
-
-  <!-- ===== ICON BROWSER SECTION ===== -->
-  <section id="icons" class="py-20 px-4 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-        <div class="sr">
-          <span class="text-xs uppercase tracking-widest text-gray-400 font-medium block mb-3">Icon Library</span>
-          <h2 class="text-4xl md:text-5xl font-black leading-tight">Browse the collection.</h2>
-          <p class="text-gray-500 mt-3 max-w-md">Crisp, clean icons for any project. Download as SVG or copy the code.</p>
-        </div>
-        <div class="flex flex-wrap gap-2 sr sr-delay-2" id="landing-cat-pills">
-          <button class="cat-pill active px-4 py-1.5 text-sm font-medium"
-            onclick="filterLandingIcons('all', this)">All</button>
-        </div>
-      </div>
-
-      <div id="icon-grid" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3">
-        <div style="grid-column:1/-1;text-align:center;padding:30px;color:#bbb;font-size:13px;">
-          <span class="loading-spinner"></span>Loading icons…
-        </div>
-      </div>
-
-      <div class="flex justify-center mt-10 sr">
-        <a href="database.html" class="btn-dark rounded-full px-8 py-3.5 text-sm font-semibold flex items-center gap-2">
-          View full icon database
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
-      </div>
     </div>
   </section>
 
@@ -782,7 +781,7 @@
         }
       } catch (e) {
         console.warn('GitHub API failed:', e.message);
-        showRateLimitError(document.getElementById('icon-grid'));
+        showRateLimitError();
         return;
       }
 
@@ -847,19 +846,16 @@
     }
 
     function showRateLimitError(container) {
-      container.innerHTML = `
-        <div class="rate-limit-banner">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+      const target = container || document.getElementById('icon-grid');
+      target.innerHTML = `
+        <div class="rate-limit-banner" style="grid-column:1/-1;font-size:12px;padding:12px 14px;border-radius:10px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;">
             <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-            <line x1="12" y1="9" x2="12" y2="13"/>
-            <line x1="12" y1="17" x2="12.01" y2="17"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
           </svg>
           <div>
-            <strong>GitHub API rate limit reached.</strong>
-            GitHub's free API allows 60 requests/hour per IP. The icons can't load right now, but this resets automatically.
-            <strong>Try refreshing in a few minutes.</strong>
-            In the meantime you can still <a href="database.html" style="color:#92400e;text-decoration:underline;">browse the full database</a>.
+            <strong>GitHub API rate limit reached.</strong> Resets automatically — try again in a few minutes.
           </div>
         </div>`;
     }
@@ -871,6 +867,12 @@
       renderCatPills();
       renderIconGrid(landingIcons);
       updateIconCount(landingIcons.length);
+      updateHeroGridCount(landingIcons.length);
+    }
+
+    function updateHeroGridCount(total) {
+      const el = document.getElementById('hero-grid-count');
+      if (el) el.textContent = total > 0 ? `${total} icons` : '';
     }
 
     function renderCatPills() {
@@ -912,17 +914,24 @@
     function renderIconGrid(icons) {
       const grid = document.getElementById('icon-grid');
       if (!icons.length) {
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:30px;color:#bbb;font-size:13px;">No icons found.</div>';
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:18px;color:#bbb;font-size:12px;">No icons found.</div>';
+        updateHeroGridCount(0);
         return;
       }
-      grid.innerHTML = icons.map(icon => `
-        <div class="icon-card p-3 flex flex-col items-center gap-2 group" title="${escH(icon.name)}"
+
+      // Cap display to keep the hero card compact; show at most 40 icons
+      const display = icons.slice(0, 40);
+      updateHeroGridCount(icons.length);
+
+      grid.innerHTML = display.map(icon => `
+        <div class="icon-card" title="${escH(icon.name)}"
+          style="border-radius:12px;padding:10px 6px 8px;display:flex;flex-direction:column;align-items:center;gap:5px;"
           onclick="copyIconSVG('${escH(icon.svgUrl)}', '${escH(icon.name)}', this)">
-          <div class="w-10 h-10 flex items-center justify-center">
-            <img src="${escH(icon.svgUrl)}" alt="${escH(icon.name)}" width="28" height="28" loading="lazy" style="object-fit:contain;" />
+          <div style="width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <img src="${escH(icon.svgUrl)}" alt="${escH(icon.name)}" width="20" height="20" loading="lazy" style="object-fit:contain;" />
           </div>
-          <span class="text-[10px] text-gray-400 font-medium text-center leading-tight hidden sm:block">${escH(icon.name)}</span>
-          <div class="copy-overlay font-medium">Copy SVG</div>
+          <span style="font-size:9px;color:#aaa;font-weight:500;text-align:center;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escH(icon.name)}</span>
+          <div class="copy-overlay" style="font-size:9px;padding:5px;">Copy</div>
         </div>`
       ).join('');
 
@@ -930,10 +939,10 @@
         el.style.opacity = '0';
         el.style.transform = 'scale(0.85)';
         setTimeout(() => {
-          el.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          el.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
           el.style.opacity = '1';
           el.style.transform = 'scale(1)';
-        }, i * 20);
+        }, i * 15);
       });
     }
 
